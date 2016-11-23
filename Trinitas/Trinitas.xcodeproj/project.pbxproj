@@ -1,0 +1,542 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		575D5387E1510375E964AED8 /* Pods_Trinitas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60961B20B77098D469E8819 /* Pods_Trinitas.framework */; };
+		E21209311DE2080E00BA390E /* SLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E21209301DE2080E00BA390E /* SLButton.m */; };
+		E23E7BD91DE6377B00FD1738 /* LoadableFromXibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E7BD41DE6377B00FD1738 /* LoadableFromXibView.swift */; };
+		E23E7BDA1DE6377B00FD1738 /* ScrollableDatepicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E7BD51DE6377B00FD1738 /* ScrollableDatepicker.swift */; };
+		E23E7BDB1DE6377B00FD1738 /* ScrollableDatepicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BD61DE6377B00FD1738 /* ScrollableDatepicker.xib */; };
+		E23E7BDC1DE6377B00FD1738 /* ScrollableDatepickerDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E7BD71DE6377B00FD1738 /* ScrollableDatepickerDayCell.swift */; };
+		E23E7BDD1DE6377B00FD1738 /* ScrollableDatepickerDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BD81DE6377B00FD1738 /* ScrollableDatepickerDayCell.xib */; };
+		E23E7BE41DE63CF300FD1738 /* ColouredTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E7BE21DE63CF300FD1738 /* ColouredTableViewCell.swift */; };
+		E23E7BE51DE63CF300FD1738 /* ColouredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BE31DE63CF300FD1738 /* ColouredTableViewCell.xib */; };
+		E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BE61DE63F2E00FD1738 /* homework.png */; };
+		E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */; };
+		E25B1B351DD3D3C40034B740 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B331DD3D3C40034B740 /* Main.storyboard */; };
+		E25B1B371DD3D3C40034B740 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B361DD3D3C40034B740 /* Assets.xcassets */; };
+		E25B1B3A1DD3D3C40034B740 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */; };
+		E25B1B431DD3D55D0034B740 /* TriniAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B1B421DD3D55D0034B740 /* TriniAPI.swift */; };
+		E28C527E1DE5F66200C1C585 /* RoosterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */; };
+		E28CC7931DE1E94100EEF231 /* trinitasLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E28CC7921DE1E94100EEF231 /* trinitasLogo.png */; };
+		E28CC7971DE1ED0700EEF231 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = E28CC7961DE1ED0700EEF231 /* UIImage+Blur.m */; };
+		E28CC7991DE1ED9900EEF231 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28CC7981DE1ED9900EEF231 /* CoreImage.framework */; };
+		E28CC79B1DE1F98E00EEF231 /* ACFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CC79A1DE1F98E00EEF231 /* ACFloatingTextField.swift */; };
+		E2B2BF631DE229E900E0E5C7 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2BF621DE229E900E0E5C7 /* API.swift */; };
+		E2EBF2861DE1E0CF00140310 /* trinitas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2EBF2851DE1E0CF00140310 /* trinitas.jpg */; };
+		E2EBF2881DE1E0FF00140310 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4CDB53B9A4238BFA8F9DAE34 /* Pods-Trinitas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.debug.xcconfig"; sourceTree = "<group>"; };
+		DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.release.xcconfig"; sourceTree = "<group>"; };
+		E212092F1DE2080E00BA390E /* SLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLButton.h; sourceTree = "<group>"; };
+		E21209301DE2080E00BA390E /* SLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLButton.m; sourceTree = "<group>"; };
+		E23E7BD41DE6377B00FD1738 /* LoadableFromXibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadableFromXibView.swift; sourceTree = "<group>"; };
+		E23E7BD51DE6377B00FD1738 /* ScrollableDatepicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableDatepicker.swift; sourceTree = "<group>"; };
+		E23E7BD61DE6377B00FD1738 /* ScrollableDatepicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollableDatepicker.xib; sourceTree = "<group>"; };
+		E23E7BD71DE6377B00FD1738 /* ScrollableDatepickerDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableDatepickerDayCell.swift; sourceTree = "<group>"; };
+		E23E7BD81DE6377B00FD1738 /* ScrollableDatepickerDayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollableDatepickerDayCell.xib; sourceTree = "<group>"; };
+		E23E7BE21DE63CF300FD1738 /* ColouredTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColouredTableViewCell.swift; sourceTree = "<group>"; };
+		E23E7BE31DE63CF300FD1738 /* ColouredTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColouredTableViewCell.xib; sourceTree = "<group>"; };
+		E23E7BE61DE63F2E00FD1738 /* homework.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homework.png; sourceTree = "<group>"; };
+		E25B1B2C1DD3D3C40034B740 /* Trinitas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trinitas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E25B1B341DD3D3C40034B740 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E25B1B361DD3D3C40034B740 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E25B1B391DD3D3C40034B740 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E25B1B3B1DD3D3C40034B740 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E25B1B421DD3D55D0034B740 /* TriniAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriniAPI.swift; sourceTree = "<group>"; };
+		E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoosterTableViewController.swift; sourceTree = "<group>"; };
+		E28CC7921DE1E94100EEF231 /* trinitasLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trinitasLogo.png; sourceTree = "<group>"; };
+		E28CC7941DE1ED0600EEF231 /* Trinitas-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Trinitas-Bridging-Header.h"; sourceTree = "<group>"; };
+		E28CC7951DE1ED0700EEF231 /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
+		E28CC7961DE1ED0700EEF231 /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
+		E28CC7981DE1ED9900EEF231 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		E28CC79A1DE1F98E00EEF231 /* ACFloatingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACFloatingTextField.swift; sourceTree = "<group>"; };
+		E2B2BF621DE229E900E0E5C7 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		E2EBF2851DE1E0CF00140310 /* trinitas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = trinitas.jpg; sourceTree = "<group>"; };
+		E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewController.swift; sourceTree = "<group>"; };
+		E60961B20B77098D469E8819 /* Pods_Trinitas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trinitas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E25B1B291DD3D3C30034B740 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E28CC7991DE1ED9900EEF231 /* CoreImage.framework in Frameworks */,
+				575D5387E1510375E964AED8 /* Pods_Trinitas.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4DCF3B8DCB05C95499E78F44 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4CDB53B9A4238BFA8F9DAE34 /* Pods-Trinitas.debug.xcconfig */,
+				DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B7E67F2DAC9C744D76BE1B1A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E28CC7981DE1ED9900EEF231 /* CoreImage.framework */,
+				E60961B20B77098D469E8819 /* Pods_Trinitas.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E23E7BD31DE6377B00FD1738 /* Date picker */ = {
+			isa = PBXGroup;
+			children = (
+				E23E7BD41DE6377B00FD1738 /* LoadableFromXibView.swift */,
+				E23E7BD51DE6377B00FD1738 /* ScrollableDatepicker.swift */,
+				E23E7BD61DE6377B00FD1738 /* ScrollableDatepicker.xib */,
+				E23E7BD71DE6377B00FD1738 /* ScrollableDatepickerDayCell.swift */,
+				E23E7BD81DE6377B00FD1738 /* ScrollableDatepickerDayCell.xib */,
+			);
+			name = "Date picker";
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		E23E7BDE1DE6378500FD1738 /* SLButton */ = {
+			isa = PBXGroup;
+			children = (
+				E212092F1DE2080E00BA390E /* SLButton.h */,
+				E21209301DE2080E00BA390E /* SLButton.m */,
+			);
+			name = SLButton;
+			sourceTree = "<group>";
+		};
+		E23E7BDF1DE6378A00FD1738 /* Textfield */ = {
+			isa = PBXGroup;
+			children = (
+				E28CC79A1DE1F98E00EEF231 /* ACFloatingTextField.swift */,
+			);
+			name = Textfield;
+			sourceTree = "<group>";
+		};
+		E25B1B231DD3D3C30034B740 = {
+			isa = PBXGroup;
+			children = (
+				E25B1B2E1DD3D3C40034B740 /* Trinitas */,
+				E25B1B2D1DD3D3C40034B740 /* Products */,
+				4DCF3B8DCB05C95499E78F44 /* Pods */,
+				B7E67F2DAC9C744D76BE1B1A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E25B1B2D1DD3D3C40034B740 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E25B1B2C1DD3D3C40034B740 /* Trinitas.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E25B1B2E1DD3D3C40034B740 /* Trinitas */ = {
+			isa = PBXGroup;
+			children = (
+				E25B1B6E1DD62FEC0034B740 /* Classes */,
+				E25B1B441DD4EE450034B740 /* Custom */,
+				E25B1B411DD3D5490034B740 /* API */,
+				E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */,
+				E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */,
+				E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */,
+				E23E7BE21DE63CF300FD1738 /* ColouredTableViewCell.swift */,
+				E23E7BE31DE63CF300FD1738 /* ColouredTableViewCell.xib */,
+				E25B1B331DD3D3C40034B740 /* Main.storyboard */,
+				E25B1B361DD3D3C40034B740 /* Assets.xcassets */,
+				E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */,
+				E25B1B3B1DD3D3C40034B740 /* Info.plist */,
+				E28CC7941DE1ED0600EEF231 /* Trinitas-Bridging-Header.h */,
+			);
+			path = Trinitas;
+			sourceTree = "<group>";
+		};
+		E25B1B411DD3D5490034B740 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E25B1B421DD3D55D0034B740 /* TriniAPI.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		E25B1B441DD4EE450034B740 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				E23E7BD31DE6377B00FD1738 /* Date picker */,
+				E23E7BDF1DE6378A00FD1738 /* Textfield */,
+				E23E7BDE1DE6378500FD1738 /* SLButton */,
+				E25B1B601DD515130034B740 /* Images */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		E25B1B601DD515130034B740 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E2EBF2851DE1E0CF00140310 /* trinitas.jpg */,
+				E28CC7921DE1E94100EEF231 /* trinitasLogo.png */,
+				E23E7BE61DE63F2E00FD1738 /* homework.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		E25B1B6E1DD62FEC0034B740 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E2B2BF611DE229CB00E0E5C7 /* API */,
+				E2B2BF601DE229C400E0E5C7 /* UIImage+Blur */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		E2B2BF601DE229C400E0E5C7 /* UIImage+Blur */ = {
+			isa = PBXGroup;
+			children = (
+				E28CC7951DE1ED0700EEF231 /* UIImage+Blur.h */,
+				E28CC7961DE1ED0700EEF231 /* UIImage+Blur.m */,
+			);
+			name = "UIImage+Blur";
+			sourceTree = "<group>";
+		};
+		E2B2BF611DE229CB00E0E5C7 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E2B2BF621DE229E900E0E5C7 /* API.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E25B1B2B1DD3D3C30034B740 /* Trinitas */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E25B1B3E1DD3D3C40034B740 /* Build configuration list for PBXNativeTarget "Trinitas" */;
+			buildPhases = (
+				78BCD2255D15BA4C85669A81 /* [CP] Check Pods Manifest.lock */,
+				E25B1B281DD3D3C30034B740 /* Sources */,
+				E25B1B291DD3D3C30034B740 /* Frameworks */,
+				E25B1B2A1DD3D3C30034B740 /* Resources */,
+				6389E23E76164B3525185C66 /* [CP] Embed Pods Frameworks */,
+				6F866452D322377F2B287703 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Trinitas;
+			productName = Trinitas;
+			productReference = E25B1B2C1DD3D3C40034B740 /* Trinitas.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E25B1B241DD3D3C30034B740 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = Rydee;
+				TargetAttributes = {
+					E25B1B2B1DD3D3C30034B740 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = HQ489F5G8S;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E25B1B271DD3D3C30034B740 /* Build configuration list for PBXProject "Trinitas" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E25B1B231DD3D3C30034B740;
+			productRefGroup = E25B1B2D1DD3D3C40034B740 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E25B1B2B1DD3D3C30034B740 /* Trinitas */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E25B1B2A1DD3D3C30034B740 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E25B1B3A1DD3D3C40034B740 /* LaunchScreen.storyboard in Resources */,
+				E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */,
+				E23E7BDD1DE6377B00FD1738 /* ScrollableDatepickerDayCell.xib in Resources */,
+				E23E7BE51DE63CF300FD1738 /* ColouredTableViewCell.xib in Resources */,
+				E25B1B371DD3D3C40034B740 /* Assets.xcassets in Resources */,
+				E25B1B351DD3D3C40034B740 /* Main.storyboard in Resources */,
+				E28CC7931DE1E94100EEF231 /* trinitasLogo.png in Resources */,
+				E23E7BDB1DE6377B00FD1738 /* ScrollableDatepicker.xib in Resources */,
+				E2EBF2861DE1E0CF00140310 /* trinitas.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6389E23E76164B3525185C66 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F866452D322377F2B287703 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78BCD2255D15BA4C85669A81 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E25B1B281DD3D3C30034B740 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E23E7BDA1DE6377B00FD1738 /* ScrollableDatepicker.swift in Sources */,
+				E28C527E1DE5F66200C1C585 /* RoosterTableViewController.swift in Sources */,
+				E23E7BDC1DE6377B00FD1738 /* ScrollableDatepickerDayCell.swift in Sources */,
+				E21209311DE2080E00BA390E /* SLButton.m in Sources */,
+				E28CC79B1DE1F98E00EEF231 /* ACFloatingTextField.swift in Sources */,
+				E28CC7971DE1ED0700EEF231 /* UIImage+Blur.m in Sources */,
+				E23E7BE41DE63CF300FD1738 /* ColouredTableViewCell.swift in Sources */,
+				E2EBF2881DE1E0FF00140310 /* LoginTableViewController.swift in Sources */,
+				E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */,
+				E25B1B431DD3D55D0034B740 /* TriniAPI.swift in Sources */,
+				E2B2BF631DE229E900E0E5C7 /* API.swift in Sources */,
+				E23E7BD91DE6377B00FD1738 /* LoadableFromXibView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E25B1B331DD3D3C40034B740 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E25B1B341DD3D3C40034B740 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E25B1B391DD3D3C40034B740 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E25B1B3C1DD3D3C40034B740 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CDB53B9A4238BFA8F9DAE34 /* Pods-Trinitas.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E25B1B3D1DD3D3C40034B740 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E25B1B3F1DD3D3C40034B740 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CDB53B9A4238BFA8F9DAE34 /* Pods-Trinitas.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = HQ489F5G8S;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Trinitas/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Rydee.Trinitas;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Trinitas/Trinitas-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E25B1B401DD3D3C40034B740 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = HQ489F5G8S;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Trinitas/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Rydee.Trinitas;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Trinitas/Trinitas-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E25B1B271DD3D3C30034B740 /* Build configuration list for PBXProject "Trinitas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E25B1B3C1DD3D3C40034B740 /* Debug */,
+				E25B1B3D1DD3D3C40034B740 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E25B1B3E1DD3D3C40034B740 /* Build configuration list for PBXNativeTarget "Trinitas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E25B1B3F1DD3D3C40034B740 /* Debug */,
+				E25B1B401DD3D3C40034B740 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E25B1B241DD3D3C30034B740 /* Project object */;
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11761" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="colouredCell" rowHeight="70" id="KGk-i7-Jjw" customClass="ColouredTableViewCell" customModule="Trinitas" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="476" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="476" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uck-Hb-XOW">
+                        <rect key="frame" x="35" y="8" width="407" height="54"/>
+                        <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="uck-Hb-XOW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="0FG-5s-3V3"/>
+                    <constraint firstItem="uck-Hb-XOW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="0Ff-vd-u9m"/>
+                    <constraint firstItem="uck-Hb-XOW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3aL-5v-voT"/>
+                    <constraint firstAttribute="trailing" secondItem="uck-Hb-XOW" secondAttribute="trailing" constant="34" id="SvT-74-TJD"/>
+                    <constraint firstAttribute="bottom" secondItem="uck-Hb-XOW" secondAttribute="bottom" constant="7.5" id="aAu-qr-0SX"/>
+                    <constraint firstItem="uck-Hb-XOW" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="m8s-EL-vgf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dataView" destination="uck-Hb-XOW" id="Ndx-9c-3TO"/>
+            </connections>
+            <point key="canvasLocation" x="112" y="161"/>
+        </tableViewCell>
+    </objects>
+</document>
