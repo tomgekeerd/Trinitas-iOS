@@ -81,7 +81,10 @@ class LoginTableViewController: UITableViewController {
             let ok = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             controller.addAction(ok)
             
-            self.present(controller, animated: true, completion: nil)
+            if let contr = UIApplication.topViewController() {
+                contr.present(controller, animated: true, completion: nil)
+            }
+            
 
         }
         
@@ -215,7 +218,8 @@ class LoginHeaderTableViewCell: UITableViewCell {
         loginButton.showLoading()
 
         if let u = usernameTextField.text, let p = passwordTextField.text {
-            api.login(username: u, password: p) { (success) in
+            let user = User(username: u, password: p)
+            api.login(user: user) { (success) in
                 
                 // Load vc
                 
@@ -227,6 +231,13 @@ class LoginHeaderTableViewCell: UITableViewCell {
                     // Send response to vc
                     
                     login!.userIsDoneLoggingIn(success: success)
+                    
+                    // Turn button back
+                    
+                    DispatchQueue.main.async {
+                        self.loginButton.hideLoading()
+                    }
+                    
                 }
                 
             }
@@ -234,5 +245,22 @@ class LoginHeaderTableViewCell: UITableViewCell {
         }
     }
     
+}
+
+extension UIApplication {
+    class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return topViewController(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController {
+                return topViewController(base: selected)
+            }
+        }
+        if let presented = base?.presentedViewController {
+            return topViewController(base: presented)
+        }
+        return base
+    }
 }
 

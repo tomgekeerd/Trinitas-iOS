@@ -26,10 +26,8 @@
                 <constraints>
                     <constraint firstItem="uck-Hb-XOW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="0FG-5s-3V3"/>
                     <constraint firstItem="uck-Hb-XOW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="0Ff-vd-u9m"/>
-                    <constraint firstItem="uck-Hb-XOW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3aL-5v-voT"/>
                     <constraint firstAttribute="trailing" secondItem="uck-Hb-XOW" secondAttribute="trailing" constant="34" id="SvT-74-TJD"/>
                     <constraint firstAttribute="bottom" secondItem="uck-Hb-XOW" secondAttribute="bottom" constant="7.5" id="aAu-qr-0SX"/>
-                    <constraint firstItem="uck-Hb-XOW" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="m8s-EL-vgf"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

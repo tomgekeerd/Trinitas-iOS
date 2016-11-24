@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class RoosterTableViewController: UITableViewController, ScrollableDatepickerDelegate {
+    
+    var schedule = [NSManagedObject]()
+    let api = API()
     
     @IBOutlet var datepicker: ScrollableDatepicker! {
         didSet {
@@ -35,8 +39,12 @@ class RoosterTableViewController: UITableViewController, ScrollableDatepickerDel
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.tableView.separatorStyle = .none
+        self.tableView.register(UINib(nibName: "BreakTableViewCell", bundle: nil), forCellReuseIdentifier: "breakCell")
         self.tableView.register(UINib(nibName: "ColouredTableViewCell", bundle: nil), forCellReuseIdentifier: "colouredCell")
-        self.tableView.register(UINib(nibName: "ColouredTableViewCell", bundle: nil), forCellReuseIdentifier: "breakCell")
+        
+        api.getScheduleOfWeek(user: User(username: "140946", password: "emnwpxnz"), startDate: Date()) { (success) in
+            print(success)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,15 +65,21 @@ class RoosterTableViewController: UITableViewController, ScrollableDatepickerDel
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 3
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "colouredCell", for: indexPath) as! ColouredTableViewCell
         
-        
         return cell
+
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "breakCell", for: indexPath) as! BreakTableViewCell
+//        
+//        
+//        return cell
+
     }
     
 

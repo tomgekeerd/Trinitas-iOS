@@ -22,6 +22,13 @@
 		E25B1B371DD3D3C40034B740 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B361DD3D3C40034B740 /* Assets.xcassets */; };
 		E25B1B3A1DD3D3C40034B740 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */; };
 		E25B1B431DD3D55D0034B740 /* TriniAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B1B421DD3D55D0034B740 /* TriniAPI.swift */; };
+		E27092011DE6E69D000F7B18 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = E27092001DE6E69D000F7B18 /* line.png */; };
+		E27092061DE6E7E3000F7B18 /* BreakTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27092041DE6E7E3000F7B18 /* BreakTableViewCell.swift */; };
+		E27092071DE6E7E3000F7B18 /* BreakTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27092051DE6E7E3000F7B18 /* BreakTableViewCell.xib */; };
+		E270920B1DE72276000F7B18 /* Rooster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E27092091DE72276000F7B18 /* Rooster.xcdatamodeld */; };
+		E270920D1DE73242000F7B18 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270920C1DE73242000F7B18 /* DataHelper.swift */; };
+		E27092101DE736B9000F7B18 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E270920F1DE736B9000F7B18 /* KeychainWrapper.m */; };
+		E27092131DE737CF000F7B18 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E27092121DE737CF000F7B18 /* Security.framework */; };
 		E28C527E1DE5F66200C1C585 /* RoosterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */; };
 		E28CC7931DE1E94100EEF231 /* trinitasLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E28CC7921DE1E94100EEF231 /* trinitasLogo.png */; };
 		E28CC7971DE1ED0700EEF231 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = E28CC7961DE1ED0700EEF231 /* UIImage+Blur.m */; };
@@ -52,6 +59,14 @@
 		E25B1B391DD3D3C40034B740 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E25B1B3B1DD3D3C40034B740 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E25B1B421DD3D55D0034B740 /* TriniAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriniAPI.swift; sourceTree = "<group>"; };
+		E27092001DE6E69D000F7B18 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
+		E27092041DE6E7E3000F7B18 /* BreakTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakTableViewCell.swift; sourceTree = "<group>"; };
+		E27092051DE6E7E3000F7B18 /* BreakTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BreakTableViewCell.xib; sourceTree = "<group>"; };
+		E270920A1DE72276000F7B18 /* Rooster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rooster.xcdatamodel; sourceTree = "<group>"; };
+		E270920C1DE73242000F7B18 /* DataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
+		E270920E1DE736B9000F7B18 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
+		E270920F1DE736B9000F7B18 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
+		E27092121DE737CF000F7B18 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoosterTableViewController.swift; sourceTree = "<group>"; };
 		E28CC7921DE1E94100EEF231 /* trinitasLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trinitasLogo.png; sourceTree = "<group>"; };
 		E28CC7941DE1ED0600EEF231 /* Trinitas-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Trinitas-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -70,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E27092131DE737CF000F7B18 /* Security.framework in Frameworks */,
 				E28CC7991DE1ED9900EEF231 /* CoreImage.framework in Frameworks */,
 				575D5387E1510375E964AED8 /* Pods_Trinitas.framework in Frameworks */,
 			);
@@ -90,6 +106,7 @@
 		B7E67F2DAC9C744D76BE1B1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E27092121DE737CF000F7B18 /* Security.framework */,
 				E28CC7981DE1ED9900EEF231 /* CoreImage.framework */,
 				E60961B20B77098D469E8819 /* Pods_Trinitas.framework */,
 			);
@@ -153,13 +170,12 @@
 				E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */,
 				E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */,
 				E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */,
-				E23E7BE21DE63CF300FD1738 /* ColouredTableViewCell.swift */,
-				E23E7BE31DE63CF300FD1738 /* ColouredTableViewCell.xib */,
 				E25B1B331DD3D3C40034B740 /* Main.storyboard */,
 				E25B1B361DD3D3C40034B740 /* Assets.xcassets */,
 				E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */,
 				E25B1B3B1DD3D3C40034B740 /* Info.plist */,
 				E28CC7941DE1ED0600EEF231 /* Trinitas-Bridging-Header.h */,
+				E27092091DE72276000F7B18 /* Rooster.xcdatamodeld */,
 			);
 			path = Trinitas;
 			sourceTree = "<group>";
@@ -175,6 +191,7 @@
 		E25B1B441DD4EE450034B740 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				E27092111DE736BD000F7B18 /* Keychain */,
 				E23E7BD31DE6377B00FD1738 /* Date picker */,
 				E23E7BDF1DE6378A00FD1738 /* Textfield */,
 				E23E7BDE1DE6378500FD1738 /* SLButton */,
@@ -186,6 +203,7 @@
 		E25B1B601DD515130034B740 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E27092001DE6E69D000F7B18 /* line.png */,
 				E2EBF2851DE1E0CF00140310 /* trinitas.jpg */,
 				E28CC7921DE1E94100EEF231 /* trinitasLogo.png */,
 				E23E7BE61DE63F2E00FD1738 /* homework.png */,
@@ -196,10 +214,31 @@
 		E25B1B6E1DD62FEC0034B740 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E27092081DE7225C000F7B18 /* TableViewCells */,
 				E2B2BF611DE229CB00E0E5C7 /* API */,
 				E2B2BF601DE229C400E0E5C7 /* UIImage+Blur */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		E27092081DE7225C000F7B18 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				E23E7BE21DE63CF300FD1738 /* ColouredTableViewCell.swift */,
+				E23E7BE31DE63CF300FD1738 /* ColouredTableViewCell.xib */,
+				E27092041DE6E7E3000F7B18 /* BreakTableViewCell.swift */,
+				E27092051DE6E7E3000F7B18 /* BreakTableViewCell.xib */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		E27092111DE736BD000F7B18 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				E270920E1DE736B9000F7B18 /* KeychainWrapper.h */,
+				E270920F1DE736B9000F7B18 /* KeychainWrapper.m */,
+			);
+			name = Keychain;
 			sourceTree = "<group>";
 		};
 		E2B2BF601DE229C400E0E5C7 /* UIImage+Blur */ = {
@@ -215,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B2BF621DE229E900E0E5C7 /* API.swift */,
+				E270920C1DE73242000F7B18 /* DataHelper.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -283,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E27092011DE6E69D000F7B18 /* line.png in Resources */,
 				E25B1B3A1DD3D3C40034B740 /* LaunchScreen.storyboard in Resources */,
 				E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */,
 				E23E7BDD1DE6377B00FD1738 /* ScrollableDatepickerDayCell.xib in Resources */,
@@ -292,6 +333,7 @@
 				E28CC7931DE1E94100EEF231 /* trinitasLogo.png in Resources */,
 				E23E7BDB1DE6377B00FD1738 /* ScrollableDatepicker.xib in Resources */,
 				E2EBF2861DE1E0CF00140310 /* trinitas.jpg in Resources */,
+				E27092071DE6E7E3000F7B18 /* BreakTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,15 +394,19 @@
 			files = (
 				E23E7BDA1DE6377B00FD1738 /* ScrollableDatepicker.swift in Sources */,
 				E28C527E1DE5F66200C1C585 /* RoosterTableViewController.swift in Sources */,
+				E270920B1DE72276000F7B18 /* Rooster.xcdatamodeld in Sources */,
 				E23E7BDC1DE6377B00FD1738 /* ScrollableDatepickerDayCell.swift in Sources */,
 				E21209311DE2080E00BA390E /* SLButton.m in Sources */,
 				E28CC79B1DE1F98E00EEF231 /* ACFloatingTextField.swift in Sources */,
 				E28CC7971DE1ED0700EEF231 /* UIImage+Blur.m in Sources */,
 				E23E7BE41DE63CF300FD1738 /* ColouredTableViewCell.swift in Sources */,
 				E2EBF2881DE1E0FF00140310 /* LoginTableViewController.swift in Sources */,
+				E27092101DE736B9000F7B18 /* KeychainWrapper.m in Sources */,
+				E270920D1DE73242000F7B18 /* DataHelper.swift in Sources */,
 				E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */,
 				E25B1B431DD3D55D0034B740 /* TriniAPI.swift in Sources */,
 				E2B2BF631DE229E900E0E5C7 /* API.swift in Sources */,
+				E27092061DE6E7E3000F7B18 /* BreakTableViewCell.swift in Sources */,
 				E23E7BD91DE6377B00FD1738 /* LoadableFromXibView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,6 +583,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E27092091DE72276000F7B18 /* Rooster.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E270920A1DE72276000F7B18 /* Rooster.xcdatamodel */,
+			);
+			currentVersion = E270920A1DE72276000F7B18 /* Rooster.xcdatamodel */;
+			path = Rooster.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E25B1B241DD3D3C30034B740 /* Project object */;
 }
