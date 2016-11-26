@@ -11,6 +11,8 @@ import UIKit
 
 class LoginTableViewController: UITableViewController {
     
+    let api = API()
+    
     private let tableHeaderHeight: CGFloat = 300.0
     private let cutAway: CGFloat = 90
     
@@ -58,6 +60,11 @@ class LoginTableViewController: UITableViewController {
         
         headerView.layer.mask = headerMaskLayer
         updateHeaderView()
+        
+        
+        api.getScheduleOfWeek(user: User(username: "140946", password: "emnwpxnz"), startDate: Date()) { (success) in
+            print(success)
+        }
 
     }
     

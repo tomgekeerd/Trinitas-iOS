@@ -15,7 +15,7 @@
         <attribute name="test" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="week_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="week_no" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="lessonsOfWeek" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Week" inverseName="lessonsOfWeek" inverseEntity="Week" syncable="YES"/>
     </entity>
     <entity name="Week" representedClassName="Week" syncable="YES" codeGenerationType="class">

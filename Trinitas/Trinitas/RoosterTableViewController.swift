@@ -42,9 +42,7 @@ class RoosterTableViewController: UITableViewController, ScrollableDatepickerDel
         self.tableView.register(UINib(nibName: "BreakTableViewCell", bundle: nil), forCellReuseIdentifier: "breakCell")
         self.tableView.register(UINib(nibName: "ColouredTableViewCell", bundle: nil), forCellReuseIdentifier: "colouredCell")
         
-        api.getScheduleOfWeek(user: User(username: "140946", password: "emnwpxnz"), startDate: Date()) { (success) in
-            print(success)
-        }
+        
     }
 
     override func didReceiveMemoryWarning() {

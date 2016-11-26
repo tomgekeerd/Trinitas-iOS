@@ -74,12 +74,50 @@ class DataHelper: NSObject {
             if let e = entity {
                 
                 // Set values in entity
+                let allLessons = helpers.getLessonsOfJSON(json: json)
                 
-                helpers.getLessonsOfJSON(json: json)
+                for les in allLessons {
+                    
+                    let lesson = NSManagedObject(entity: e, insertInto: managedContext)
+                    
+                    
+                    // If type is 'vrij', dan alleen day, type & hour submitten
+                    
+                    if les.type != "Vrij" {
+                        
+                        lesson.setValue(les.day, forKey: "day")
+                        lesson.setValue(les.end, forKey: "end")
+                        lesson.setValue(les.homework, forKey: "homework")
+                        lesson.setValue(les.homeworkDescription, forKey: "homework_description")
+                        lesson.setValue(les.hour, forKey: "hour")
+                        lesson.setValue(les.lessonGroup, forKey: "group")
+                        lesson.setValue(les.lessonTitle, forKey: "title")
+                        lesson.setValue(les.room, forKey: "room")
+                        lesson.setValue(les.start, forKey: "start")
+                        lesson.setValue(les.teacher, forKey: "teacher")
+                        lesson.setValue(les.teacherSmall, forKey: "teacher_small")
+                        lesson.setValue(les.teacherTitle, forKey: "teacher_title")
+                        lesson.setValue(les.test, forKey: "test")
+                        lesson.setValue(les.type, forKey: "type")
+                        lesson.setValue(les.week_no, forKey: "week_no")
+                        
+                    } else {
+                        
+                        lesson.setValue(les.day, forKey: "day")
+                        lesson.setValue(les.type, forKey: "type")
+                        lesson.setValue(les.week_no, forKey: "week_no")
+                        lesson.setValue(les.hour, forKey: "hour")
+
+                    }
+                    
+                }
                 
-                
-//                let lesson = NSManagedObject(entity: e, insertInto: managedContext)
-//                lesson.setValue("", forKey: "")
+                do {
+                    try managedContext.save()
+                    self.helpers.getLessons()
+                } catch let error as NSError  {
+                    print("Could not save \(error), \(error.userInfo)")
+                }
                 
             }
         }
@@ -96,22 +134,23 @@ class DataHelperHelpers {
         
         self.setWeek(json: json)
         
-        // Initialize array
+        // Initialize arrays
         
         var lessonArray = [Lesson]()
+        var dateArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
         
         // Loop through days...
         
         for index in 0..<5 {
             
-            let key = Array(json.dictionaryValue.keys)[index]
+            let key = dateArray[index]
             
             // Loop through the lessons...
             
-            for i in 0..<json[key].count {
+            for i in 0..<8 {
                 
                 // Check status of lesson
-                
+
                 if json[key][i]["type"].stringValue != "Vrij" {
                     
                     let course = json[key][i]
@@ -120,10 +159,11 @@ class DataHelperHelpers {
                     var test = false
                     var hwDesc: String!
                     
-                    if json["huiswerk"].error == nil {
+                    
+                    if course["afspraakObject"]["huiswerk"].exists() {
                         homework = true
-                        test = json["huiswerk"]["toets"].boolValue
-                        hwDesc = json["huiswerk"]["omschrijving"].stringValue
+                        test = course["afspraakObject"]["huiswerk"]["toets"].boolValue
+                        hwDesc = course["afspraakObject"]["huiswerk"]["omschrijving"].stringValue
                     }
                     
                     // Add lesson to the array
@@ -132,9 +172,9 @@ class DataHelperHelpers {
                                         type: course["afspraakObject"]["type"].stringValue,
                                         hour: course["afspraakObject"]["lesuur"].intValue,
                                         lessonGroup: course["afspraakObject"]["lesgroep"].stringValue,
-                                        teacher: course["afspraakObject"]["docent"]["achternaam"].stringValue,
-                                        teacherSmall: course["afspraakObject"]["docent"]["afkorting"].stringValue,
-                                        teacherTitle: course["afspraakObject"]["docent"]["title"].stringValue,
+                                        teacher: course["afspraakObject"]["docent"][0]["achternaam"].stringValue,
+                                        teacherSmall: course["afspraakObject"]["docent"][0]["afkorting"].stringValue,
+                                        teacherTitle: course["afspraakObject"]["docent"][0]["title"].stringValue,
                                         lessonTitle: course["title"].stringValue,
                                         homeworkDescription: hwDesc,
                                         start: course["start"].intValue,
@@ -178,6 +218,26 @@ class DataHelperHelpers {
         }
         
         return lessonArray
+    }
+    
+    func getLessons() {
+        //1
+        let appDelegate =
+            UIApplication.shared.delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        //2
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
+        
+        //3
+        do {
+            let results =
+                try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+
     }
     
     func setWeek(json: JSON) {

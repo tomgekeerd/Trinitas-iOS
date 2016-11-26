@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class API: NSObject {
     
+    var sheduleLoop = DispatchGroup()
     var baseURL = "https://tomderuiter.com/trinitas/v1/"
     let dh = DataHelper()
     
@@ -44,7 +45,7 @@ class API: NSObject {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let dateString = dateFormatter.string(from: startDate)
-        
+
         // Initialize params
         
         let parameters: Parameters = [
@@ -54,19 +55,39 @@ class API: NSObject {
         ]
         
         // Request schedule
-        
+
         Alamofire.request(baseURL + "schedule", method: .post, parameters: parameters).responseData { (response) in
             
             // Call completion when data is sent to CoreData
             
             switch response.result {
-                
                 case .success:
                     if let data = response.data {
                         let json = JSON(data: data)
-                        self.dh.scheduleNeedsUpdate(json: json)
+                        if let success = json["success"].bool {
+                            if success == true {
+                                
+                                // Set schedule in data
+                                
+                                self.dh.scheduleNeedsUpdate(json: json)
+                                completion(json["success"].boolValue)
+                                
+                                
+                            } else if success == false {
+                                
+                                if json["err"].intValue == 202 {
+                                    
+                                    self.getScheduleOfWeek(user: user, startDate: startDate, completion: completion)
+                                    
+                                } else {
+                                    
+                                    completion(false)
+
+                                }
+                                
+                            }
+                        }
                     }
-                    completion(true)
                 break
 
                 case .failure(let error):
@@ -77,7 +98,7 @@ class API: NSObject {
             }
             
         }
-
+        
     }
     
 }
