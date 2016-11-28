@@ -38,62 +38,66 @@ class API: NSObject {
         
     }
     
-    func getScheduleOfWeek(user: User, startDate: Date, completion: @escaping (_ result: Bool) -> Void) {
+    func getScheduleOfWeek(startDate: Date, completion: @escaping (_ result: Bool) -> Void) {
         
-        // Get string date of startDate
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let dateString = dateFormatter.string(from: startDate)
-
-        // Initialize params
-        
-        let parameters: Parameters = [
-            "lln": user.username,
-            "pass": user.password,
-            "sd": dateString
-        ]
-        
-        // Request schedule
-
-        Alamofire.request(baseURL + "schedule", method: .post, parameters: parameters).responseData { (response) in
+        if let user = dh.user() as? User {
             
-            // Call completion when data is sent to CoreData
+            // Get string date of startDate
             
-            switch response.result {
-                case .success:
-                    if let data = response.data {
-                        let json = JSON(data: data)
-                        if let success = json["success"].bool {
-                            if success == true {
-                                
-                                // Set schedule in data
-                                
-                                self.dh.scheduleNeedsUpdate(json: json)
-                                completion(json["success"].boolValue)
-                                
-                                
-                            } else if success == false {
-                                
-                                if json["err"].intValue == 202 {
-                                    
-                                    self.getScheduleOfWeek(user: user, startDate: startDate, completion: completion)
-                                    
-                                } else {
-                                    
-                                    completion(false)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            let dateString = dateFormatter.string(from: startDate)
 
+            // Initialize params
+            
+            let parameters: Parameters = [
+                "lln": user.username,
+                "pass": user.password,
+                "sd": dateString
+            ]
+            
+            // Request schedule
+
+            Alamofire.request(baseURL + "schedule", method: .post, parameters: parameters).responseData { (response) in
+                
+                // Call completion when data is sent to CoreData
+                
+                switch response.result {
+                    case .success:
+                        if let data = response.data {
+                            let json = JSON(data: data)
+                            if let success = json["success"].bool {
+                                if success == true {
+                                    
+                                    // Set schedule in data
+                                    
+                                    self.dh.scheduleNeedsUpdate(json: json)
+                                    completion(json["success"].boolValue)
+                                    
+                                    
+                                } else if success == false {
+                                    
+                                    if json["err"].intValue == 202 {
+                                        
+                                        self.getScheduleOfWeek(startDate: startDate, completion: completion)
+                                        
+                                    } else {
+                                        
+                                        completion(false)
+
+                                    }
+                                    
                                 }
-                                
                             }
                         }
-                    }
-                break
+                    break
 
-                case .failure(let error):
-                    completion(false)
-                    fatalError(error as! String)
-                break
+                    case .failure(let error):
+                        completion(false)
+                        fatalError(error as! String)
+                    break
+                    
+                }
                 
             }
             

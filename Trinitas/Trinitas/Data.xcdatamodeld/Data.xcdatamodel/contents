@@ -7,7 +7,7 @@
         <attribute name="homework" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="homework_description" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="room" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="room" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="teacher" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teacher_small" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,13 +18,18 @@
         <attribute name="week_no" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="lessonsOfWeek" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Week" inverseName="lessonsOfWeek" inverseEntity="Week" syncable="YES"/>
     </entity>
+    <entity name="Users" representedClassName="Users" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="student_no" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="Week" representedClassName="Week" syncable="YES" codeGenerationType="class">
         <attribute name="start_date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="week_no" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="lessonsOfWeek" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lessons" inverseName="lessonsOfWeek" inverseEntity="Lessons" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Week" positionX="225" positionY="171" width="128" height="88"/>
         <element name="Lessons" positionX="36" positionY="108" width="128" height="283"/>
+        <element name="Week" positionX="225" positionY="171" width="128" height="88"/>
+        <element name="Users" positionX="144" positionY="243" width="128" height="75"/>
     </elements>
 </model>

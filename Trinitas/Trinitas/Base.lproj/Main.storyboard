@@ -122,63 +122,62 @@
             </objects>
             <point key="canvasLocation" x="101.59999999999999" y="103.89805097451276"/>
         </scene>
-        <!--Oktober-->
-        <scene sceneID="9hJ-eg-ohg">
+        <!--Rooster Table View Controller-->
+        <scene sceneID="lYT-4l-4Xb">
             <objects>
-                <tableViewController id="A37-Ge-iyR" customClass="RoosterTableViewController" customModule="Trinitas" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="28" sectionFooterHeight="28" id="UIE-eu-0jk">
+                <viewController id="Akl-Oe-SnX" customClass="RoosterTableViewController" customModule="Trinitas" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9xs-q1-G0R"/>
+                        <viewControllerLayoutGuide type="bottom" id="j2c-0t-Wt9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nwu-HQ-z1U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pmy-WV-rpq">
+                                <rect key="frame" x="0.0" y="124" width="375" height="494"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hDw-mX-gGd">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hDw-mX-gGd" id="chN-zn-rBI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bhi-XI-BGO" customClass="ScrollableDatepicker" customModule="Trinitas" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="60"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="xwX-wf-6Fc"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="TLo-nd-mMB">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u02-nC-v6Z" customClass="ScrollableDatepicker" customModule="Trinitas" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="69" id="MdE-PY-BSW"/>
-                                    </constraints>
-                                </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nog 0:12 minuten tot de les begint." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JcN-kD-xxN">
-                                    <rect key="frame" x="34" y="77" width="306" height="41"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="u02-nC-v6Z" firstAttribute="leading" secondItem="TLo-nd-mMB" secondAttribute="leading" id="1je-xl-M7C"/>
-                                <constraint firstItem="u02-nC-v6Z" firstAttribute="top" secondItem="TLo-nd-mMB" secondAttribute="top" id="4Ak-x4-U5t"/>
-                                <constraint firstAttribute="trailing" secondItem="u02-nC-v6Z" secondAttribute="trailing" id="ehm-a0-3M0"/>
-                            </constraints>
-                        </view>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="76" id="dWR-Rg-eNm">
-                                <rect key="frame" x="0.0" y="154" width="375" height="76"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dWR-Rg-eNm" id="LY9-cq-SkL">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="A37-Ge-iyR" id="CQQ-57-5l2"/>
-                            <outlet property="delegate" destination="A37-Ge-iyR" id="zON-Iu-OU4"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Oktober" id="eIG-Rd-bS5"/>
+                        <constraints>
+                            <constraint firstItem="Bhi-XI-BGO" firstAttribute="centerX" secondItem="nwu-HQ-z1U" secondAttribute="centerX" id="3I7-Wt-Gu4"/>
+                            <constraint firstAttribute="trailing" secondItem="Pmy-WV-rpq" secondAttribute="trailing" id="5Of-OC-HgI"/>
+                            <constraint firstItem="Pmy-WV-rpq" firstAttribute="top" secondItem="9xs-q1-G0R" secondAttribute="bottom" constant="60" id="6f7-Co-IGM"/>
+                            <constraint firstItem="Bhi-XI-BGO" firstAttribute="top" secondItem="9xs-q1-G0R" secondAttribute="bottom" id="9N7-bm-dSL"/>
+                            <constraint firstItem="Pmy-WV-rpq" firstAttribute="centerX" secondItem="nwu-HQ-z1U" secondAttribute="centerX" id="EZ6-M1-XBf"/>
+                            <constraint firstItem="Pmy-WV-rpq" firstAttribute="leading" secondItem="nwu-HQ-z1U" secondAttribute="leading" id="OMr-sF-7D7"/>
+                            <constraint firstItem="j2c-0t-Wt9" firstAttribute="top" secondItem="Pmy-WV-rpq" secondAttribute="bottom" id="b8E-iH-dBU"/>
+                            <constraint firstItem="Bhi-XI-BGO" firstAttribute="leading" secondItem="nwu-HQ-z1U" secondAttribute="leading" id="jLN-Z5-FfD"/>
+                            <constraint firstAttribute="trailing" secondItem="Bhi-XI-BGO" secondAttribute="trailing" id="ng8-gg-zFe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="LQO-Qc-ml4"/>
                     <connections>
-                        <outlet property="datepicker" destination="u02-nC-v6Z" id="DCJ-6n-KBM"/>
+                        <outlet property="datepicker" destination="Bhi-XI-BGO" id="4Hd-kj-1GT"/>
+                        <outlet property="tableView" destination="Pmy-WV-rpq" id="dKz-Fn-m2R"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NBW-vS-Bma" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uKL-Nn-vpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3639.1999999999998" y="96.7016491754123"/>
+            <point key="canvasLocation" x="4272.8000000000002" y="77.811094452773617"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="EbD-e2-9Gw">
@@ -211,7 +210,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="A37-Ge-iyR" kind="relationship" relationship="rootViewController" id="sfE-rI-cc0"/>
+                        <segue destination="Akl-Oe-SnX" kind="relationship" relationship="rootViewController" id="BJ4-xl-4Ia"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wsv-Hy-YQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -12,7 +12,9 @@ import UIKit
 class LoginTableViewController: UITableViewController {
     
     let api = API()
-    
+    let dh = DataHelper()
+    let key = KeychainWrapper()
+
     private let tableHeaderHeight: CGFloat = 300.0
     private let cutAway: CGFloat = 90
     
@@ -60,18 +62,17 @@ class LoginTableViewController: UITableViewController {
         
         headerView.layer.mask = headerMaskLayer
         updateHeaderView()
-        
-        
-        api.getScheduleOfWeek(user: User(username: "140946", password: "emnwpxnz"), startDate: Date()) { (success) in
-            print(success)
-        }
 
     }
     
-    func userIsDoneLoggingIn(success: Bool) {
+    func userIsDoneLoggingIn(success: Bool, user: User) {
         
         if success {
-        
+            
+            // Save user credentials
+            
+            dh.userNeedsUpdate(user: user)
+            
             // Load vc
             
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "tabBarMenu")
@@ -84,14 +85,13 @@ class LoginTableViewController: UITableViewController {
             
             // Dipslay error
             
-            let controller = UIAlertController(title: "Er is een fout opgetreden...", message: "Je gebruikersnaam of wachtwoord in incorrect ingevoerd.", preferredStyle: .alert)
+            let controller = UIAlertController(title: "Er is een fout opgetreden", message: "Je gebruikersnaam of wachtwoord in incorrect ingevoerd", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             controller.addAction(ok)
             
             if let contr = UIApplication.topViewController() {
                 contr.present(controller, animated: true, completion: nil)
             }
-            
 
         }
         
@@ -149,10 +149,21 @@ class LoginTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as!LoginHeaderTableViewCell
         
-        cell.loginButton.layer.cornerRadius = cell.loginButton.frame.size.height / 2        
+        // Login button
+        
+        cell.loginButton.layer.cornerRadius = cell.loginButton.frame.size.height / 2
+        
+        // Textfields
+        
         cell.usernameTextField.delegate = self
         cell.passwordTextField.delegate = self
+        
+        // Enter credidentials if present
 
+        if let user = dh.user() as? User {
+            cell.usernameTextField.text = user.username
+            cell.passwordTextField.text = user.password
+        }
         
         return cell
     }
@@ -233,11 +244,11 @@ class LoginHeaderTableViewCell: UITableViewCell {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let login = storyboard.instantiateViewController(withIdentifier: "login") as? LoginTableViewController ?? nil
                 
-                if login != nil {
+                if let l = login {
                     
                     // Send response to vc
                     
-                    login!.userIsDoneLoggingIn(success: success)
+                    l.userIsDoneLoggingIn(success: success, user: user)
                     
                     // Turn button back
                     

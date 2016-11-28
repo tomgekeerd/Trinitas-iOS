@@ -15,9 +15,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     
-    private func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func applicationDidFinishLaunching(_ application: UIApplication) {
         // Override point for customization after application launch.
-        return true
+        
+        // Initialize Fetch Request
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
+        
+        // Configure Fetch Request
+        fetchRequest.includesPropertyValues = false
+        
+        do {
+            let items = try managedObjectContext.fetch(fetchRequest) as! [NSManagedObject]
+            
+            for item in items {
+                managedObjectContext.delete(item)
+            }
+            
+            // Save Changes
+            try managedObjectContext.save()
+            
+        } catch {
+            // Error Handling
+            // ...
+        }
+        
+        let managedContext = self.managedObjectContext
+        
+        //2
+        let fetchRequests = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
+        
+        //3
+        do {
+            let results = try managedContext.fetch(fetchRequests)
+            print(results.count)
+            //            for result in results {
+            //                if let r = result as? Lessons {
+            //                    print(r.week_no)
+            //                }
+            //            }
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -54,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = Bundle.main.url(forResource: "Rooster", withExtension: "momd")!
+        let modelURL = Bundle.main.url(forResource: "Data", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
