@@ -8,12 +8,12 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class LoginTableViewController: UITableViewController {
     
     let api = API()
     let dh = DataHelper()
-    let key = KeychainWrapper()
 
     private let tableHeaderHeight: CGFloat = 300.0
     private let cutAway: CGFloat = 90
@@ -108,13 +108,13 @@ class LoginTableViewController: UITableViewController {
         
         let diff = self.view.frame.size.width / 3
         
-        let path2 = UIBezierPath()
-        path2.move(to: CGPoint(x: 0, y: 0))
-        path2.addLine(to: CGPoint(x: headerRect.width, y: 0))
-        path2.addLine(to: CGPoint(x: headerRect.width, y: headerRect.height - cutAway))
-        path2.addLine(to: CGPoint(x: diff, y: headerRect.height))
-        path2.addLine(to: CGPoint(x: 0, y: headerRect.height - cutAway))
-        headerMaskLayer?.path = path2.cgPath
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: headerRect.width, y: 0))
+        path.addLine(to: CGPoint(x: headerRect.width, y: headerRect.height - cutAway))
+        path.addLine(to: CGPoint(x: diff, y: headerRect.height))
+        path.addLine(to: CGPoint(x: 0, y: headerRect.height - cutAway))
+        headerMaskLayer?.path = path.cgPath
         
         self.originialContentInset = self.tableView.contentInset
     }

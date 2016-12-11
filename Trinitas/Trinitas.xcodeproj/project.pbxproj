@@ -27,13 +27,10 @@
 		E25B1B351DD3D3C40034B740 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B331DD3D3C40034B740 /* Main.storyboard */; };
 		E25B1B371DD3D3C40034B740 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B361DD3D3C40034B740 /* Assets.xcassets */; };
 		E25B1B3A1DD3D3C40034B740 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */; };
-		E25B1B431DD3D55D0034B740 /* TriniAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B1B421DD3D55D0034B740 /* TriniAPI.swift */; };
-		E27092011DE6E69D000F7B18 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = E27092001DE6E69D000F7B18 /* line.png */; };
 		E27092061DE6E7E3000F7B18 /* BreakTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27092041DE6E7E3000F7B18 /* BreakTableViewCell.swift */; };
 		E27092071DE6E7E3000F7B18 /* BreakTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27092051DE6E7E3000F7B18 /* BreakTableViewCell.xib */; };
 		E270920B1DE72276000F7B18 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E27092091DE72276000F7B18 /* Data.xcdatamodeld */; };
 		E270920D1DE73242000F7B18 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270920C1DE73242000F7B18 /* DataHelper.swift */; };
-		E27092101DE736B9000F7B18 /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E270920F1DE736B9000F7B18 /* KeychainWrapper.m */; };
 		E27092131DE737CF000F7B18 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E27092121DE737CF000F7B18 /* Security.framework */; };
 		E28C527E1DE5F66200C1C585 /* RoosterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */; };
 		E28CC7931DE1E94100EEF231 /* trinitasLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E28CC7921DE1E94100EEF231 /* trinitasLogo.png */; };
@@ -70,14 +67,10 @@
 		E25B1B361DD3D3C40034B740 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E25B1B391DD3D3C40034B740 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E25B1B3B1DD3D3C40034B740 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E25B1B421DD3D55D0034B740 /* TriniAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriniAPI.swift; sourceTree = "<group>"; };
-		E27092001DE6E69D000F7B18 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		E27092041DE6E7E3000F7B18 /* BreakTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakTableViewCell.swift; sourceTree = "<group>"; };
 		E27092051DE6E7E3000F7B18 /* BreakTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BreakTableViewCell.xib; sourceTree = "<group>"; };
 		E270920A1DE72276000F7B18 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
 		E270920C1DE73242000F7B18 /* DataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
-		E270920E1DE736B9000F7B18 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
-		E270920F1DE736B9000F7B18 /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
 		E27092121DE737CF000F7B18 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoosterTableViewController.swift; sourceTree = "<group>"; };
 		E28CC7921DE1E94100EEF231 /* trinitasLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trinitasLogo.png; sourceTree = "<group>"; };
@@ -178,7 +171,6 @@
 			children = (
 				E25B1B6E1DD62FEC0034B740 /* Classes */,
 				E25B1B441DD4EE450034B740 /* Custom */,
-				E25B1B411DD3D5490034B740 /* API */,
 				E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */,
 				E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */,
 				E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */,
@@ -192,18 +184,9 @@
 			path = Trinitas;
 			sourceTree = "<group>";
 		};
-		E25B1B411DD3D5490034B740 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				E25B1B421DD3D55D0034B740 /* TriniAPI.swift */,
-			);
-			name = API;
-			sourceTree = "<group>";
-		};
 		E25B1B441DD4EE450034B740 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				E27092111DE736BD000F7B18 /* Keychain */,
 				E23E7BD31DE6377B00FD1738 /* Date picker */,
 				E23E7BDF1DE6378A00FD1738 /* Textfield */,
 				E23E7BDE1DE6378500FD1738 /* SLButton */,
@@ -215,7 +198,6 @@
 		E25B1B601DD515130034B740 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				E27092001DE6E69D000F7B18 /* line.png */,
 				E2EBF2851DE1E0CF00140310 /* trinitas.jpg */,
 				E28CC7921DE1E94100EEF231 /* trinitasLogo.png */,
 				E23E7BE61DE63F2E00FD1738 /* homework.png */,
@@ -248,15 +230,6 @@
 				E22EFF1C1DEC8DBB0077950A /* FirstOffTableViewCell.xib */,
 			);
 			name = TableViewCells;
-			sourceTree = "<group>";
-		};
-		E27092111DE736BD000F7B18 /* Keychain */ = {
-			isa = PBXGroup;
-			children = (
-				E270920E1DE736B9000F7B18 /* KeychainWrapper.h */,
-				E270920F1DE736B9000F7B18 /* KeychainWrapper.m */,
-			);
-			name = Keychain;
 			sourceTree = "<group>";
 		};
 		E2B2BF601DE229C400E0E5C7 /* UIImage+Blur */ = {
@@ -342,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E22EFF1E1DEC8DBB0077950A /* FirstOffTableViewCell.xib in Resources */,
-				E27092011DE6E69D000F7B18 /* line.png in Resources */,
 				E25B1B3A1DD3D3C40034B740 /* LaunchScreen.storyboard in Resources */,
 				E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */,
 				E23E7BDD1DE6377B00FD1738 /* ScrollableDatepickerDayCell.xib in Resources */,
@@ -424,11 +396,9 @@
 				E28CC7971DE1ED0700EEF231 /* UIImage+Blur.m in Sources */,
 				E23E7BE41DE63CF300FD1738 /* ColouredTableViewCell.swift in Sources */,
 				E2EBF2881DE1E0FF00140310 /* LoginTableViewController.swift in Sources */,
-				E27092101DE736B9000F7B18 /* KeychainWrapper.m in Sources */,
 				E270920D1DE73242000F7B18 /* DataHelper.swift in Sources */,
 				E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */,
 				E22EFF1D1DEC8DBB0077950A /* FirstOffTableViewCell.swift in Sources */,
-				E25B1B431DD3D55D0034B740 /* TriniAPI.swift in Sources */,
 				E2B2BF631DE229E900E0E5C7 /* API.swift in Sources */,
 				E27092061DE6E7E3000F7B18 /* BreakTableViewCell.swift in Sources */,
 				E23E7BD91DE6377B00FD1738 /* LoadableFromXibView.swift in Sources */,

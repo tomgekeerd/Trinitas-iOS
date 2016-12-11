@@ -29,40 +29,58 @@ class API: NSObject {
         
         Alamofire.request(baseURL + "login", method: .post, parameters: parameters).responseData { (response) in
 
-            if let data = response.data {
-                let json = JSON(data: data)
-                completion(json["success"].boolValue)
-            }
+            switch response.result {
+            case .success:
+                
+                if let data = response.data {
+                    let json = JSON(data: data)
+                    completion(json["success"].boolValue)
+                }
 
+                break
+                
+            case .failure(let error):
+                
+                completion(false, [])
+                print(error)
+                
+                break
+                
+            }
+            
         }
         
     }
     
-    func getScheduleOfWeek(startDate: Date, completion: @escaping (_ result: Bool) -> Void) {
+    func getScheduleOfDay(day: Date, completion: @escaping (_ success: Bool, _ callback: [Lesson]) -> Void) {
         
-        if let user = dh.user() as? User {
+        
+        let needsUpdate = dh.needsUpdate(date: day)
+        if needsUpdate {
             
-            // Get string date of startDate
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy"
-            let dateString = dateFormatter.string(from: startDate)
-
-            // Initialize params
-            
-            let parameters: Parameters = [
-                "lln": user.username,
-                "pass": user.password,
-                "sd": dateString
-            ]
-            
-            // Request schedule
-
-            Alamofire.request(baseURL + "schedule", method: .post, parameters: parameters).responseData { (response) in
+            if let user = dh.user() as? User {
                 
-                // Call completion when data is sent to CoreData
+                // Get string date of startDate
                 
-                switch response.result {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy"
+                let dateString = dateFormatter.string(from: day)
+                
+                // Initialize params
+                
+                let parameters: Parameters = [
+                    "lln": user.username,
+                    "pass": user.password,
+                    "sd": dateString
+                ]
+                
+                // Request schedule
+                
+                Alamofire.request(baseURL + "schedule", method: .post, parameters: parameters).responseData { (response) in
+                    
+                    // Call completion when data is sent to CoreData
+                    
+                    switch response.result {
                     case .success:
                         if let data = response.data {
                             let json = JSON(data: data)
@@ -71,38 +89,115 @@ class API: NSObject {
                                     
                                     // Set schedule in data
                                     
-                                    self.dh.scheduleNeedsUpdate(json: json)
-                                    completion(json["success"].boolValue)
-                                    
+                                    self.dh.scheduleNeedsUpdate(json: json, day: day, completion: { (results) in
+                                        completion(true, results)
+                                    })
                                     
                                 } else if success == false {
                                     
                                     if json["err"].intValue == 202 {
                                         
-                                        self.getScheduleOfWeek(startDate: startDate, completion: completion)
+                                        self.getScheduleOfDay(day: day, completion: completion)
                                         
                                     } else {
                                         
-                                        completion(false)
-
+                                        completion(false, [])
+                                        
                                     }
                                     
                                 }
                             }
                         }
-                    break
-
+                        break
+                        
                     case .failure(let error):
-                        completion(false)
-                        fatalError(error as! String)
-                    break
+                        completion(false, [])
+                        print(error)
+                        break
+                        
+                    }
                     
                 }
                 
             }
             
+        } else {
+            
+            dh.scheduleData(date: day, completion: { (results) in
+                completion(true, results)
+            })
+            
         }
-        
+            
     }
+    
+//    func getScheduleOfWeek(startDate: Date, completion: @escaping (_ result: Bool) -> Void) {
+//        
+//        if let user = dh.user() as? User {
+//            
+//            // Get string date of startDate
+//            
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "dd-MM-yyyy"
+//            let dateString = dateFormatter.string(from: startDate)
+//
+//            // Initialize params
+//            
+//            let parameters: Parameters = [
+//                "lln": user.username,
+//                "pass": user.password,
+//                "sd": dateString
+//            ]
+//            
+//            // Request schedule
+//
+//            Alamofire.request(baseURL + "schedule", method: .post, parameters: parameters).responseData { (response) in
+//                
+//                // Call completion when data is sent to CoreData
+//                
+//                switch response.result {
+//                    case .success:
+//                        if let data = response.data {
+//                            let json = JSON(data: data)
+//                            if let success = json["success"].bool {
+//                                if success == true {
+//                                    
+//                                    // Set schedule in data
+//                                    
+//                                    self.dh.scheduleNeedsUpdate(json: json, completion: { (results) in
+//                                        completion(json["success"].boolValue)
+//
+//                                    })
+//                                    
+//                                    
+//                                } else if success == false {
+//                                    
+//                                    if json["err"].intValue == 202 {
+//                                        
+//                                        self.getScheduleOfWeek(startDate: startDate, completion: completion)
+//                                        
+//                                    } else {
+//                                        
+//                                        completion(false)
+//
+//                                    }
+//                                    
+//                                }
+//                            }
+//                        }
+//                    break
+//
+//                    case .failure(let error):
+//                        completion(false)
+//                        fatalError(error as! String)
+//                    break
+//                    
+//                }
+//                
+//            }
+//            
+//        }
+//        
+//    }
     
 }

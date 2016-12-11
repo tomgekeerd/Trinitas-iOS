@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import SwiftyJSON
 import CoreData
+import SwiftKeychainWrapper
 
 struct Lesson {
     
@@ -17,8 +18,11 @@ struct Lesson {
     
     var day: String!
     var type: String!
-    var hour: Int!
+    var date: String!
     
+    var hour: Int!
+    var lastUpdate: Int!
+
     // Optional
     
     var lessonGroup: String? = nil
@@ -28,10 +32,9 @@ struct Lesson {
     var lessonTitle: String? = nil
     var homeworkDescription: String? = nil
     var room: String? = nil
-
+    
     var start: Int? = nil
     var end: Int? = nil
-    var week_no: Int? = nil
     
     var homework: Bool? = nil
     var test: Bool? = nil
@@ -55,17 +58,14 @@ class DataHelper: NSObject {
         
         // Write username & password to keychain...
         
-        let key = KeychainWrapper()
-        key.mySetObject(user.username, forKey: kSecAttrAccount)
-        key.mySetObject(user.password, forKey: kSecValueData)
-        key.writeToKeychain()
+        KeychainWrapper.standard.set(user.username, forKey: String(kSecAttrAccount))
+        KeychainWrapper.standard.set(user.password, forKey: String(kSecValueData))
         
     }
     
     func user() -> Any? {
         
-        let key = KeychainWrapper()
-        if let u = key.myObject(forKey: kSecAttrAccount) as? String, let p = key.myObject(forKey: kSecValueData) as? String {
+        if let u = KeychainWrapper.standard.string(forKey: String(kSecAttrAccount)), let p = KeychainWrapper.standard.string(forKey: String(kSecValueData)) {
             return User(username: u, password: p)
         } else {
             return nil
@@ -75,7 +75,7 @@ class DataHelper: NSObject {
     
     // Schedule
     
-    func scheduleData(startDate: Date, completion: @escaping (_ results: [Lesson]) -> Void) {
+    func scheduleData(date: Date, completion: @escaping (_ results: [Lesson]) -> Void) {
         
         // Get AppDelegate
         
@@ -88,52 +88,52 @@ class DataHelper: NSObject {
             let entity = NSEntityDescription.entity(forEntityName: "Lessons", in: managedContext)
             let fetchCount = NSFetchRequest<NSFetchRequestResult>()
             
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yy"
+            let dateStamp = dateFormatter.string(from: date)
+            
             if let e = entity {
                 
-                // Date formatting...
+                // Set fetch request...
                 
-                if let w_no = helpers.getWeek(today: startDate) {
+                fetchCount.entity = e
+                let predicate = NSPredicate(format: "date = %@", dateStamp)
+                fetchCount.predicate = predicate
+                
+                do {
                     
-                    // Set fetch request...
-                    
-                    fetchCount.entity = e
-                    let predicate = NSPredicate(format: "week_no = %i", w_no)
-                    fetchCount.predicate = predicate
-                    
-                    do {
+                    if let results = try managedContext.fetch(fetchCount) as? [Lessons] {
                         
-                        if let results = try managedContext.fetch(fetchCount) as? [Lessons] {
+                        var callback = [Lesson]()
+                        for result in results {
                             
-                            var callback = [Lesson]()
-                            for result in results {
-                                
-                                let lesson = Lesson(day: result.day,
-                                                    type: result.type,
-                                                    hour: Int(result.hour),
-                                                    lessonGroup: result.group,
-                                                    teacher: result.teacher,
-                                                    teacherSmall: result.teacher_small,
-                                                    teacherTitle: result.teacher_title,
-                                                    lessonTitle: result.title,
-                                                    homeworkDescription: result.homework_description,
-                                                    room: result.room,
-                                                    start: Int(result.start),
-                                                    end: Int(result.end),
-                                                    week_no: Int(result.week_no),
-                                                    homework: result.homework,
-                                                    test: result.test)
-                                
-                                callback.append(lesson)
-                                
-                            }
+                            let lesson = Lesson(day: result.day,
+                                                type: result.type,
+                                                date: result.date,
+                                                hour: Int(result.hour),
+                                                lastUpdate: Int(result.lastUpdate),
+                                                lessonGroup: result.group,
+                                                teacher: result.teacher,
+                                                teacherSmall: result.teacher_small,
+                                                teacherTitle: result.teacher_title,
+                                                lessonTitle: result.title,
+                                                homeworkDescription: result.homework_description,
+                                                room: result.room,
+                                                start: Int(result.start),
+                                                end: Int(result.end),
+                                                homework: result.homework,
+                                                test: result.test)
                             
-                            completion(callback)
+                            callback.append(lesson)
                             
                         }
-                    } catch {
-                        fatalError("Something went wrong gathering results...")
+                        
+                        completion(callback)
+                        
                     }
                     
+                } catch {
+                    fatalError("Something went wrong gathering results...")
                 }
                 
             }
@@ -141,9 +141,72 @@ class DataHelper: NSObject {
         }
     }
     
+    // Check if a server update is necessary
+    
+    func needsUpdate(date: Date) -> Bool {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yy"
+        let dateStamp = dateFormatter.string(from: date)
+        
+        var needsUpdate = false
+
+        // Get AppDelegate
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? nil
+        if let app = appDelegate {
+            
+            // Retrieve context & entity
+            
+            let managedContext = app.managedObjectContext
+            let entity = NSEntityDescription.entity(forEntityName: "Lessons", in: managedContext)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+            
+            if let e = entity {
+                
+                // Set fetchRequest
+                
+                fetchRequest.entity = e
+                let predicate = NSPredicate(format: "date = %@", dateStamp)
+                fetchRequest.predicate = predicate
+                
+                var fetchResults = [Lessons]()
+                do {
+                    if let results = try managedContext.fetch(fetchRequest) as? [Lessons] {
+                        fetchResults = results
+                    }
+                } catch {
+                    fatalError("Something went wrong fetching...")
+                }
+                
+                if fetchResults.count > 0 {
+                    
+                    for r in fetchResults {
+                        
+                        // Check if the last update is over 5 min.
+                        
+                        if Int(r.lastUpdate) > Int(Date().timeIntervalSinceNow + 60 * 5) {
+                            needsUpdate = true
+                        }
+                        
+                    }
+                    
+                } else {
+                    
+                    needsUpdate = true
+                    
+                }
+            }
+            
+        }
+        
+        return needsUpdate
+        
+    }
+    
     // Save data to coreData 
     
-    func scheduleNeedsUpdate(json: JSON) {
+    func scheduleNeedsUpdate(json: JSON, day: Date, completion: @escaping ( _ callback: [Lesson]) -> Void) {
         
         // Get AppDelegate
 
@@ -158,36 +221,41 @@ class DataHelper: NSObject {
 
             if let e = entity {
                 
-                // Set fetchRequest
-                
-                fetchRequest.entity = e
-                let predicate = NSPredicate(format: "week_no = %i", json["w_no"].intValue)
-                fetchRequest.predicate = predicate
-                
-                var fetchResults = [Lessons]()
-                do {
-                    if let results = try managedContext.fetch(fetchRequest) as? [Lessons] {
-                        fetchResults = results
-                    }
-                } catch {
-                    fatalError("Something went wrong fetching...")
-                }
-                
                 // Set values in entity
                 
                 let allLessons = helpers.getLessonsOfJSON(json: json)
                 
-                for (index, les) in allLessons.enumerated() {
+                for les in allLessons {
                     
+                    // Set fetchRequest
+                    
+                    fetchRequest.entity = e
+                    let datePredicate = NSPredicate(format: "date = %@", les.date)
+                    let hourPredicate = NSPredicate(format: "hour = %i", les.hour)
+                    let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [datePredicate, hourPredicate])
+                    fetchRequest.predicate = compoundPredicate
+                    
+                    var fetchResults = [Lessons]()
+                    do {
+                        if let results = try managedContext.fetch(fetchRequest) as? [Lessons] {
+                            fetchResults = results
+                        }
+                    } catch {
+                        fatalError("Something went wrong fetching...")
+                    }
+
                     // Had to this weird solution because NSManagedObject does not want to initiate without inserting...
+                    
                     
                     if fetchResults.count > 0 {
                         
                         // Already exists, overwrite
                         
-                        let f = fetchResults[index]
+                        let f = fetchResults[0]
 
                         f.setValue(les.day, forKey: "day")
+                        f.setValue(les.date, forKey: "date")
+                        f.setValue(les.lastUpdate, forKey: "lastUpdate")
                         f.setValue(les.end, forKey: "end")
                         f.setValue(les.homework, forKey: "homework")
                         f.setValue(les.homeworkDescription, forKey: "homework_description")
@@ -201,8 +269,7 @@ class DataHelper: NSObject {
                         f.setValue(les.teacherTitle, forKey: "teacher_title")
                         f.setValue(les.test, forKey: "test")
                         f.setValue(les.type, forKey: "type")
-                        f.setValue(les.week_no, forKey: "week_no")
-                            
+                        
                     } else {
                         
                         // Insert new one
@@ -210,6 +277,8 @@ class DataHelper: NSObject {
                         let lesson = Lessons(entity: e, insertInto: managedContext)
                                                 
                         lesson.setValue(les.day, forKey: "day")
+                        lesson.setValue(les.date, forKey: "date")
+                        lesson.setValue(les.lastUpdate, forKey: "lastUpdate")
                         lesson.setValue(les.end, forKey: "end")
                         lesson.setValue(les.homework, forKey: "homework")
                         lesson.setValue(les.homeworkDescription, forKey: "homework_description")
@@ -223,20 +292,25 @@ class DataHelper: NSObject {
                         lesson.setValue(les.teacherTitle, forKey: "teacher_title")
                         lesson.setValue(les.test, forKey: "test")
                         lesson.setValue(les.type, forKey: "type")
-                        lesson.setValue(les.week_no, forKey: "week_no")
 
                     }
+                    
+                    // Save to managedContext
+                    
+                    do {
+                        try managedContext.save()
+                    } catch let error as NSError  {
+                        print("Could not save \(error), \(error.userInfo)")
+                    }
+
                 }
                 
-                // Save to managedContext 
-                
-                do {
-                    try managedContext.save()
-                } catch let error as NSError  {
-                    print("Could not save \(error), \(error.userInfo)")
-                }
+                self.scheduleData(date: day, completion: { (callback) in
+                    completion(callback)
+                })
                 
             }
+            
         }
         
     }
@@ -245,57 +319,9 @@ class DataHelper: NSObject {
 
 class DataHelperHelpers {
     
-    func removeAllLessonsWithWeekId(id: Int) {
-        
-        // Get AppDelegate
-        
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? nil
-        if let app = appDelegate {
-            
-            // Retrieve context & entity
-            
-            let managedContext = app.managedObjectContext
-            let entity = NSEntityDescription.entity(forEntityName: "Lessons", in: managedContext)
-            let fetchRemove = NSFetchRequest<NSFetchRequestResult>()
-
-            if let e = entity {
-                
-                fetchRemove.entity = e
-                let predicate = NSPredicate(format: "week_no = %i", id)
-                fetchRemove.predicate = predicate
-                
-                do {
-                    
-                    if let objectArray = try managedContext.fetch(fetchRemove) as? [Lessons] {
-                        for object in objectArray {
-                            managedContext.delete(object)
-                        }
-                    }
-                    
-                    try managedContext.save()
-
-                } catch {
-                    
-                    if let error = error as? String {
-                        fatalError(error)
-                    }
-                    
-                }
-
-            }
-            
-        }
-
-    }
-    
-    
     // Parse json into Lesson structs
     
     func getLessonsOfJSON(json: JSON) -> [Lesson] {
-        
-        // Set week
-        
-        self.setWeek(json: json)
         
         // Initialize arrays
         
@@ -326,11 +352,15 @@ class DataHelperHelpers {
                     hwDesc = course["afspraakObject"]["huiswerk"]["omschrijving"].stringValue
                 }
                 
+                let date = course["date"].stringValue
+                    
                 // Add lesson to the array
-                
+                    
                 let lesson = Lesson(day: course["day"].stringValue,
                                     type: course["afspraakObject"]["type"].stringValue,
+                                    date: date,
                                     hour: course["afspraakObject"]["lesuur"].intValue,
+                                    lastUpdate: Int(Date().timeIntervalSinceNow),
                                     lessonGroup: course["afspraakObject"]["lesgroep"].stringValue,
                                     teacher: course["afspraakObject"]["docent"][0]["achternaam"].stringValue,
                                     teacherSmall: course["afspraakObject"]["docent"][0]["afkorting"].stringValue,
@@ -340,74 +370,18 @@ class DataHelperHelpers {
                                     room: course["afspraakObject"]["lokaal"].stringValue,
                                     start: course["start"].intValue,
                                     end: course["end"].intValue,
-                                    week_no: json["w_no"].intValue,
                                     homework: homework,
                                     test: test)
                 
-                
                 lessonArray.append(lesson)
+                    
+                
                 
             }
 
         }
         
         return lessonArray
-    }
-    
-    func setWeek(json: JSON) {
-        
-        // Get AppDelegate
-        
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? nil
-        if let app = appDelegate {
-            
-            // Retrieve context & entity
-            
-            let managedContext = app.managedObjectContext
-            let entity = NSEntityDescription.entity(forEntityName: "Week", in: managedContext)
-            let fetchCount = NSFetchRequest<NSFetchRequestResult>()
-
-            if let e = entity {
-                
-                // Date formatting...
-                
-                let w_no = json["w_no"].intValue
-                let startDate = getFirstDay(weekNumber: w_no)
-                
-                // Set fetch request...
-                
-                fetchCount.entity = e
-                let predicate = NSPredicate(format: "week_no = %i", w_no)
-                fetchCount.predicate = predicate
-                
-                // Get fetch count...
-                
-                var count = 0
-                do {
-                    let results = try managedContext.fetch(fetchCount)
-                    count = results.count
-                } catch {
-                    fatalError("Something went wrong gathering results...")
-                }
-                
-                if count == 0 {
-                
-                    // Set values in entity
-                    
-                    let lesson = Lessons(entity: e, insertInto: managedContext)
-                    lesson.setValue(w_no, forKey: "week_no")
-                    lesson.setValue(startDate, forKey: "start_date")
-                    
-                    do {
-                        try managedContext.save()
-                    } catch {
-                        fatalError("Something went wrong saving results...")
-                    }
-                    
-                }
-            }
-        }
-        
     }
     
     func getWeek(today:Date) -> Int? {
@@ -442,26 +416,21 @@ class DataHelperHelpers {
 //
 //    }
     
-    func getFirstDay(weekNumber: Int) -> String? {
-        
+    private static func getWeekFirstDay(from sourceDate: Date) -> Date? {
         let Calendar = NSCalendar(calendarIdentifier: .gregorian)!
-        var dayComponent = DateComponents()
-        dayComponent.weekOfYear = weekNumber
-        dayComponent.weekday = 1
-        dayComponent.year = 2015
-        
-        var date = Calendar.date(from: dayComponent)
-        
-        if weekNumber == 1 && Calendar.components(.month, from: date!).month != 1 {
-            dayComponent.year = 2014
-            date = Calendar.date(from: dayComponent)
-        }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        
-        return String(dateFormatter.string(from: date!))
-        
+        var sourceComp = sourceDate.components
+        var comp = DateComponents()
+        comp.weekOfYear = sourceComp.weekOfYear
+        comp.weekday = 1
+        comp.yearForWeekOfYear = sourceComp.yearForWeekOfYear
+        return Calendar.date(from: comp)
     }
     
+}
+
+extension Date {
+    var components: DateComponents {
+        let cal = NSCalendar.current
+        return cal.dateComponents(Set([.year, .month, .day, .hour, .minute, .second, .weekday, .weekOfYear, .yearForWeekOfYear]), from: self)
+    }
 }

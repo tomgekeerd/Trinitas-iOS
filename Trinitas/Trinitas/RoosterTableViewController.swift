@@ -44,26 +44,12 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.register(UINib(nibName: "BreakTableViewCell", bundle: nil), forCellReuseIdentifier: "breakCell")
         self.tableView.register(UINib(nibName: "ColouredTableViewCell", bundle: nil), forCellReuseIdentifier: "colouredCell")
         
-        api.getScheduleOfWeek(startDate: Date()) { (success) in
-            
-            if success {
-                
-                self.dh.scheduleData(startDate: Date(), completion: { (results) in
-                    
-                    self.lessonArray = results
-                    for result in results {
-                        print(result.hour)
-                    }
-                    //                    self.tableView.reloadData()
-                    
-                })
-                
-            } else {
-                
-                // Display error
-                
+        let date = Date().addingTimeInterval(3600 * 48)
+        api.getScheduleOfDay(day: date) { (success, results) in
+            print(results)
+            for r in results {
+                print(r.hour)
             }
-            
         }
         
     }

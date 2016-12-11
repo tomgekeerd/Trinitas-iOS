@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // ...
         }
         
+        
         let managedContext = self.managedObjectContext
         
         //2
