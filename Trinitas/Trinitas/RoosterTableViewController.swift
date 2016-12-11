@@ -9,29 +9,16 @@
 import UIKit
 import CoreData
 
-class RoosterTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ScrollableDatepickerDelegate {
+class RoosterTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView: UITableView!
+    var calendarView: CLWeeklyCalendarView!
+
     var schedule = [NSManagedObject]()
     var lessonArray = [Lesson]()
     
     let api = API()
     let dh = DataHelper()
-    
-    @IBOutlet var datepicker: ScrollableDatepicker! {
-        didSet {
-            let beforeDates = 15
-            var dates = [Date]()
-            for day in -beforeDates...60 {
-                dates.append(Date(timeIntervalSinceNow: Double(day * 86400)))
-            }
-            
-            datepicker.selectedDate = Date()
-            datepicker.dates = dates
-            datepicker.delegate = self
-            datepicker.beforeDates = 15
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,13 +31,12 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.register(UINib(nibName: "BreakTableViewCell", bundle: nil), forCellReuseIdentifier: "breakCell")
         self.tableView.register(UINib(nibName: "ColouredTableViewCell", bundle: nil), forCellReuseIdentifier: "colouredCell")
         
-        let date = Date().addingTimeInterval(3600 * 48)
-        api.getScheduleOfDay(day: date) { (success, results) in
-            print(results)
-            for r in results {
-                print(r.hour)
-            }
-        }
+        // Setup dateselector
+        
+        self.calendarView = CLWeeklyCalendarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 130))
+        self.calendarView.delegate = self
+        
+        self.view.addSubview(self.calendarView)
         
     }
     
@@ -59,75 +45,80 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Datepicker delegate methods
-    
-    func datepicker(_ datepicker: ScrollableDatepicker, didSelectDate date: Date) {
-        print(date)
-    }
-    
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return lessonArray.count
+        return self.lessonArray.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let currentLesson = lessonArray[indexPath.row]
-        var cell = UITableViewCell()
+        // Check if we should display loading screen or loading screen...
         
-        switch currentLesson.type {
-        case "Vrij":
+        if self.lessonArray.count > 0 {
             
-            // Spare time
+            // Not loading, get lessons
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "spareCell", for: indexPath) as! SpareTableViewCell
+            let currentLesson = self.lessonArray[indexPath.row]
+            var cell = UITableViewCell()
             
-            break
-            
-        case "Eerste uur vrij":
-            
-            // First hour(s) off
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "firstOffCell", for: indexPath) as! FirstOffTableViewCell
-            
-            break
-        case "Tussenuur":
-            
-            // Hour off between lessons
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "betweenCell", for: indexPath) as! BetweenTableViewCell
+            switch currentLesson.type {
+            case "Vrij":
+                
+                // Spare time
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "spareCell", for: indexPath) as! SpareTableViewCell
+                
+                break
+                
+            case "Eerste uur vrij":
+                
+                // First hour(s) off
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "firstOffCell", for: indexPath) as! FirstOffTableViewCell
+                
+                break
+            case "Tussenuur":
+                
+                // Hour off between lessons
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "betweenCell", for: indexPath) as! BetweenTableViewCell
 
-            break
-        case "Les":
+                break
+            case "Les":
+                
+                // Lesson
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "colouredCell", for: indexPath) as! ColouredTableViewCell
+                cell.selectionStyle = .none
+                
+                break
+            case "Pauze":
+                
+                // Break
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "breakCell", for: indexPath) as! BreakTableViewCell
+                
+                break
+            default:
+                ()
+            }
             
-            // Lesson
+            return cell
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "colouredCell", for: indexPath) as! ColouredTableViewCell
-            cell.selectionStyle = .none
+        } else {
             
-            break
-        case "Pauze":
+            // Display loading screen..
             
-            // Break
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "breakCell", for: indexPath) as! BreakTableViewCell
-            
-            break
-        default:
-            ()
         }
         
-        // Should prevent this
+        return UITableViewCell()
         
-        return cell
     }
     
     
@@ -175,5 +166,50 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
      // Pass the selected object to the new view controller.
      }
      */
+    
+}
+
+extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
+    
+    // MARK: - Datepicker delegate method(s)
+    
+    public func clCalendarBehaviorAttributes() -> [AnyHashable : Any]! {
+
+        return [
+            CLCalendarWeekStartDay: 1,
+            CLCalendarBackgroundImageColor: UIColor(red: 224, green: 54, blue: 56, alpha: 1.0),
+            CLCalendarDayTitleTextColor: UIColor.white,
+            CLCalendarSelectedDatePrintColor: UIColor.white
+        ]
+        
+    }
+    
+    func dailyCalendarViewDidSelect(_ date: Date!) {
+        
+        // Get weekday and display in navigation bar
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
+        let weekday = formatter.string(from: date)
+        
+        self.title = weekday
+        
+        // Empty out array, reload tableview for load screen
+        
+        self.lessonArray = []
+        self.tableView.reloadData()
+        
+        // Receive schedule of the Date
+        
+        api.getScheduleOfDay(day: date) { (success, result) in
+            
+            // Got results, reload tableView to display...
+            
+            self.lessonArray = result
+            self.tableView.reloadData()
+            
+        }
+
+    }
     
 }

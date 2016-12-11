@@ -48,7 +48,7 @@
                                 <rect key="frame" x="0.0" y="368" width="375" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ckf-0w-KYs" id="saq-ck-ybc">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="299.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="299"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2U-HE-ZAF" customClass="SLButton">
@@ -122,7 +122,7 @@
             </objects>
             <point key="canvasLocation" x="101.59999999999999" y="103.89805097451276"/>
         </scene>
-        <!--Rooster Table View Controller-->
+        <!--Rooster-->
         <scene sceneID="lYT-4l-4Xb">
             <objects>
                 <viewController id="Akl-Oe-SnX" customClass="RoosterTableViewController" customModule="Trinitas" customModuleProvider="target" sceneMemberID="viewController">
@@ -135,7 +135,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pmy-WV-rpq">
-                                <rect key="frame" x="0.0" y="124" width="375" height="494"/>
+                                <rect key="frame" x="0.0" y="150" width="375" height="468"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hDw-mX-gGd">
@@ -148,30 +148,19 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bhi-XI-BGO" customClass="ScrollableDatepicker" customModule="Trinitas" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="60"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="xwX-wf-6Fc"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Bhi-XI-BGO" firstAttribute="centerX" secondItem="nwu-HQ-z1U" secondAttribute="centerX" id="3I7-Wt-Gu4"/>
                             <constraint firstAttribute="trailing" secondItem="Pmy-WV-rpq" secondAttribute="trailing" id="5Of-OC-HgI"/>
-                            <constraint firstItem="Pmy-WV-rpq" firstAttribute="top" secondItem="9xs-q1-G0R" secondAttribute="bottom" constant="60" id="6f7-Co-IGM"/>
-                            <constraint firstItem="Bhi-XI-BGO" firstAttribute="top" secondItem="9xs-q1-G0R" secondAttribute="bottom" id="9N7-bm-dSL"/>
+                            <constraint firstItem="Pmy-WV-rpq" firstAttribute="top" secondItem="9xs-q1-G0R" secondAttribute="bottom" constant="130" id="6f7-Co-IGM"/>
                             <constraint firstItem="Pmy-WV-rpq" firstAttribute="centerX" secondItem="nwu-HQ-z1U" secondAttribute="centerX" id="EZ6-M1-XBf"/>
                             <constraint firstItem="Pmy-WV-rpq" firstAttribute="leading" secondItem="nwu-HQ-z1U" secondAttribute="leading" id="OMr-sF-7D7"/>
                             <constraint firstItem="j2c-0t-Wt9" firstAttribute="top" secondItem="Pmy-WV-rpq" secondAttribute="bottom" id="b8E-iH-dBU"/>
-                            <constraint firstItem="Bhi-XI-BGO" firstAttribute="leading" secondItem="nwu-HQ-z1U" secondAttribute="leading" id="jLN-Z5-FfD"/>
-                            <constraint firstAttribute="trailing" secondItem="Bhi-XI-BGO" secondAttribute="trailing" id="ng8-gg-zFe"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Rooster" id="U11-K4-mid"/>
                     <navigationItem key="navigationItem" id="LQO-Qc-ml4"/>
                     <connections>
-                        <outlet property="datepicker" destination="Bhi-XI-BGO" id="4Hd-kj-1GT"/>
                         <outlet property="tableView" destination="Pmy-WV-rpq" id="dKz-Fn-m2R"/>
                     </connections>
                 </viewController>
@@ -190,32 +179,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Djr-nF-GeI" kind="relationship" relationship="viewControllers" id="MFS-MH-7Vs"/>
-                        <segue destination="Ovc-5Y-xQ2" kind="relationship" relationship="viewControllers" id="uO5-BW-cBR"/>
+                        <segue destination="Akl-Oe-SnX" kind="relationship" relationship="viewControllers" id="OYs-Sd-B4T"/>
+                        <segue destination="Ovc-5Y-xQ2" kind="relationship" relationship="viewControllers" id="4vd-28-4KL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="60u-Hm-3LG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1760.8" y="96.7016491754123"/>
-        </scene>
-        <!--Rooster-->
-        <scene sceneID="sjM-pO-WMO">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Djr-nF-GeI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Rooster" id="apk-No-jul"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vkx-R8-fDv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Akl-Oe-SnX" kind="relationship" relationship="rootViewController" id="BJ4-xl-4Ia"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wsv-Hy-YQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2700" y="96.7016491754123"/>
         </scene>
         <!--Cijfers-->
         <scene sceneID="110-HF-jf1">
@@ -230,7 +200,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uik-mC-dmw" id="jcp-pV-KNJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

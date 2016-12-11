@@ -41,7 +41,7 @@ class API: NSObject {
                 
             case .failure(let error):
                 
-                completion(false, [])
+                completion(false)
                 print(error)
                 
                 break
