@@ -80,9 +80,9 @@
 {
     //    DLog(@"mark date selected %@ -- %d",self.date, blnSelected);
     if([self.date isDateToday]){
-        self.dateLabelContainer.backgroundColor = (blnSelected)?[UIColor whiteColor]: [UIColor colorWithHex:0x0081c1];
+        self.dateLabelContainer.backgroundColor = (blnSelected)?[UIColor whiteColor]: [UIColor colorWithHex:0x0081c1 andAlpha:0.3];
         
-        self.dateLabel.textColor = (blnSelected)?[UIColor colorWithHex:0x0081c1]:[UIColor whiteColor];
+        self.dateLabel.textColor = (blnSelected)?[UIColor colorWithHex:0x0081c1 andAlpha:1.0]:[UIColor whiteColor];
     }else{
         self.dateLabelContainer.backgroundColor = (blnSelected)?[UIColor whiteColor]: [UIColor clearColor];
         
@@ -95,7 +95,7 @@
 }
 -(UIColor *)colorByDate
 {
-    return [self.date isPastDate]?[UIColor colorWithHex:0x7BD1FF]:[UIColor whiteColor];
+    return [self.date isPastDate]?[UIColor lightGrayColor]:[UIColor whiteColor];
 }
 
 -(void)dailyViewDidClick: (UIGestureRecognizer *)tap

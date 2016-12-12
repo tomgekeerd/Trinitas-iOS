@@ -27,13 +27,10 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableView.separatorStyle = .none
-        self.tableView.register(UINib(nibName: "BreakTableViewCell", bundle: nil), forCellReuseIdentifier: "breakCell")
-        self.tableView.register(UINib(nibName: "ColouredTableViewCell", bundle: nil), forCellReuseIdentifier: "colouredCell")
         
         // Setup dateselector
         
-        self.calendarView = CLWeeklyCalendarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 130))
+        self.calendarView = CLWeeklyCalendarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 120))
         self.calendarView.delegate = self
         
         self.view.addSubview(self.calendarView)
@@ -64,49 +61,10 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
             // Not loading, get lessons
             
             let currentLesson = self.lessonArray[indexPath.row]
-            var cell = UITableViewCell()
             
-            switch currentLesson.type {
-            case "Vrij":
-                
-                // Spare time
-                
-                cell = tableView.dequeueReusableCell(withIdentifier: "spareCell", for: indexPath) as! SpareTableViewCell
-                
-                break
-                
-            case "Eerste uur vrij":
-                
-                // First hour(s) off
-                
-                cell = tableView.dequeueReusableCell(withIdentifier: "firstOffCell", for: indexPath) as! FirstOffTableViewCell
-                
-                break
-            case "Tussenuur":
-                
-                // Hour off between lessons
-                
-                cell = tableView.dequeueReusableCell(withIdentifier: "betweenCell", for: indexPath) as! BetweenTableViewCell
-
-                break
-            case "Les":
-                
-                // Lesson
-                
-                cell = tableView.dequeueReusableCell(withIdentifier: "colouredCell", for: indexPath) as! ColouredTableViewCell
-                cell.selectionStyle = .none
-                
-                break
-            case "Pauze":
-                
-                // Break
-                
-                cell = tableView.dequeueReusableCell(withIdentifier: "breakCell", for: indexPath) as! BreakTableViewCell
-                
-                break
-            default:
-                ()
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! LessonCell
+            cell.lessonData = currentLesson
+            cell.type = currentLesson.type
             
             return cell
             
@@ -167,6 +125,10 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
      }
      */
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 }
 
 extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
@@ -177,9 +139,7 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
 
         return [
             CLCalendarWeekStartDay: 1,
-            CLCalendarBackgroundImageColor: UIColor(red: 224, green: 54, blue: 56, alpha: 1.0),
-            CLCalendarDayTitleTextColor: UIColor.white,
-            CLCalendarSelectedDatePrintColor: UIColor.white
+            CLCalendarBackgroundImageColor: UIColor(red: 224/255, green: 54/255, blue: 56/255, alpha: 1.0)
         ]
         
     }

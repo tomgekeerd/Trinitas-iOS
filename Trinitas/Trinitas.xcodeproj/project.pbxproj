@@ -9,21 +9,11 @@
 /* Begin PBXBuildFile section */
 		575D5387E1510375E964AED8 /* Pods_Trinitas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60961B20B77098D469E8819 /* Pods_Trinitas.framework */; };
 		E21209311DE2080E00BA390E /* SLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E21209301DE2080E00BA390E /* SLButton.m */; };
-		E22EFF151DEB66FB0077950A /* SpareTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22EFF131DEB66FB0077950A /* SpareTableViewCell.swift */; };
-		E22EFF161DEB66FB0077950A /* SpareTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22EFF141DEB66FB0077950A /* SpareTableViewCell.xib */; };
-		E22EFF191DEC8DAC0077950A /* BetweenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22EFF171DEC8DAC0077950A /* BetweenTableViewCell.swift */; };
-		E22EFF1A1DEC8DAC0077950A /* BetweenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22EFF181DEC8DAC0077950A /* BetweenTableViewCell.xib */; };
-		E22EFF1D1DEC8DBB0077950A /* FirstOffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22EFF1B1DEC8DBB0077950A /* FirstOffTableViewCell.swift */; };
-		E22EFF1E1DEC8DBB0077950A /* FirstOffTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22EFF1C1DEC8DBB0077950A /* FirstOffTableViewCell.xib */; };
-		E23E7BE41DE63CF300FD1738 /* ColouredTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23E7BE21DE63CF300FD1738 /* ColouredTableViewCell.swift */; };
-		E23E7BE51DE63CF300FD1738 /* ColouredTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BE31DE63CF300FD1738 /* ColouredTableViewCell.xib */; };
 		E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BE61DE63F2E00FD1738 /* homework.png */; };
 		E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */; };
 		E25B1B351DD3D3C40034B740 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B331DD3D3C40034B740 /* Main.storyboard */; };
 		E25B1B371DD3D3C40034B740 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B361DD3D3C40034B740 /* Assets.xcassets */; };
 		E25B1B3A1DD3D3C40034B740 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */; };
-		E27092061DE6E7E3000F7B18 /* BreakTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27092041DE6E7E3000F7B18 /* BreakTableViewCell.swift */; };
-		E27092071DE6E7E3000F7B18 /* BreakTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27092051DE6E7E3000F7B18 /* BreakTableViewCell.xib */; };
 		E270920B1DE72276000F7B18 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E27092091DE72276000F7B18 /* Data.xcdatamodeld */; };
 		E270920D1DE73242000F7B18 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270920C1DE73242000F7B18 /* DataHelper.swift */; };
 		E27092131DE737CF000F7B18 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E27092121DE737CF000F7B18 /* Security.framework */; };
@@ -40,6 +30,7 @@
 		E2D0278D1DFDD87800280887 /* NSDictionary+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D027841DFDD87800280887 /* NSDictionary+CL.m */; };
 		E2D0278E1DFDD87800280887 /* UIColor+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D027861DFDD87800280887 /* UIColor+CL.m */; };
 		E2D0278F1DFDD87800280887 /* UIImage+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D027881DFDD87800280887 /* UIImage+CL.m */; };
+		E2D027911DFEF27500280887 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D027901DFEF27500280887 /* TableViewCells.swift */; };
 		E2EBF2861DE1E0CF00140310 /* trinitas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E2EBF2851DE1E0CF00140310 /* trinitas.jpg */; };
 		E2EBF2881DE1E0FF00140310 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -49,14 +40,6 @@
 		DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.release.xcconfig"; sourceTree = "<group>"; };
 		E212092F1DE2080E00BA390E /* SLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLButton.h; sourceTree = "<group>"; };
 		E21209301DE2080E00BA390E /* SLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLButton.m; sourceTree = "<group>"; };
-		E22EFF131DEB66FB0077950A /* SpareTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpareTableViewCell.swift; sourceTree = "<group>"; };
-		E22EFF141DEB66FB0077950A /* SpareTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpareTableViewCell.xib; sourceTree = "<group>"; };
-		E22EFF171DEC8DAC0077950A /* BetweenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetweenTableViewCell.swift; sourceTree = "<group>"; };
-		E22EFF181DEC8DAC0077950A /* BetweenTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BetweenTableViewCell.xib; sourceTree = "<group>"; };
-		E22EFF1B1DEC8DBB0077950A /* FirstOffTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstOffTableViewCell.swift; sourceTree = "<group>"; };
-		E22EFF1C1DEC8DBB0077950A /* FirstOffTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstOffTableViewCell.xib; sourceTree = "<group>"; };
-		E23E7BE21DE63CF300FD1738 /* ColouredTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColouredTableViewCell.swift; sourceTree = "<group>"; };
-		E23E7BE31DE63CF300FD1738 /* ColouredTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColouredTableViewCell.xib; sourceTree = "<group>"; };
 		E23E7BE61DE63F2E00FD1738 /* homework.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homework.png; sourceTree = "<group>"; };
 		E25B1B2C1DD3D3C40034B740 /* Trinitas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trinitas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,8 +47,6 @@
 		E25B1B361DD3D3C40034B740 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E25B1B391DD3D3C40034B740 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E25B1B3B1DD3D3C40034B740 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E27092041DE6E7E3000F7B18 /* BreakTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakTableViewCell.swift; sourceTree = "<group>"; };
-		E27092051DE6E7E3000F7B18 /* BreakTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BreakTableViewCell.xib; sourceTree = "<group>"; };
 		E270920A1DE72276000F7B18 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
 		E270920C1DE73242000F7B18 /* DataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 		E27092121DE737CF000F7B18 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -91,6 +72,7 @@
 		E2D027861DFDD87800280887 /* UIColor+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CL.m"; sourceTree = "<group>"; };
 		E2D027871DFDD87800280887 /* UIImage+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CL.h"; sourceTree = "<group>"; };
 		E2D027881DFDD87800280887 /* UIImage+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CL.m"; sourceTree = "<group>"; };
+		E2D027901DFEF27500280887 /* TableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
 		E2EBF2851DE1E0CF00140310 /* trinitas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = trinitas.jpg; sourceTree = "<group>"; };
 		E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewController.swift; sourceTree = "<group>"; };
 		E60961B20B77098D469E8819 /* Pods_Trinitas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trinitas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,16 +213,7 @@
 		E27092081DE7225C000F7B18 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				E23E7BE21DE63CF300FD1738 /* ColouredTableViewCell.swift */,
-				E23E7BE31DE63CF300FD1738 /* ColouredTableViewCell.xib */,
-				E27092041DE6E7E3000F7B18 /* BreakTableViewCell.swift */,
-				E27092051DE6E7E3000F7B18 /* BreakTableViewCell.xib */,
-				E22EFF131DEB66FB0077950A /* SpareTableViewCell.swift */,
-				E22EFF141DEB66FB0077950A /* SpareTableViewCell.xib */,
-				E22EFF171DEC8DAC0077950A /* BetweenTableViewCell.swift */,
-				E22EFF181DEC8DAC0077950A /* BetweenTableViewCell.xib */,
-				E22EFF1B1DEC8DBB0077950A /* FirstOffTableViewCell.swift */,
-				E22EFF1C1DEC8DBB0077950A /* FirstOffTableViewCell.xib */,
+				E2D027901DFEF27500280887 /* TableViewCells.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -342,17 +315,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E22EFF1E1DEC8DBB0077950A /* FirstOffTableViewCell.xib in Resources */,
 				E25B1B3A1DD3D3C40034B740 /* LaunchScreen.storyboard in Resources */,
 				E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */,
-				E23E7BE51DE63CF300FD1738 /* ColouredTableViewCell.xib in Resources */,
-				E22EFF161DEB66FB0077950A /* SpareTableViewCell.xib in Resources */,
 				E25B1B371DD3D3C40034B740 /* Assets.xcassets in Resources */,
 				E25B1B351DD3D3C40034B740 /* Main.storyboard in Resources */,
 				E28CC7931DE1E94100EEF231 /* trinitasLogo.png in Resources */,
 				E2EBF2861DE1E0CF00140310 /* trinitas.jpg in Resources */,
-				E22EFF1A1DEC8DAC0077950A /* BetweenTableViewCell.xib in Resources */,
-				E27092071DE6E7E3000F7B18 /* BreakTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,27 +379,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E22EFF151DEB66FB0077950A /* SpareTableViewCell.swift in Sources */,
 				E28C527E1DE5F66200C1C585 /* RoosterTableViewController.swift in Sources */,
 				E2D0278E1DFDD87800280887 /* UIColor+CL.m in Sources */,
 				E270920B1DE72276000F7B18 /* Data.xcdatamodeld in Sources */,
-				E22EFF191DEC8DAC0077950A /* BetweenTableViewCell.swift in Sources */,
 				E21209311DE2080E00BA390E /* SLButton.m in Sources */,
 				E2D0278B1DFDD87800280887 /* DayTitleLabel.m in Sources */,
 				E28CC79B1DE1F98E00EEF231 /* ACFloatingTextField.swift in Sources */,
 				E2D0278C1DFDD87800280887 /* NSDate+CL.m in Sources */,
+				E2D027911DFEF27500280887 /* TableViewCells.swift in Sources */,
 				E2D0278A1DFDD87800280887 /* DailyCalendarView.m in Sources */,
 				E28CC7971DE1ED0700EEF231 /* UIImage+Blur.m in Sources */,
 				E2D027891DFDD87800280887 /* CLWeeklyCalendarView.m in Sources */,
-				E23E7BE41DE63CF300FD1738 /* ColouredTableViewCell.swift in Sources */,
 				E2D0278F1DFDD87800280887 /* UIImage+CL.m in Sources */,
 				E2D0278D1DFDD87800280887 /* NSDictionary+CL.m in Sources */,
 				E2EBF2881DE1E0FF00140310 /* LoginTableViewController.swift in Sources */,
 				E270920D1DE73242000F7B18 /* DataHelper.swift in Sources */,
 				E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */,
-				E22EFF1D1DEC8DBB0077950A /* FirstOffTableViewCell.swift in Sources */,
 				E2B2BF631DE229E900E0E5C7 /* API.swift in Sources */,
-				E27092061DE6E7E3000F7B18 /* BreakTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

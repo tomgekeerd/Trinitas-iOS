@@ -25,6 +25,7 @@ struct Lesson {
 
     // Optional
     
+    var lessonFormat: String? = nil
     var lessonGroup: String? = nil
     var teacher: String? = nil
     var teacherSmall: String? = nil
@@ -112,6 +113,7 @@ class DataHelper: NSObject {
                                                 date: result.date,
                                                 hour: Int(result.hour),
                                                 lastUpdate: Int(result.lastUpdate),
+                                                lessonFormat: result.lessonFormat,
                                                 lessonGroup: result.group,
                                                 teacher: result.teacher,
                                                 teacherSmall: result.teacher_small,
@@ -260,6 +262,7 @@ class DataHelper: NSObject {
                         f.setValue(les.homework, forKey: "homework")
                         f.setValue(les.homeworkDescription, forKey: "homework_description")
                         f.setValue(les.hour, forKey: "hour")
+                        f.setValue(les.lessonFormat, forKey: "lessonFormat")
                         f.setValue(les.lessonGroup, forKey: "group")
                         f.setValue(les.lessonTitle, forKey: "title")
                         f.setValue(les.room, forKey: "room")
@@ -283,6 +286,7 @@ class DataHelper: NSObject {
                         lesson.setValue(les.homework, forKey: "homework")
                         lesson.setValue(les.homeworkDescription, forKey: "homework_description")
                         lesson.setValue(les.hour, forKey: "hour")
+                        lesson.setValue(les.lessonFormat, forKey: "lessonFormat")
                         lesson.setValue(les.lessonGroup, forKey: "group")
                         lesson.setValue(les.lessonTitle, forKey: "title")
                         lesson.setValue(les.room, forKey: "room")
@@ -361,6 +365,7 @@ class DataHelperHelpers {
                                     date: date,
                                     hour: course["afspraakObject"]["lesuur"].intValue,
                                     lastUpdate: Int(Date().timeIntervalSinceNow),
+                                    lessonFormat: course["lesFormat"].stringValue,
                                     lessonGroup: course["afspraakObject"]["lesgroep"].stringValue,
                                     teacher: course["afspraakObject"]["docent"][0]["achternaam"].stringValue,
                                     teacherSmall: course["afspraakObject"]["docent"][0]["afkorting"].stringValue,

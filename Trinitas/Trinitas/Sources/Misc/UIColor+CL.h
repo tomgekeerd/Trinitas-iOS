@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (CL)
-+ (UIColor *)colorWithHex:(unsigned long)col;
++ (UIColor *)colorWithHex:(unsigned long)col andAlpha:(CGFloat)alpha;
 @end

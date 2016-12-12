@@ -9,6 +9,7 @@
         <attribute name="homework_description" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lessonFormat" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="room" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="teacher" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,7 +24,7 @@
         <attribute name="student_no" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Lessons" positionX="36" positionY="108" width="128" height="283"/>
+        <element name="Lessons" positionX="36" positionY="108" width="128" height="300"/>
         <element name="Users" positionX="277" positionY="243" width="128" height="75"/>
     </elements>
 </model>

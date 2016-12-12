@@ -19,25 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
-        
-        // Configure Fetch Request
-        fetchRequest.includesPropertyValues = false
-        
-        do {
-            let items = try managedObjectContext.fetch(fetchRequest) as! [NSManagedObject]
-            
-            for item in items {
-                managedObjectContext.delete(item)
-            }
-            
-            // Save Changes
-            try managedObjectContext.save()
-            
-        } catch {
-            // Error Handling
-            // ...
-        }
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
+//        
+//        // Configure Fetch Request
+//        fetchRequest.includesPropertyValues = false
+//        
+//        do {
+//            let items = try managedObjectContext.fetch(fetchRequest) as! [NSManagedObject]
+//            
+//            for item in items {
+//                managedObjectContext.delete(item)
+//            }
+//            
+//            // Save Changes
+//            try managedObjectContext.save()
+//            
+//        } catch {
+//            // Error Handling
+//            // ...
+//        }
         
         
         let managedContext = self.managedObjectContext
