@@ -9,8 +9,9 @@ target 'Trinitas' do
   # Pods for Trinitas
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftyJSON'
-  
+  pod 'SVProgressHUD'
+
   # Swift 3
-  pod 'SwiftKeychainWrapper',:git=>'https://github.com/jrendel/SwiftKeychainWrapper.git',:branch=>'master'
+  pod 'SwiftKeychainWrapper', :git=> 'https://github.com/jrendel/SwiftKeychainWrapper.git', :branch=>'master'
 
 end

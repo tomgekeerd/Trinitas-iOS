@@ -56,6 +56,9 @@ class API: NSObject {
         
         
         let needsUpdate = dh.needsUpdate(date: day)
+        
+        
+        
         if needsUpdate {
             
             if let user = dh.user() as? User {

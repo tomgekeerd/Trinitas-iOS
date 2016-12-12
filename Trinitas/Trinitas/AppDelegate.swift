@@ -8,16 +8,19 @@
 
 import UIKit
 import CoreData
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    
     func applicationDidFinishLaunching(_ application: UIApplication) {
         // Override point for customization after application launch.
         
+        SVProgressHUD.setDefaultStyle(.custom)
+        SVProgressHUD.setBackgroundColor(UIColor.lightGray)
+        SVProgressHUD.setForegroundColor(UIColor.white)
         // Initialize Fetch Request
 //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
 //        
@@ -38,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            // Error Handling
 //            // ...
 //        }
-        
+//        
         
         let managedContext = self.managedObjectContext
         

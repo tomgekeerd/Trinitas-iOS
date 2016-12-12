@@ -152,52 +152,59 @@ class DataHelper: NSObject {
         let dateStamp = dateFormatter.string(from: date)
         
         var needsUpdate = false
-
-        // Get AppDelegate
         
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? nil
-        if let app = appDelegate {
+        // Check for saturdays & sundays...
+        
+        let comp = date.components
+        if comp.weekday != 1 && comp.weekday != 7 {
             
-            // Retrieve context & entity
+            // Get AppDelegate
             
-            let managedContext = app.managedObjectContext
-            let entity = NSEntityDescription.entity(forEntityName: "Lessons", in: managedContext)
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-            
-            if let e = entity {
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? nil
+            if let app = appDelegate {
                 
-                // Set fetchRequest
+                // Retrieve context & entity
                 
-                fetchRequest.entity = e
-                let predicate = NSPredicate(format: "date = %@", dateStamp)
-                fetchRequest.predicate = predicate
+                let managedContext = app.managedObjectContext
+                let entity = NSEntityDescription.entity(forEntityName: "Lessons", in: managedContext)
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
                 
-                var fetchResults = [Lessons]()
-                do {
-                    if let results = try managedContext.fetch(fetchRequest) as? [Lessons] {
-                        fetchResults = results
-                    }
-                } catch {
-                    fatalError("Something went wrong fetching...")
-                }
-                
-                if fetchResults.count > 0 {
+                if let e = entity {
                     
-                    for r in fetchResults {
+                    // Set fetchRequest
+                    
+                    fetchRequest.entity = e
+                    let predicate = NSPredicate(format: "date = %@", dateStamp)
+                    fetchRequest.predicate = predicate
+                    
+                    var fetchResults = [Lessons]()
+                    do {
+                        if let results = try managedContext.fetch(fetchRequest) as? [Lessons] {
+                            fetchResults = results
+                        }
+                    } catch {
+                        fatalError("Something went wrong fetching...")
+                    }
+                    
+                    if fetchResults.count > 0 {
                         
-                        // Check if the last update is over 5 min.
-                        
-                        if Int(r.lastUpdate) > Int(Date().timeIntervalSinceNow + 60 * 5) {
-                            needsUpdate = true
+                        for r in fetchResults {
+                            
+                            // Check if the last update is over 5 min.
+                            
+                            if Int(Date().timeIntervalSince1970) - Int(r.lastUpdate) > 60 * 1  {
+                                needsUpdate = true
+                            }
+                            
                         }
                         
+                    } else {
+                        
+                        needsUpdate = true
+                        
                     }
-                    
-                } else {
-                    
-                    needsUpdate = true
-                    
                 }
+                
             }
             
         }
@@ -364,7 +371,7 @@ class DataHelperHelpers {
                                     type: course["afspraakObject"]["type"].stringValue,
                                     date: date,
                                     hour: course["afspraakObject"]["lesuur"].intValue,
-                                    lastUpdate: Int(Date().timeIntervalSinceNow),
+                                    lastUpdate: Int(Date().timeIntervalSince1970),
                                     lessonFormat: course["lesFormat"].stringValue,
                                     lessonGroup: course["afspraakObject"]["lesgroep"].stringValue,
                                     teacher: course["afspraakObject"]["docent"][0]["achternaam"].stringValue,

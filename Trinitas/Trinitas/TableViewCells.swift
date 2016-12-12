@@ -16,6 +16,7 @@ class LessonCell: UITableViewCell {
     @IBOutlet var classLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var homeworkIcon: UIImageView!
     
     // Lesson data
     
@@ -50,6 +51,10 @@ class LessonCell: UITableViewCell {
     func setCellType(type: String) {
         
         if let data = self.lessonData {
+            
+            // Hide homework
+            
+            self.homeworkIcon.isHidden = true
             
             // Set hour
             
@@ -112,13 +117,20 @@ class LessonCell: UITableViewCell {
                         
                         // Set normal 'les'
                         
-                        if let lesson = data.lessonFormat {
+                        if let lesson = data.lessonFormat, let homework = data.homework {
                             
                             // Set!
                             
                             self.classLabel.text = lesson
                             self.titleLabel.text = lTitle
                             
+                            // Check for homework
+                            
+                            if homework {
+                                
+                                self.homeworkIcon.isHidden = false
+                                
+                            }
                             
                             // Cool for later
                             

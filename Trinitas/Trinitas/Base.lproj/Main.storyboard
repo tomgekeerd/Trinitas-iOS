@@ -122,7 +122,7 @@
             </objects>
             <point key="canvasLocation" x="101.59999999999999" y="103.89805097451276"/>
         </scene>
-        <!--Rooster-->
+        <!--Rooster Table View Controller-->
         <scene sceneID="lYT-4l-4Xb">
             <objects>
                 <viewController id="Akl-Oe-SnX" customClass="RoosterTableViewController" customModule="Trinitas" customModuleProvider="target" sceneMemberID="viewController">
@@ -189,6 +189,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="classLabel" destination="5EM-YN-yY2" id="uIU-M1-DaP"/>
+                                            <outlet property="homeworkIcon" destination="oGG-JR-aOK" id="ngy-kw-fs1"/>
                                             <outlet property="timeLabel" destination="iPB-SM-ygb" id="7Fp-ta-rfA"/>
                                             <outlet property="titleLabel" destination="nKs-fp-LLP" id="o98-01-WoA"/>
                                         </connections>
@@ -205,15 +206,15 @@
                             <constraint firstItem="j2c-0t-Wt9" firstAttribute="top" secondItem="Pmy-WV-rpq" secondAttribute="bottom" id="b8E-iH-dBU"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Rooster" id="U11-K4-mid"/>
                     <navigationItem key="navigationItem" id="LQO-Qc-ml4"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="Pmy-WV-rpq" id="dKz-Fn-m2R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKL-Nn-vpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4272.8000000000002" y="77.811094452773617"/>
+            <point key="canvasLocation" x="5212" y="77.811094452773617"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="EbD-e2-9Gw">
@@ -226,7 +227,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Akl-Oe-SnX" kind="relationship" relationship="viewControllers" id="OYs-Sd-B4T"/>
+                        <segue destination="Uq8-wp-9cY" kind="relationship" relationship="viewControllers" id="OYs-Sd-B4T"/>
                         <segue destination="Ovc-5Y-xQ2" kind="relationship" relationship="viewControllers" id="4vd-28-4KL"/>
                     </connections>
                 </tabBarController>
@@ -281,6 +282,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIr-cF-RCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2700" y="759"/>
+        </scene>
+        <!--Rooster-->
+        <scene sceneID="w6N-zs-yii">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uq8-wp-9cY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Rooster" id="U11-K4-mid"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yqb-vn-Xz7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Akl-Oe-SnX" kind="relationship" relationship="rootViewController" id="bmR-px-A2h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Azr-B4-VxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4272.8000000000002" y="77.811094452773617"/>
         </scene>
     </scenes>
     <resources>

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SVProgressHUD
 
 class RoosterTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -22,6 +23,10 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // UINavigationBar setup
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         // UITableView setup
         
@@ -71,7 +76,6 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         } else {
             
             // Display loading screen..
-            
             
         }
         
@@ -139,7 +143,7 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
 
         return [
             CLCalendarWeekStartDay: 1,
-            CLCalendarBackgroundImageColor: UIColor(red: 224/255, green: 54/255, blue: 56/255, alpha: 1.0)
+            CLCalendarBackgroundImageColor: UIColor(red: 224/255, green: 54/255, blue: 56/255, alpha: 1.0),
         ]
         
     }
@@ -148,6 +152,8 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
         
         // Get weekday and display in navigation bar
         
+        self.load(show: true)
+
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE"
         let weekday = formatter.string(from: date)
@@ -168,8 +174,31 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
             self.lessonArray = result
             self.tableView.reloadData()
             
+            // Dismiss loading screen
+            
+            self.load(show: false)
         }
 
+    }
+    
+}
+
+extension RoosterTableViewController {
+    
+    func load(show: Bool) {
+        
+        if show {
+            
+            self.view.isUserInteractionEnabled = false
+            SVProgressHUD.show()
+            
+        } else {
+            
+            self.view.isUserInteractionEnabled = true
+            SVProgressHUD.dismiss()
+            
+        }
+        
     }
     
 }
