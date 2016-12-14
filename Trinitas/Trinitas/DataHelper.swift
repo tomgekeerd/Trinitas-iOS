@@ -192,7 +192,7 @@ class DataHelper: NSObject {
                             
                             // Check if the last update is over 5 min.
                             
-                            if Int(Date().timeIntervalSince1970) - Int(r.lastUpdate) > 60 * 1  {
+                            if Int(Date().timeIntervalSince1970) - Int(r.lastUpdate) > 60 * 5 {
                                 needsUpdate = true
                             }
                             

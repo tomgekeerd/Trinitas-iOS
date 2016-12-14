@@ -17,6 +17,7 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
 
     var schedule = [NSManagedObject]()
     var lessonArray = [Lesson]()
+    var resultsFromDB: Bool = false
     
     let api = API()
     let dh = DataHelper()
@@ -59,27 +60,13 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // Check if we should display loading screen or loading screen...
+        let currentLesson = self.lessonArray[indexPath.row]
         
-        if self.lessonArray.count > 0 {
-            
-            // Not loading, get lessons
-            
-            let currentLesson = self.lessonArray[indexPath.row]
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! LessonCell
-            cell.lessonData = currentLesson
-            cell.type = currentLesson.type
-            
-            return cell
-            
-        } else {
-            
-            // Display loading screen..
-            
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! LessonCell
+        cell.lessonData = currentLesson
+        cell.type = currentLesson.type
         
-        return UITableViewCell()
+        return cell
         
     }
     
@@ -150,33 +137,43 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
     
     func dailyCalendarViewDidSelect(_ date: Date!) {
         
-        // Get weekday and display in navigation bar
+        // Show loading screen
         
         self.load(show: true)
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE"
-        let weekday = formatter.string(from: date)
-        
-        self.title = weekday
         
         // Empty out array, reload tableview for load screen
         
         self.lessonArray = []
+        self.resultsFromDB = false
         self.tableView.reloadData()
         
         // Receive schedule of the Date
         
-        api.getScheduleOfDay(day: date) { (success, result) in
+        api.getScheduleOfDay(day: date) { (success, fromDB, result) in
             
             // Got results, reload tableView to display...
             
-            self.lessonArray = result
-            self.tableView.reloadData()
+            // Check if succeeded & got results. Otherwise, do not display any message about results in database
             
-            // Dismiss loading screen
+            if result.count == 0 {
+                
+                // No data, display error
+                
+                
+            } else {
+                
+                // Data, display in tableview
+                
+                self.lessonArray = result
+                self.resultsFromDB = fromDB
+                self.tableView.reloadData()
+                
+                // Dismiss loading screen
+                
+                self.load(show: false)
+ 
+            }
             
-            self.load(show: false)
         }
 
     }

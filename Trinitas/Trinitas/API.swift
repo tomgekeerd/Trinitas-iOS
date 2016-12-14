@@ -52,7 +52,7 @@ class API: NSObject {
         
     }
     
-    func getScheduleOfDay(day: Date, completion: @escaping (_ success: Bool, _ callback: [Lesson]) -> Void) {
+    func getScheduleOfDay(day: Date, completion: @escaping (_ success: Bool, _ fromDB: Bool, _ callback: [Lesson]) -> Void) {
         
         
         let needsUpdate = dh.needsUpdate(date: day)
@@ -93,7 +93,7 @@ class API: NSObject {
                                     // Set schedule in data
                                     
                                     self.dh.scheduleNeedsUpdate(json: json, day: day, completion: { (results) in
-                                        completion(true, results)
+                                        completion(true, false, results)
                                     })
                                     
                                 } else if success == false {
@@ -104,7 +104,7 @@ class API: NSObject {
                                         
                                     } else {
                                         
-                                        completion(false, [])
+                                        completion(false, false, [])
                                         
                                     }
                                     
@@ -113,9 +113,14 @@ class API: NSObject {
                         }
                         break
                         
-                    case .failure(let error):
-                        completion(false, [])
-                        print(error)
+                    case .failure:
+                        
+                        // Error occurred (probably wifi lost), load last updated data in db
+                        
+                        self.dh.scheduleData(date: day, completion: { (results) in
+                            completion(true, true, results)
+                        })
+                        
                         break
                         
                     }
@@ -126,8 +131,8 @@ class API: NSObject {
             
         } else {
             
-            dh.scheduleData(date: day, completion: { (results) in
-                completion(true, results)
+            self.dh.scheduleData(date: day, completion: { (results) in
+                completion(true, true, results)
             })
             
         }
