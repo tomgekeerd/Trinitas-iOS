@@ -22,6 +22,7 @@
 		E28CC7971DE1ED0700EEF231 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = E28CC7961DE1ED0700EEF231 /* UIImage+Blur.m */; };
 		E28CC7991DE1ED9900EEF231 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28CC7981DE1ED9900EEF231 /* CoreImage.framework */; };
 		E28CC79B1DE1F98E00EEF231 /* ACFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CC79A1DE1F98E00EEF231 /* ACFloatingTextField.swift */; };
+		E2A79B881E01F42800FC37E8 /* LessonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A79B871E01F42800FC37E8 /* LessonDetailViewController.swift */; };
 		E2B2BF631DE229E900E0E5C7 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B2BF621DE229E900E0E5C7 /* API.swift */; };
 		E2D027891DFDD87800280887 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D0277B1DFDD87800280887 /* CLWeeklyCalendarView.m */; };
 		E2D0278A1DFDD87800280887 /* DailyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D0277D1DFDD87800280887 /* DailyCalendarView.m */; };
@@ -57,6 +58,7 @@
 		E28CC7961DE1ED0700EEF231 /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
 		E28CC7981DE1ED9900EEF231 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		E28CC79A1DE1F98E00EEF231 /* ACFloatingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACFloatingTextField.swift; sourceTree = "<group>"; };
+		E2A79B871E01F42800FC37E8 /* LessonDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonDetailViewController.swift; sourceTree = "<group>"; };
 		E2B2BF621DE229E900E0E5C7 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		E2D0277A1DFDD87800280887 /* CLWeeklyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWeeklyCalendarView.h; sourceTree = "<group>"; };
 		E2D0277B1DFDD87800280887 /* CLWeeklyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWeeklyCalendarView.m; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */,
 				E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */,
 				E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */,
+				E2A79B871E01F42800FC37E8 /* LessonDetailViewController.swift */,
 				E25B1B331DD3D3C40034B740 /* Main.storyboard */,
 				E25B1B361DD3D3C40034B740 /* Assets.xcassets */,
 				E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */,
@@ -385,6 +388,7 @@
 				E21209311DE2080E00BA390E /* SLButton.m in Sources */,
 				E2D0278B1DFDD87800280887 /* DayTitleLabel.m in Sources */,
 				E28CC79B1DE1F98E00EEF231 /* ACFloatingTextField.swift in Sources */,
+				E2A79B881E01F42800FC37E8 /* LessonDetailViewController.swift in Sources */,
 				E2D0278C1DFDD87800280887 /* NSDate+CL.m in Sources */,
 				E2D027911DFEF27500280887 /* TableViewCells.swift in Sources */,
 				E2D0278A1DFDD87800280887 /* DailyCalendarView.m in Sources */,

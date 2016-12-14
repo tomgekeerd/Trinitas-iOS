@@ -176,6 +176,43 @@ class LessonCell: UITableViewCell {
     
 }
 
+class TeacherCell: UITableViewCell {
+    
+    @IBOutlet var teacherLabel: UILabel!
+    @IBOutlet var timeLabel: UILabel!
+    
+    var lessonData: Lesson! {
+        
+        didSet {
+            
+            if let teacherLastname = lessonData.teacher, let teacherTitle = lessonData.teacherTitle, let startTime = lessonData.start {
+                
+                // Set teacher
+                
+                self.teacherLabel.text = teacherTitle + " " + teacherLastname
+                
+                // Calculate date & time
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yy"
+                let date = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(startTime / 1000)))
+                dateFormatter.dateFormat = "hh:mm"
+                let time = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(startTime / 1000)))
+                
+                // Set date
+                
+                self.timeLabel.text = date + "\n" + time
+                
+            }
+            
+        }
+        
+    }
+    
+    
+
+}
+
 extension UITableViewCell {
     
     func enable(on: Bool) {

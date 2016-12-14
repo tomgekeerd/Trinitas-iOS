@@ -135,7 +135,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pmy-WV-rpq">
-                                <rect key="frame" x="0.0" y="125" width="375" height="493"/>
+                                <rect key="frame" x="0.0" y="169" width="375" height="449"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="classCell" id="hDw-mX-gGd" customClass="LessonCell" customModule="Trinitas" customModuleProvider="target">
@@ -192,6 +192,7 @@
                                             <outlet property="homeworkIcon" destination="oGG-JR-aOK" id="ngy-kw-fs1"/>
                                             <outlet property="timeLabel" destination="iPB-SM-ygb" id="7Fp-ta-rfA"/>
                                             <outlet property="titleLabel" destination="nKs-fp-LLP" id="o98-01-WoA"/>
+                                            <segue destination="nQd-AR-3AC" kind="show" identifier="ShowLessonDetails" id="eiL-T2-Jdm"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -207,7 +208,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LQO-Qc-ml4"/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="Pmy-WV-rpq" id="dKz-Fn-m2R"/>
                     </connections>
@@ -215,6 +215,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKL-Nn-vpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3638" y="97"/>
+        </scene>
+        <!--Lesson Detail View Controller-->
+        <scene sceneID="mgj-Yf-sZZ">
+            <objects>
+                <viewController id="nQd-AR-3AC" customClass="LessonDetailViewController" customModule="Trinitas" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Ft-ms-QYZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="3dl-29-SeZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Hgt-0k-P5y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xie-ql-Tm9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="4" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="64" id="twX-6r-UU2" customClass="TeacherCell" customModule="Trinitas" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="twX-6r-UU2" id="75S-wR-3SB">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0B-6I-Onk">
+                                                    <rect key="frame" x="247" y="8" width="120" height="47"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1X-NP-Huc">
+                                                    <rect key="frame" x="15" y="18" width="224" height="27"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="27" id="XdT-W3-dQe"/>
+                                                        <constraint firstAttribute="width" constant="224" id="dY2-hA-p37"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="H1X-NP-Huc" firstAttribute="leading" secondItem="75S-wR-3SB" secondAttribute="leading" constant="15" id="6qJ-ww-9ez"/>
+                                                <constraint firstAttribute="trailing" secondItem="M0B-6I-Onk" secondAttribute="trailing" constant="8" id="8va-BX-Owv"/>
+                                                <constraint firstItem="M0B-6I-Onk" firstAttribute="centerY" secondItem="75S-wR-3SB" secondAttribute="centerY" id="Awe-sX-vXu"/>
+                                                <constraint firstItem="H1X-NP-Huc" firstAttribute="centerY" secondItem="75S-wR-3SB" secondAttribute="centerY" id="oQ4-oj-ULA"/>
+                                                <constraint firstItem="M0B-6I-Onk" firstAttribute="leading" secondItem="H1X-NP-Huc" secondAttribute="trailing" constant="8" id="qg6-55-crB"/>
+                                                <constraint firstItem="M0B-6I-Onk" firstAttribute="top" secondItem="75S-wR-3SB" secondAttribute="topMargin" id="wfs-dG-UAh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="teacherLabel" destination="H1X-NP-Huc" id="9Qk-Wr-hlg"/>
+                                            <outlet property="timeLabel" destination="M0B-6I-Onk" id="R86-TW-GZa"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Xie-ql-Tm9" firstAttribute="top" secondItem="Hgt-0k-P5y" secondAttribute="top" id="9E4-vy-Mhv"/>
+                            <constraint firstItem="Xie-ql-Tm9" firstAttribute="centerX" secondItem="Hgt-0k-P5y" secondAttribute="centerX" id="CpV-kI-xjN"/>
+                            <constraint firstItem="Xie-ql-Tm9" firstAttribute="centerY" secondItem="Hgt-0k-P5y" secondAttribute="centerY" id="JJ7-Dh-A1k"/>
+                            <constraint firstItem="Xie-ql-Tm9" firstAttribute="leading" secondItem="Hgt-0k-P5y" secondAttribute="leading" id="feN-AF-pSI"/>
+                            <constraint firstAttribute="trailing" secondItem="Xie-ql-Tm9" secondAttribute="trailing" id="qwJ-Ld-1po"/>
+                            <constraint firstItem="3dl-29-SeZ" firstAttribute="top" secondItem="Xie-ql-Tm9" secondAttribute="bottom" id="xP8-rc-TH8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Xie-ql-Tm9" id="mWl-JZ-Yn9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XSB-YV-TiY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4277.6000000000004" y="96.7016491754123"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="EbD-e2-9Gw">
@@ -333,9 +410,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uq8-wp-9cY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Rooster" id="U11-K4-mid"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yqb-vn-Xz7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Yqb-vn-Xz7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.95686274510000002" green="0.1176470588" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
