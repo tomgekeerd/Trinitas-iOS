@@ -31,7 +31,7 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
+
         // Refresh control setup
         
         self.refreshSpinner = UIRefreshControl()
@@ -146,6 +146,7 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         let currentLesson = self.lessonArray[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! LessonCell
+        cell.selectionStyle = .none
         cell.lessonData = currentLesson
         cell.type = currentLesson.type
         
