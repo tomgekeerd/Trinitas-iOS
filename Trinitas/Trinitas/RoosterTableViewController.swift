@@ -19,6 +19,8 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
     var lessonArray = [Lesson]()
     var resultsFromDB: Bool = false
     
+    var refreshSpinner: UIRefreshControl = UIRefreshControl()
+    
     let api = API()
     let dh = DataHelper()
     
@@ -34,6 +36,12 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
+        // Refresh control setup
+        
+        self.refreshSpinner = UIRefreshControl()
+        self.refreshSpinner.addTarget(self, action: #selector(persistsRefresh), for: .valueChanged)
+        self.tableView.addSubview(self.refreshSpinner)
+        
         // Setup dateselector
         
         self.calendarView = CLWeeklyCalendarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 120))
@@ -46,6 +54,51 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - UIRefreshControl .valueChanged method
+    
+    func persistsRefresh() {
+        
+        // User wants a forced refresh from server...
+        
+        self.setDataInView(date: self.calendarView.selectedDate, forced: true)
+        
+    }
+    
+    // MARK: - Receive last update
+    
+    func setLastUpdateOfCurrentView() {
+        
+        // Getting last update of the current date displayed, last update is saved within every lesson. Although this is not handy for receiving the last update of a day, the day will always be saved together with all the lessons combined. This method must be called every time the request date changed.
+        
+        // Calculate last update average lol
+        
+        var total = 0
+        for lesson in self.lessonArray {
+            
+            total = total + lesson.lastUpdate
+            
+        }
+        
+        if total != 0 {
+            
+            // Calculate average
+            
+            let average = total / self.lessonArray.count
+            let averageDate: Date = Date(timeIntervalSince1970: TimeInterval(average))
+            
+            // Set title in spinner
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yy hh:mm:ss"
+            let date = dateFormatter.string(from: averageDate)
+            let attributedString = NSAttributedString(string: "\(date)")
+            
+            self.refreshSpinner.attributedTitle = attributedString
+            
+        }
+
     }
     
     // MARK: - Table view data source
@@ -70,6 +123,47 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     
+    // MARK: - Data parsing
+    
+    func setDataInView(date: Date, forced: Bool) {
+        
+        // Receive schedule of the Date
+        
+        api.getScheduleOfDay(day: date, forced: forced) { (success, fromDB, result) in
+            
+            // Got results, reload tableView to display...
+            
+            self.refreshSpinner.endRefreshing()
+            
+            // Check if succeeded & got results. Otherwise, do not display any message about results in database
+            
+            if result.count == 0 {
+                
+                // No data, display error
+                
+                self.load(show: false)
+                
+            } else {
+                
+                // Data, display in tableview
+                
+                self.lessonArray = result
+                self.resultsFromDB = fromDB
+                self.tableView.reloadData()
+                
+                // Set last update
+                
+                self.setLastUpdateOfCurrentView()
+                
+                // Dismiss loading screen
+                
+                self.load(show: false)
+                
+            }
+            
+        }
+        
+    }
     
     /*
      // Override to support conditional editing of the table view.
@@ -137,8 +231,9 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
     
     func dailyCalendarViewDidSelect(_ date: Date!) {
         
-        // Show loading screen
+        // Show loading screen & update last update
         
+        self.setLastUpdateOfCurrentView()
         self.load(show: true)
         
         // Empty out array, reload tableview for load screen
@@ -147,35 +242,8 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
         self.resultsFromDB = false
         self.tableView.reloadData()
         
-        // Receive schedule of the Date
+        self.setDataInView(date: date, forced: false)
         
-        api.getScheduleOfDay(day: date) { (success, fromDB, result) in
-            
-            // Got results, reload tableView to display...
-            
-            // Check if succeeded & got results. Otherwise, do not display any message about results in database
-            
-            if result.count == 0 {
-                
-                // No data, display error
-                
-                
-            } else {
-                
-                // Data, display in tableview
-                
-                self.lessonArray = result
-                self.resultsFromDB = fromDB
-                self.tableView.reloadData()
-                
-                // Dismiss loading screen
-                
-                self.load(show: false)
- 
-            }
-            
-        }
-
     }
     
 }

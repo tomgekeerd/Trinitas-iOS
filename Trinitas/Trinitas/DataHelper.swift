@@ -145,7 +145,7 @@ class DataHelper: NSObject {
     
     // Check if a server update is necessary
     
-    func needsUpdate(date: Date) -> Bool {
+    func needsUpdate(date: Date, forced: Bool) -> Bool {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yy"
@@ -160,50 +160,58 @@ class DataHelper: NSObject {
             
             // Get AppDelegate
             
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? nil
-            if let app = appDelegate {
+            if !forced {
                 
-                // Retrieve context & entity
-                
-                let managedContext = app.managedObjectContext
-                let entity = NSEntityDescription.entity(forEntityName: "Lessons", in: managedContext)
-                let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-                
-                if let e = entity {
+                let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? nil
+                if let app = appDelegate {
                     
-                    // Set fetchRequest
+                    // Retrieve context & entity
                     
-                    fetchRequest.entity = e
-                    let predicate = NSPredicate(format: "date = %@", dateStamp)
-                    fetchRequest.predicate = predicate
+                    let managedContext = app.managedObjectContext
+                    let entity = NSEntityDescription.entity(forEntityName: "Lessons", in: managedContext)
+                    let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
                     
-                    var fetchResults = [Lessons]()
-                    do {
-                        if let results = try managedContext.fetch(fetchRequest) as? [Lessons] {
-                            fetchResults = results
-                        }
-                    } catch {
-                        fatalError("Something went wrong fetching...")
-                    }
-                    
-                    if fetchResults.count > 0 {
+                    if let e = entity {
                         
-                        for r in fetchResults {
+                        // Set fetchRequest
+                        
+                        fetchRequest.entity = e
+                        let predicate = NSPredicate(format: "date = %@", dateStamp)
+                        fetchRequest.predicate = predicate
+                        
+                        var fetchResults = [Lessons]()
+                        do {
+                            if let results = try managedContext.fetch(fetchRequest) as? [Lessons] {
+                                fetchResults = results
+                            }
+                        } catch {
+                            fatalError("Something went wrong fetching...")
+                        }
+                        
+                        if fetchResults.count > 0 {
                             
-                            // Check if the last update is over 5 min.
-                            
-                            if Int(Date().timeIntervalSince1970) - Int(r.lastUpdate) > 60 * 5 {
-                                needsUpdate = true
+                            for r in fetchResults {
+                                
+                                // Check if the last update is over 5 min.
+                                
+                                if Int(Date().timeIntervalSince1970) - Int(r.lastUpdate) > 60 * 5 {
+                                    needsUpdate = true
+                                }
+                                
                             }
                             
+                        } else {
+                            
+                            needsUpdate = true
+                            
                         }
-                        
-                    } else {
-                        
-                        needsUpdate = true
-                        
                     }
+                    
                 }
+                
+            } else {
+                
+                needsUpdate = true
                 
             }
             

@@ -52,13 +52,9 @@ class API: NSObject {
         
     }
     
-    func getScheduleOfDay(day: Date, completion: @escaping (_ success: Bool, _ fromDB: Bool, _ callback: [Lesson]) -> Void) {
+    func getScheduleOfDay(day: Date, forced: Bool, completion: @escaping (_ success: Bool, _ fromDB: Bool, _ callback: [Lesson]) -> Void) {
         
-        
-        let needsUpdate = dh.needsUpdate(date: day)
-        
-        
-        
+        let needsUpdate = dh.needsUpdate(date: day, forced: forced)
         if needsUpdate {
             
             if let user = dh.user() as? User {
@@ -100,7 +96,7 @@ class API: NSObject {
                                     
                                     if json["err"].intValue == 202 {
                                         
-                                        self.getScheduleOfDay(day: day, completion: completion)
+                                        self.getScheduleOfDay(day: day, forced: forced, completion: completion)
                                         
                                     } else {
                                         
