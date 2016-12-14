@@ -16,7 +16,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
-        // Override point for customization after application launch.
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialViewController: Any!
+        
+        // Check if password is saved already
+        
+        let dh = DataHelper()
+        if let _ = dh.user() as? User {
+            
+            // Load data views
+            
+            initialViewController = storyboard.instantiateViewController(withIdentifier: "tabBarMenu")
+            
+        } else {
+            
+            // Load login view
+            
+            initialViewController = storyboard.instantiateViewController(withIdentifier: "login")
+            
+        }
+        
+        // Set initialViewController
+        
+        if let vc = initialViewController as? UIViewController {
+            self.window?.rootViewController = vc
+        } else if let tab = initialViewController as? UITabBarController {
+            self.window?.rootViewController = tab
+        }
+        self.window?.makeKeyAndVisible()
+        
         
         SVProgressHUD.setDefaultStyle(.custom)
         SVProgressHUD.setBackgroundColor(UIColor.lightGray)
