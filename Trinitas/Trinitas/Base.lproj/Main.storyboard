@@ -232,7 +232,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="4" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="64" id="twX-6r-UU2" customClass="TeacherCell" customModule="Trinitas" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="4" indentationWidth="0.0" reuseIdentifier="teacherCell" rowHeight="64" id="twX-6r-UU2" customClass="TeacherCell" customModule="Trinitas" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="twX-6r-UU2" id="75S-wR-3SB">
@@ -251,7 +251,7 @@
                                                         <constraint firstAttribute="height" constant="27" id="XdT-W3-dQe"/>
                                                         <constraint firstAttribute="width" constant="224" id="dY2-hA-p37"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -269,6 +269,65 @@
                                         <connections>
                                             <outlet property="teacherLabel" destination="H1X-NP-Huc" id="9Qk-Wr-hlg"/>
                                             <outlet property="timeLabel" destination="M0B-6I-Onk" id="R86-TW-GZa"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="4" indentationWidth="0.0" reuseIdentifier="homeworkCell" rowHeight="204" id="aOf-VD-YoM" customClass="HomeworkTableViewCell" customModule="Trinitas" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="204"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aOf-VD-YoM" id="m2s-LD-a4s">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="203"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gM6-ej-vQQ">
+                                                    <rect key="frame" x="367" y="8" width="0.0" height="187.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQr-wg-BbG">
+                                                    <rect key="frame" x="15" y="75" width="352" height="120"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toets:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1I-k3-2tY">
+                                                    <rect key="frame" x="15" y="8" width="352" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="352" id="FRB-IP-RyG"/>
+                                                        <constraint firstAttribute="height" constant="21" id="cdd-6k-eb0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Huiswerk:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jy-i8-A9e">
+                                                    <rect key="frame" x="15" y="37" width="352" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZQr-wg-BbG" firstAttribute="top" secondItem="4jy-i8-A9e" secondAttribute="bottom" constant="18.5" id="0N1-c1-7HT"/>
+                                                <constraint firstItem="gM6-ej-vQQ" firstAttribute="leading" secondItem="ZQr-wg-BbG" secondAttribute="trailing" id="1b0-41-2qW"/>
+                                                <constraint firstItem="ZQr-wg-BbG" firstAttribute="bottom" secondItem="m2s-LD-a4s" secondAttribute="bottomMargin" id="32M-FU-Wm6"/>
+                                                <constraint firstItem="4jy-i8-A9e" firstAttribute="leading" secondItem="m2s-LD-a4s" secondAttribute="leadingMargin" constant="7" id="5cW-IO-jMV"/>
+                                                <constraint firstItem="f1I-k3-2tY" firstAttribute="top" secondItem="m2s-LD-a4s" secondAttribute="topMargin" id="AWM-bt-2zj"/>
+                                                <constraint firstItem="gM6-ej-vQQ" firstAttribute="centerY" secondItem="m2s-LD-a4s" secondAttribute="centerY" id="COR-Sa-4Bk"/>
+                                                <constraint firstItem="gM6-ej-vQQ" firstAttribute="leading" secondItem="f1I-k3-2tY" secondAttribute="trailing" id="MUd-ex-rpb"/>
+                                                <constraint firstItem="f1I-k3-2tY" firstAttribute="leading" secondItem="m2s-LD-a4s" secondAttribute="leadingMargin" constant="7" id="Z2G-0v-W5Z"/>
+                                                <constraint firstAttribute="trailing" secondItem="gM6-ej-vQQ" secondAttribute="trailing" constant="8" id="ZHM-B8-VLZ"/>
+                                                <constraint firstItem="gM6-ej-vQQ" firstAttribute="top" secondItem="m2s-LD-a4s" secondAttribute="topMargin" id="iC4-Tq-vLA"/>
+                                                <constraint firstItem="gM6-ej-vQQ" firstAttribute="leading" secondItem="4jy-i8-A9e" secondAttribute="trailing" id="msw-9N-T7d"/>
+                                                <constraint firstItem="4jy-i8-A9e" firstAttribute="top" secondItem="f1I-k3-2tY" secondAttribute="bottom" constant="8" id="uHW-jt-oCb"/>
+                                                <constraint firstItem="ZQr-wg-BbG" firstAttribute="leading" secondItem="m2s-LD-a4s" secondAttribute="leadingMargin" constant="7" id="xCa-wl-P6G"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="homeworkDescription" destination="ZQr-wg-BbG" id="lIu-fn-Usu"/>
+                                            <outlet property="homeworkLabel" destination="4jy-i8-A9e" id="QD4-0R-n2t"/>
+                                            <outlet property="testLabel" destination="f1I-k3-2tY" id="XDI-KY-Nxg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -24,9 +24,11 @@ class LessonDetailViewController: UIViewController {
         
         // UITableView setup
         
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +58,7 @@ extension LessonDetailViewController: UITableViewDataSource, UITableViewDelegate
             
         case 0:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TeacherCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "teacherCell", for: indexPath) as! TeacherCell
             
             if let c = cell as? TeacherCell {
                 
@@ -69,6 +71,58 @@ extension LessonDetailViewController: UITableViewDataSource, UITableViewDelegate
             
             break
         case 1:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "homeworkCell", for: indexPath) as! HomeworkTableViewCell
+            
+            if let c = cell as? HomeworkTableViewCell {
+                
+                if let data = self.lessonData {
+
+                    // Set test
+                    
+                    if let testL = c.testLabel {
+                        
+                        if let test = data.test {
+                            
+                            testL.text = "Toets: " + (test ? "ja" : "nee")
+
+                        }
+
+                    }
+                    
+                    // Set homework
+                    
+                    if let homeworkL = c.homeworkLabel {
+                        
+                        if let homework = data.homework {
+                            
+                            homeworkL.text = "Huiswerk: " + (homework ? "ja" : "nee")
+                            
+                        }
+                        
+                    }
+                    
+                    // Set homework description
+                    
+                    if let homeworkTv = c.homeworkDescription {
+                        
+                        if let homeworkDescription = data.homeworkDescription {
+                            
+                            homeworkTv.text = homeworkDescription
+                            
+                        }
+                        
+                    }
+                    
+                    // Set height of homework description
+                    
+                    let contentSize = c.homeworkDescription.sizeThatFits(c.homeworkDescription.bounds.size)
+                    c.homeworkDescription.frame.size = contentSize
+                    
+                }
+                
+            }
+
             break
             
         default:()
@@ -80,7 +134,35 @@ extension LessonDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 1 {
+            
+            // Set height of homework cell
+            
+            var goodSize: CGFloat = 0.0
+            
+            if let data = self.lessonData {
+                
+                if let homeworkDescription = data.homeworkDescription {
+                    
+                    // Workaround using NSString(?)
+
+                    let myString: NSString = homeworkDescription.string as NSString
+                    goodSize = myString.size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]).height
+                    
+                }
+
+            }
+            
+            return goodSize + 83
+        }
+        
+        return 64
+        
     }
     
 }

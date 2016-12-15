@@ -209,8 +209,14 @@ class TeacherCell: UITableViewCell {
         
     }
     
-    
+}
 
+class HomeworkTableViewCell: UITableViewCell {
+    
+    @IBOutlet var homeworkDescription: UITextView!
+    @IBOutlet var homeworkLabel: UILabel!
+    @IBOutlet var testLabel: UILabel!
+    
 }
 
 extension UITableViewCell {

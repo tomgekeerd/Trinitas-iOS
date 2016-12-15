@@ -31,6 +31,7 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.separatorInset = UIEdgeInsets.zero
 
         // Refresh control setup
         
