@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		575D5387E1510375E964AED8 /* Pods_Trinitas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60961B20B77098D469E8819 /* Pods_Trinitas.framework */; };
+		93CFD9A01E33B1B60039D7E3 /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */; };
 		E21209311DE2080E00BA390E /* SLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E21209301DE2080E00BA390E /* SLButton.m */; };
 		E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BE61DE63F2E00FD1738 /* homework.png */; };
 		E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		4CDB53B9A4238BFA8F9DAE34 /* Pods-Trinitas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.debug.xcconfig"; sourceTree = "<group>"; };
+		93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
 		DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.release.xcconfig"; sourceTree = "<group>"; };
 		E212092F1DE2080E00BA390E /* SLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLButton.h; sourceTree = "<group>"; };
 		E21209301DE2080E00BA390E /* SLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLButton.m; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */,
 				E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */,
 				E2A79B871E01F42800FC37E8 /* LessonDetailViewController.swift */,
+				93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */,
 				E25B1B331DD3D3C40034B740 /* Main.storyboard */,
 				E25B1B361DD3D3C40034B740 /* Assets.xcassets */,
 				E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */,
@@ -383,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E28C527E1DE5F66200C1C585 /* RoosterTableViewController.swift in Sources */,
+				93CFD9A01E33B1B60039D7E3 /* MailViewController.swift in Sources */,
 				E2D0278E1DFDD87800280887 /* UIColor+CL.m in Sources */,
 				E270920B1DE72276000F7B18 /* Data.xcdatamodeld in Sources */,
 				E21209311DE2080E00BA390E /* SLButton.m in Sources */,
