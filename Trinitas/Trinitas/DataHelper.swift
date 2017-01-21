@@ -12,12 +12,23 @@ import SwiftyJSON
 import CoreData
 import SwiftKeychainWrapper
 
+
+enum LessonType {
+    
+    case Vrij
+    case EersteUurVrij
+    case Tussenuur
+    case Les
+    case Pauze
+    
+}
+
 struct Lesson {
     
     // Required
     
     var day: String!
-    var type: String!
+    var type: LessonType!
     var date: String!
     
     var hour: Int!
@@ -108,25 +119,31 @@ class DataHelper: NSObject {
                         var callback = [Lesson]()
                         for result in results {
                             
-                            let lesson = Lesson(day: result.day,
-                                                type: result.type,
-                                                date: result.date,
-                                                hour: Int(result.hour),
-                                                lastUpdate: Int(result.lastUpdate),
-                                                lessonFormat: result.lessonFormat,
-                                                lessonGroup: result.group,
-                                                teacher: result.teacher,
-                                                teacherSmall: result.teacher_small,
-                                                teacherTitle: result.teacher_title,
-                                                lessonTitle: result.title,
-                                                homeworkDescription: result.homework_description,
-                                                room: result.room,
-                                                start: Int(result.start),
-                                                end: Int(result.end),
-                                                homework: result.homework,
-                                                test: result.test)
-                            
-                            callback.append(lesson)
+                            if let type = result.type {
+                                
+                                let t = self.helpers.getLessonType(withType: type)
+                                
+                                let lesson = Lesson(day: result.day,
+                                                    type: t,
+                                                    date: result.date,
+                                                    hour: Int(result.hour),
+                                                    lastUpdate: Int(result.lastUpdate),
+                                                    lessonFormat: result.lessonFormat,
+                                                    lessonGroup: result.group,
+                                                    teacher: result.teacher,
+                                                    teacherSmall: result.teacher_small,
+                                                    teacherTitle: result.teacher_title,
+                                                    lessonTitle: result.title,
+                                                    homeworkDescription: result.homework_description,
+                                                    room: result.room,
+                                                    start: Int(result.start),
+                                                    end: Int(result.end),
+                                                    homework: result.homework,
+                                                    test: result.test)
+                                
+                                callback.append(lesson)
+
+                            }
                             
                         }
                         
@@ -286,7 +303,7 @@ class DataHelper: NSObject {
                         f.setValue(les.teacherSmall, forKey: "teacher_small")
                         f.setValue(les.teacherTitle, forKey: "teacher_title")
                         f.setValue(les.test, forKey: "test")
-                        f.setValue(les.type, forKey: "type")
+                        f.setValue(self.helpers.getType(withLesson: les.type), forKey: "type")
                         
                     } else {
                         
@@ -310,7 +327,7 @@ class DataHelper: NSObject {
                         lesson.setValue(les.teacherSmall, forKey: "teacher_small")
                         lesson.setValue(les.teacherTitle, forKey: "teacher_title")
                         lesson.setValue(les.test, forKey: "test")
-                        lesson.setValue(les.type, forKey: "type")
+                        lesson.setValue(self.helpers.getType(withLesson: les.type), forKey: "type")
 
                     }
                     
@@ -374,9 +391,9 @@ class DataHelperHelpers {
                 let date = course["date"].stringValue
                     
                 // Add lesson to the array
-                    
+                
                 let lesson = Lesson(day: course["day"].stringValue,
-                                    type: course["afspraakObject"]["type"].stringValue,
+                                    type: self.getLessonType(withType: course["afspraakObject"]["type"].stringValue),
                                     date: date,
                                     hour: course["afspraakObject"]["lesuur"].intValue,
                                     lastUpdate: Int(Date().timeIntervalSince1970),
@@ -410,6 +427,43 @@ class DataHelperHelpers {
         let components = calendar.dateComponents([.weekOfYear], from: today)
         
         return components.weekOfYear
+        
+    }
+    
+    func getType(withLesson lessonType: LessonType) -> String {
+        
+        switch lessonType {
+        case .Vrij:
+            return "Vrij"
+        case .EersteUurVrij:
+            return "Eerste uur vrij"
+        case .Tussenuur:
+            return "Tussenuur"
+        case .Les:
+            return "Les"
+        case .Pauze:
+            return "Pauze"
+        }
+        
+    }
+    
+    func getLessonType(withType type: String) -> LessonType {
+        
+        switch type {
+            case "Vrij":
+                return .Vrij
+            case "Eerste uur vrij":
+                return .EersteUurVrij
+            case "Tussenuur":
+                return .Tussenuur
+            case "Les":
+                return .Les
+            case "Pauze":
+                return .Pauze
+        default: ()
+        }
+        
+        return .Vrij
         
     }
     

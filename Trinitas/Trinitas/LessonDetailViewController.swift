@@ -151,7 +151,7 @@ extension LessonDetailViewController: UITableViewDataSource, UITableViewDelegate
                     
                     // Workaround using NSString(?)
 
-                    let myString: NSString = homeworkDescription.string as NSString
+                    let myString: NSString = homeworkDescription as NSString
                     goodSize = myString.size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]).height
                     
                 }

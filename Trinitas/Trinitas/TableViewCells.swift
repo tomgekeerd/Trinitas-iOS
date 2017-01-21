@@ -24,7 +24,7 @@ class LessonCell: UITableViewCell {
     
     // Type of hour
     
-    var type: String! {
+    var type: LessonType! {
         
         didSet {
             
@@ -48,7 +48,7 @@ class LessonCell: UITableViewCell {
     
     // MARK - Set type functions
     
-    func setCellType(type: String) {
+    func setCellType(type: LessonType) {
         
         if let data = self.lessonData {
             
@@ -69,7 +69,7 @@ class LessonCell: UITableViewCell {
             // Switch through to the options
             
             switch type {
-            case "Vrij":
+            case .Vrij:
                 
                 // Set 'Vrij'
                 
@@ -78,7 +78,7 @@ class LessonCell: UITableViewCell {
                 
                 break
                 
-            case "Eerste uur vrij":
+            case .EersteUurVrij:
                 
                 // Set 'eerste uur vrij'
                 
@@ -89,7 +89,7 @@ class LessonCell: UITableViewCell {
                 
                 break
                 
-            case "Tussenuur":
+            case .Tussenuur:
                 
                 // Set 'tussenuur'
                 
@@ -98,7 +98,7 @@ class LessonCell: UITableViewCell {
                 
                 break
                 
-            case "Les":
+            case .Les:
                 
                 // Set 'les' & enable cell
                 
@@ -163,7 +163,7 @@ class LessonCell: UITableViewCell {
 
                 break
                 
-            case "Pauze":
+            case .Pauze:
                 
                 break
             default:
@@ -223,6 +223,8 @@ extension UITableViewCell {
     
     func enable(on: Bool) {
         
+        self.isUserInteractionEnabled = on
+
         for view in contentView.subviews {
             
             view.isUserInteractionEnabled = on

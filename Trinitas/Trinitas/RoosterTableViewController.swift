@@ -74,7 +74,7 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
             if let cell = sender as? UITableViewCell {
                 
                 if let indexPath = self.tableView.indexPath(for: cell) {
-                    
+
                     vc.lessonData = self.lessonArray[indexPath.row]
                     
                 }
@@ -84,7 +84,7 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
         }
         
     }
-    
+
     // MARK: - UIRefreshControl .valueChanged method
     
     func persistsRefresh() {
