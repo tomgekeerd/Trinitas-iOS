@@ -169,13 +169,13 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
             
             // Check if succeeded & got results. Otherwise, do not display any message about results in database
             
-            if result.count == 0 {
+            if result.count == 0 && (date.components.weekday == 1 || date.components.weekday == 7) {
                 
-                // No data, display error
+                // No data, display weekend
                 
                 self.load(show: false)
                 
-            } else {
+            } else if result.count > 0 {
                 
                 // Data, display in tableview
                 
@@ -191,6 +191,12 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
                 
                 self.load(show: false)
                 
+            } else {
+                
+                // Display error
+                
+                self.load(show: false)
+
             }
             
         }

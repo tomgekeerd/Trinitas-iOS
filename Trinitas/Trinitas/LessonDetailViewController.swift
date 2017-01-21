@@ -141,24 +141,8 @@ extension LessonDetailViewController: UITableViewDataSource, UITableViewDelegate
         
         if indexPath.row == 1 {
             
-            // Set height of homework cell
+            return self.view.frame.size.height - 64 * 2
             
-            var goodSize: CGFloat = 0.0
-            
-            if let data = self.lessonData {
-                
-                if let homeworkDescription = data.homeworkDescription {
-                    
-                    // Workaround using NSString(?)
-
-                    let myString: NSString = homeworkDescription as NSString
-                    goodSize = myString.size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]).height
-                    
-                }
-
-            }
-            
-            return goodSize + 83
         }
         
         return 64

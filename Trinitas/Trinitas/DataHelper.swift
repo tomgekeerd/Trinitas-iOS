@@ -232,7 +232,7 @@ class DataHelper: NSObject {
                 
             }
             
-        }
+        } 
         
         return needsUpdate
         
