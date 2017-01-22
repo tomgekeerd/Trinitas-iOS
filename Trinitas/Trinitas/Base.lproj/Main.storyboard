@@ -425,7 +425,7 @@
             </objects>
             <point key="canvasLocation" x="2700" y="759"/>
         </scene>
-        <!--View Controller-->
+        <!--Meer-->
         <scene sceneID="XQz-Zl-ggg">
             <objects>
                 <viewController id="iTT-d7-Mdo" sceneMemberID="viewController">
@@ -438,13 +438,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="HTh-QO-RG9"/>
+                    <navigationItem key="navigationItem" title="Meer" id="HTh-QO-RG9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3L-YP-CuW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3638" y="1427"/>
         </scene>
-        <!--View Controller-->
+        <!--Mediatheek-->
         <scene sceneID="HRx-3P-HCW">
             <objects>
                 <viewController id="mae-P5-ibe" sceneMemberID="viewController">
@@ -457,7 +457,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9Q8-h8-59h"/>
+                    <navigationItem key="navigationItem" title="Mediatheek" id="9Q8-h8-59h"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oW1-vf-HSI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -521,10 +521,10 @@
             </objects>
             <point key="canvasLocation" x="2700" y="2090"/>
         </scene>
-        <!--Mail View Controller-->
+        <!--ELO Mail-->
         <scene sceneID="iOL-ZS-zIh">
             <objects>
-                <viewController id="DaX-fI-b22" customClass="MailViewController" customModule="Trinitas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DaX-fI-b22" customClass="MailViewController" customModule="Trinitas" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wv5-8y-BKM"/>
                         <viewControllerLayoutGuide type="bottom" id="ETE-nT-anS"/>
@@ -533,19 +533,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eo8-9U-H1b">
-                                <rect key="frame" x="16" y="277" width="343" height="64"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.1176470588" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="bgW-pD-qEd"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                <state key="normal" title="Mail instellen">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Om je ELO mail in deze app weer te geven, moet je als gebruiker toestemming geven dat wij deze gegevens mogen gebruiken." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guu-UR-SO0">
-                                <rect key="frame" x="25" y="175" width="325" height="94"/>
+                                <rect key="frame" x="25" y="262" width="325" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="94" id="tEI-oe-MEw"/>
                                 </constraints>
@@ -553,20 +542,34 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eo8-9U-H1b">
+                                <rect key="frame" x="37" y="364" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.1176470588" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bgW-pD-qEd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="Mail instellen">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showSetupMail" destination="DaX-fI-b22" eventType="touchUpInside" id="MZx-6E-PGR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Eo8-9U-H1b" firstAttribute="trailing" secondItem="zVn-Qp-Yt2" secondAttribute="trailingMargin" id="0Mo-Yd-uvD"/>
-                            <constraint firstItem="Eo8-9U-H1b" firstAttribute="centerY" secondItem="zVn-Qp-Yt2" secondAttribute="centerY" id="FMt-Hn-PGY"/>
                             <constraint firstItem="Eo8-9U-H1b" firstAttribute="centerX" secondItem="zVn-Qp-Yt2" secondAttribute="centerX" id="M9y-1X-nBl"/>
                             <constraint firstItem="guu-UR-SO0" firstAttribute="centerX" secondItem="zVn-Qp-Yt2" secondAttribute="centerX" id="MvD-sM-hDT"/>
-                            <constraint firstItem="Eo8-9U-H1b" firstAttribute="top" secondItem="guu-UR-SO0" secondAttribute="bottom" constant="8" id="WKB-jr-gDv"/>
+                            <constraint firstItem="Eo8-9U-H1b" firstAttribute="leading" secondItem="zVn-Qp-Yt2" secondAttribute="leadingMargin" constant="21" id="Nzj-Ey-L8c"/>
                             <constraint firstItem="guu-UR-SO0" firstAttribute="leading" secondItem="zVn-Qp-Yt2" secondAttribute="leadingMargin" constant="9" id="cOz-io-Ek4"/>
-                            <constraint firstItem="Eo8-9U-H1b" firstAttribute="leading" secondItem="zVn-Qp-Yt2" secondAttribute="leadingMargin" id="oh5-u0-c7H"/>
+                            <constraint firstItem="Eo8-9U-H1b" firstAttribute="top" secondItem="guu-UR-SO0" secondAttribute="bottom" constant="8" id="f9E-JF-g9X"/>
+                            <constraint firstItem="guu-UR-SO0" firstAttribute="centerY" secondItem="zVn-Qp-Yt2" secondAttribute="centerY" id="rjM-z1-JeP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Eo8-9U-H1b" secondAttribute="trailing" constant="22" id="vLq-0j-fwQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="guu-UR-SO0" secondAttribute="trailing" constant="9" id="y7u-XT-hmE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="BLq-fN-SNN"/>
+                    <navigationItem key="navigationItem" title="ELO Mail" id="BLq-fN-SNN"/>
                     <connections>
                         <outlet property="setupButton" destination="Eo8-9U-H1b" id="qjW-ZH-Pwm"/>
                         <outlet property="setupLabel" destination="guu-UR-SO0" id="KTi-8E-e6H"/>

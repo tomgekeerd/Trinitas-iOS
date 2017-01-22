@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultStyle(.custom)
         SVProgressHUD.setBackgroundColor(UIColor.lightGray)
         SVProgressHUD.setForegroundColor(UIColor.white)
+        
         // Initialize Fetch Request
 //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
 //        
@@ -74,11 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
         
         let managedContext = self.managedObjectContext
-        
-        //2
         let fetchRequests = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
-        
-        //3
         do {
             let results = try managedContext.fetch(fetchRequests)
             print(results.count)
@@ -91,6 +88,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Could not fetch \(error), \(error.userInfo)")
         }
         
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        if let scheme = url.scheme, let values = url.getKeyVals(), let code = values["code"] {
+            if scheme == "itsl-itslearning" {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MailUpdate"), object: code, userInfo: nil)
+                return true
+            }
+        }
+        
+        return false
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -178,6 +187,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
+    }
+    
+}
+
+extension URL {
+    
+    func getKeyVals() -> [String: String]? {
+        
+        var results = [String: String]()
+        let keyValues = self.query?.components(separatedBy: "&")
+        if (keyValues?.count)! > 0 {
+            for pair in keyValues! {
+                let kv = pair.components(separatedBy: "=")
+                if kv.count > 1 {
+                    results.updateValue(kv[1], forKey: kv[0])
+                }
+            }
+            
+        }
+        return results
     }
     
 }

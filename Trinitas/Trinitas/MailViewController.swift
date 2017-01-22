@@ -13,8 +13,7 @@ class MailViewController: UIViewController {
 
     @IBOutlet var setupButton: UIButton!
     @IBOutlet var setupLabel: UILabel!
-    
-    var safariController: SFSafariViewController!
+    var sfViewController: SFSafariViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +22,7 @@ class MailViewController: UIViewController {
         
         self.setupButton.layer.cornerRadius = self.setupButton.frame.size.height / 2
         
-        if let url = URL(string: "") {
-            self.safariController = SFSafariViewController(url: url)
-            self.safariController.delegate = self
-        }
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(grantedViewControllerFinished(notification:)), name: Notification.Name(rawValue: "MailUpdate"), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,10 +46,27 @@ class MailViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func showSetupMail() {
+        
+        if let url = URL(string: "https://trinitas.itslearning.com/oauth2/authorize.aspx?client_id=10ae9d30-1853-48ff-81cb-47b58a325685&state=state&response_type=code&redirect_uri=itsl-itslearning://login&scope=SCOPE") {
+            self.sfViewController = SFSafariViewController(url: url)
+            self.sfViewController.delegate = self
+            self.present(self.sfViewController, animated: true, completion: nil)
+        }
+
+    }
 
 }
 
 extension MailViewController: SFSafariViewControllerDelegate {
     
+    // MARK: - Get finish
+    
+    func grantedViewControllerFinished(notification: NSNotification) {
+        if let code = notification.object as? String {
+            self.sfViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+    
 }
-
