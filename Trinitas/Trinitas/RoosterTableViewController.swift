@@ -10,9 +10,18 @@ import UIKit
 import CoreData
 import SVProgressHUD
 
+enum RoosterStatus {
+    case Weekend
+    case DataFailure
+    case DaySchedule
+    case Loading
+}
+
 class RoosterTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var headerLabel: UILabel!
+    @IBOutlet var subLabel: UILabel!
     var calendarView: CLWeeklyCalendarView!
 
     var schedule = [NSManagedObject]()
@@ -173,7 +182,7 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
                 
                 // No data, display weekend
                 
-                self.load(show: false)
+                self.setView(withStatus: .Weekend)
                 
             } else if result.count > 0 {
                 
@@ -189,20 +198,20 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
                 
                 // Dismiss loading screen
                 
-                self.load(show: false)
+                self.setView(withStatus: .DaySchedule)
                 
             } else {
                 
                 // Display error
                 
-                self.load(show: false)
-
+                self.setView(withStatus: .DataFailure)
+                
             }
             
         }
         
     }
-    
+
     // MARK: - StatusBarStyle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -229,7 +238,7 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
         // Show loading screen & update last update
         
         self.setLastUpdateOfCurrentView()
-        self.load(show: true)
+        self.setView(withStatus: .Loading)
         
         // Empty out array, reload tableview for load screen
         
@@ -245,20 +254,71 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
 
 extension RoosterTableViewController {
     
-    func load(show: Bool) {
+    func setView(withStatus status: RoosterStatus) {
         
-        if show {
+        switch status {
+        case .DataFailure:
             
-            self.view.isUserInteractionEnabled = false
-            SVProgressHUD.show()
+            // TableView setup
             
-        } else {
+            self.tableView.isHidden = true
             
-            self.view.isUserInteractionEnabled = true
+            // Label setup
+            
+            self.headerLabel.text = "Iets ging er mis..."
+            self.subLabel.text = "Probeer het later opnieuw"
+            
+            // Loading spinner setup
+            
             SVProgressHUD.dismiss()
             
+            break
+        case .Weekend:
+            
+            // TableView setup
+            
+            self.tableView.isHidden = true
+            
+            // Label setup
+            
+            self.headerLabel.text = "Weekend!"
+            self.subLabel.text = "Doe het rustig aan."
+            
+            // Loading spinner setup
+            
+            SVProgressHUD.dismiss()
+            
+            break
+        case .DaySchedule:
+            
+            // TableView setup
+            
+            self.tableView.isUserInteractionEnabled = true
+            self.tableView.isHidden = false
+            
+            // Loading spinner setup
+            
+            SVProgressHUD.dismiss()
+            
+            break
+        case .Loading:
+            
+            // TableView setup
+            
+            self.tableView.isUserInteractionEnabled = false
+            
+            // Label setup
+            
+            self.headerLabel.text = ""
+            self.subLabel.text = ""
+            
+            // Loading spinner setup
+            
+            SVProgressHUD.show()
+            
+            break
         }
         
     }
-    
+
 }
