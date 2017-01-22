@@ -24,7 +24,10 @@ class MailViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
-        if !self.userDidSetupMail() {
+        let setupMail = self.userDidSetupMail()
+        self.setView(setup: setupMail)
+
+        if !setupMail {
             
             self.setupButton.layer.cornerRadius = self.setupButton.frame.size.height / 2
             NotificationCenter.default.addObserver(self, selector: #selector(grantedViewControllerFinished(notification:)), name: Notification.Name(rawValue: "MailUpdate"), object: nil)
@@ -43,17 +46,19 @@ class MailViewController: UIViewController {
     
     // MARK: - View methods
     
-    func setupView(setup: Bool) {
+    func setView(setup: Bool) {
         
         if setup {
             
-            self.setupButton.isHidden = false
-            self.setupLabel.isHidden = false
+            self.tableView.isHidden = false
+            self.setupButton.isHidden = true
+            self.setupLabel.isHidden = true
             
         } else {
             
-            self.setupButton.isHidden = true
-            self.setupLabel.isHidden = true
+            self.tableView.isHidden = true
+            self.setupButton.isHidden = false
+            self.setupLabel.isHidden = false
             
         }
         
@@ -126,6 +131,7 @@ extension MailViewController: SFSafariViewControllerDelegate {
         
         if let code = notification.object as? String {
             
+            print(code)
             // Set userdefault boolean
             
             UserDefaults().set(true, forKey: "setupMail")

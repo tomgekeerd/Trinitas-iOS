@@ -75,7 +75,7 @@ class DataHelper: NSObject {
         
     }
     
-    func user() -> Any? {
+    func user() -> User? {
         
         if let u = KeychainWrapper.standard.string(forKey: String(kSecAttrAccount)), let p = KeychainWrapper.standard.string(forKey: String(kSecValueData)) {
             return User(username: u, password: p)
@@ -429,7 +429,7 @@ class DataHelperHelpers {
         return components.weekOfYear
         
     }
-    
+        
     func getType(withLesson lessonType: LessonType) -> String {
         
         switch lessonType {
@@ -498,6 +498,17 @@ class DataHelperHelpers {
         comp.weekday = 1
         comp.yearForWeekOfYear = sourceComp.yearForWeekOfYear
         return Calendar.date(from: comp)
+    }
+    
+    
+    // MARK: - Itslearning
+    
+    func saveRefreshToken(withToken token: String) {
+        
+    }
+    
+    func retrieveRefreshToken() -> String? {
+        return ""
     }
     
 }

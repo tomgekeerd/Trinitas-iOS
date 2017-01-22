@@ -1,11 +1,15 @@
 PODS:
   - Alamofire (4.0.1)
+  - CocoaSecurity (1.2.4)
+  - SecureNSUserDefaults (1.0.1):
+    - CocoaSecurity (~> 1.2.4)
   - SVProgressHUD (2.0.3)
   - SwiftKeychainWrapper (3.0.1)
   - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - SecureNSUserDefaults (~> 1.0.1)
   - SVProgressHUD
   - SwiftKeychainWrapper (from `https://github.com/jrendel/SwiftKeychainWrapper.git`, branch `master`)
   - SwiftyJSON
@@ -22,10 +26,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  CocoaSecurity: d288a6f87e0f363823d2cb83e753814a6944f71a
+  SecureNSUserDefaults: 8a07fc6a6fde31c7f8fa6ead73d3c9c3706a6364
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftKeychainWrapper: e353c2d5ac22e72ff7c1dc3b1de1f0e7341ba030
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: 0fc44979020384dc446e38f28ae63fd3a91e4b1d
+PODFILE CHECKSUM: d5a09e01deb4280e9f917934e75b1d6fcf3d1afc
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0.beta.1

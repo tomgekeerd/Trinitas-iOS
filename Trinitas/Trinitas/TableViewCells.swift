@@ -185,7 +185,7 @@ class TeacherCell: UITableViewCell {
         
         didSet {
             
-            if let teacherLastname = lessonData.teacher, let teacherTitle = lessonData.teacherTitle, let startTime = lessonData.start {
+            if let teacherLastname = lessonData.teacher, let teacherTitle = lessonData.teacherTitle, let startTime = lessonData.start, let endTime = lessonData.end {
                 
                 // Set teacher
                 
@@ -197,11 +197,12 @@ class TeacherCell: UITableViewCell {
                 dateFormatter.dateFormat = "dd-MM-yy"
                 let date = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(startTime / 1000)))
                 dateFormatter.dateFormat = "hh:mm"
-                let time = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(startTime / 1000)))
+                let start = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(startTime / 1000)))
+                let end = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(endTime / 1000)))
                 
                 // Set date
                 
-                self.timeLabel.text = date + "\n" + time
+                self.timeLabel.text = date + "\n" + start + " - " + end
                 
             }
             

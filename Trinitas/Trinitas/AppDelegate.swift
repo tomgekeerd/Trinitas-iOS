@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Check if password is saved already
         
         let dh = DataHelper()
-        if let _ = dh.user() as? User {
+        if let _ = dh.user() {
             
             // Load data views
             
