@@ -16,6 +16,7 @@ class API: NSObject {
     var baseURL = "https://tomderuiter.com/trinitas/v1/"
     var baseILURL = "https://trinitas.itslearning.com/restapi/"
     let dh = DataHelper()
+    let dhh = DataHelperHelpers()
     
     // MARK: - TriniAPI
     
@@ -140,7 +141,59 @@ class API: NSObject {
     
     // MARK: - Itslearning RESTAPI
     
-    func getItslearningToken(withCode code: String, completion: @escaping (_ success: Bool, _ token: String?) -> Void) {
+    func getItslearningMail(completion: @escaping (_ success: Bool, _ data: String?) -> Void) {
+        
+        // Get refreshToken
+        
+        if let refreshToken = self.dhh.retrieveRefreshToken() {
+            
+            self.getItslearningToken(withCode: refreshToken, completion: { (success, access_token) in
+                
+                if success {
+                    
+                    if let at = access_token {
+                        
+                        let params = [
+                            "access_token": at
+                        ]
+                        
+                        Alamofire.request(self.baseILURL + "personal/messages/v1", method: .get, parameters: params).responseData { (response) in
+                            
+                            switch response.result {
+                            case .success:
+                                
+                                if let data = response.data {
+                                    
+                                    let json = JSON(data: data)
+                                    print(json)
+                                }
+                                
+                                break
+                                
+                            case .failure:
+                                
+                                completion(false, nil)
+                                
+                                break
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                } else {
+                    completion(false, nil)
+                }
+            })
+            
+        } else {
+            completion(false, nil)
+        }
+        
+    }
+    
+    private func getItslearningToken(withCode code: String, completion: @escaping (_ success: Bool, _ token: String?) -> Void) {
         
         let params = [
             "code": code,
@@ -160,6 +213,13 @@ class API: NSObject {
                     if json.count > 0 {
             
                         if let at = json["access_token"].string, let rt = json["refresh_token"].string {
+                            
+                            // Save refreshToken
+                            
+                            self.dhh.saveRefreshToken(withToken: rt)
+                            
+                            // Completion
+                            
                             completion(true, at)
                         }
                         

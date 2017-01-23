@@ -19,13 +19,22 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Users" representedClassName="Users" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="refresh_token" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="student_no" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    <entity name="Mails" representedClassName="Mails" syncable="YES" codeGenerationType="class">
+        <attribute name="attachments" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="forwarded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="message_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="message_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="preview_text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="read" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="replied" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sender_first" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sender_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sender_last" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sender_profile_url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Lessons" positionX="36" positionY="108" width="128" height="300"/>
-        <element name="Users" positionX="277" positionY="243" width="128" height="90"/>
+        <element name="Mails" positionX="36" positionY="234" width="128" height="225"/>
     </elements>
 </model>

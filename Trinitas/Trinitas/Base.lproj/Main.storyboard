@@ -584,17 +584,62 @@
                                     <action selector="showSetupMail" destination="DaX-fI-b22" eventType="touchUpInside" id="MZx-6E-PGR"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iEm-KS-Gjn">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iEm-KS-Gjn">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="neM-In-ZZI" customClass="MailCell" customModule="Trinitas" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="84" id="neM-In-ZZI" customClass="MailCell" customModule="Trinitas" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="neM-In-ZZI" id="cqB-uF-xQF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="O. Putten van der" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvc-xh-U3p">
+                                                    <rect key="frame" x="16" y="8" width="264" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="sDD-Cs-wkc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17-10-2016" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjj-Rc-cJD">
+                                                    <rect key="frame" x="288" y="8" width="79" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="XvV-Ia-Nfv"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQV-WV-jzg">
+                                                    <rect key="frame" x="16" y="32" width="344" height="43"/>
+                                                    <string key="text">asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wjj-Rc-cJD" firstAttribute="top" secondItem="cqB-uF-xQF" secondAttribute="topMargin" id="6PB-55-Uc6"/>
+                                                <constraint firstItem="wQV-WV-jzg" firstAttribute="top" secondItem="wjj-Rc-cJD" secondAttribute="bottom" constant="3" id="9dr-VR-aUH"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wQV-WV-jzg" secondAttribute="trailing" constant="7" id="HLb-nK-neD"/>
+                                                <constraint firstItem="fvc-xh-U3p" firstAttribute="leading" secondItem="cqB-uF-xQF" secondAttribute="leadingMargin" constant="8" id="Hsf-9v-Gcb"/>
+                                                <constraint firstItem="wjj-Rc-cJD" firstAttribute="leading" secondItem="fvc-xh-U3p" secondAttribute="trailing" constant="8" id="QCg-5g-sMv"/>
+                                                <constraint firstItem="wjj-Rc-cJD" firstAttribute="trailing" secondItem="cqB-uF-xQF" secondAttribute="trailingMargin" id="YMf-nO-wFH"/>
+                                                <constraint firstItem="fvc-xh-U3p" firstAttribute="top" secondItem="cqB-uF-xQF" secondAttribute="topMargin" id="Zyh-W4-98d"/>
+                                                <constraint firstItem="wQV-WV-jzg" firstAttribute="centerX" secondItem="cqB-uF-xQF" secondAttribute="centerX" id="fqU-rI-mk5"/>
+                                                <constraint firstItem="wQV-WV-jzg" firstAttribute="leading" secondItem="cqB-uF-xQF" secondAttribute="leadingMargin" constant="8" id="gMP-oM-Yni"/>
+                                                <constraint firstItem="wQV-WV-jzg" firstAttribute="bottom" secondItem="cqB-uF-xQF" secondAttribute="bottomMargin" id="km1-zx-tlf"/>
+                                                <constraint firstItem="wQV-WV-jzg" firstAttribute="top" secondItem="fvc-xh-U3p" secondAttribute="bottom" constant="3" id="lgO-KV-UQS"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateOfMsg" destination="wjj-Rc-cJD" id="bcT-BS-weD"/>
+                                            <outlet property="descriptionOfMsg" destination="wQV-WV-jzg" id="HTP-qQ-TpH"/>
+                                            <outlet property="sender" destination="fvc-xh-U3p" id="38e-Bc-4Q6"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

@@ -14,6 +14,8 @@ class MailViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var setupButton: UIButton!
     @IBOutlet var setupLabel: UILabel!
+    let dhh = DataHelperHelpers()
+    let api = API()
     var sfViewController: SFSafariViewController!
     
     override func viewDidLoad() {
@@ -34,6 +36,9 @@ class MailViewController: UIViewController {
             
         } else {
             
+            self.api.getItslearningMail(completion: { (success, data) in
+                
+            })
             
         }
         
@@ -116,7 +121,9 @@ extension MailViewController: UITableViewDataSource {
 // MARK: - MailCell
 
 class MailCell: UITableViewCell {
-    
+    @IBOutlet var sender: UILabel!
+    @IBOutlet var descriptionOfMsg: UILabel!
+    @IBOutlet var dateOfMsg: UILabel!
 }
 
 // MARK: - SFSafariViewControllerDelegate
@@ -135,6 +142,14 @@ extension MailViewController: SFSafariViewControllerDelegate {
             
             UserDefaults().set(true, forKey: "setupMail")
             UserDefaults().synchronize()
+            
+            // Save token & get mail
+            
+            self.dhh.saveRefreshToken(withToken: code)
+            
+            self.api.getItslearningMail(completion: { (success, data) in
+                
+            })
             
             // Dismiss the OAuth controller
             

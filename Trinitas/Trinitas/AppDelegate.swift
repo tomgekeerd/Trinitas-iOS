@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SVProgressHUD
+import SecureNSUserDefaults
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewController: Any!
+        
+        // Set Encryption
+        
+        let saltStringMD5 = "3f04f40b3c8f2bcb366574817be3ed92"
+        let uuid = UIDevice.current.identifierForVendor?.uuidString
+        let secret = saltStringMD5 + uuid! + String(Date().timeIntervalSinceNow)
+        UserDefaults.standard.setSecret(secret)
         
         // Check if password is saved already
         
