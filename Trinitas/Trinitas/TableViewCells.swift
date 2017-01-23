@@ -102,7 +102,12 @@ class LessonCell: UITableViewCell {
                 
                 // Set 'les' & enable cell
                 
-                self.enable(on: true)
+                if let endInterval = self.lessonData.end {
+                    let endDate = Date(timeIntervalSince1970: TimeInterval(endInterval) / 1000)
+                    if endDate.timeIntervalSinceNow > 0 {
+                        self.enable(on: true)
+                    }
+                }
                 
                 // Check what kind of lesson this is, a real lesson or subscription
                 

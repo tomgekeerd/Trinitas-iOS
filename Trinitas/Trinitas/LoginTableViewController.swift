@@ -160,7 +160,7 @@ class LoginTableViewController: UITableViewController {
         
         // Enter credidentials if present
 
-        if let user = dh.user() as? User {
+        if let user = dh.user() {
             cell.usernameTextField.text = user.username
             cell.passwordTextField.text = user.password
         }

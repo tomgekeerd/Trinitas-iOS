@@ -131,7 +131,6 @@ extension MailViewController: SFSafariViewControllerDelegate {
         
         if let code = notification.object as? String {
             
-            print(code)
             // Set userdefault boolean
             
             UserDefaults().set(true, forKey: "setupMail")
