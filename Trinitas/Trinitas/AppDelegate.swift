@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let saltStringMD5 = "3f04f40b3c8f2bcb366574817be3ed92"
         let uuid = UIDevice.current.identifierForVendor?.uuidString
-        let secret = saltStringMD5 + uuid! + String(Date().timeIntervalSinceNow)
+        let secret = saltStringMD5 + uuid!
+        
         UserDefaults.standard.setSecret(secret)
         
         // Check if password is saved already

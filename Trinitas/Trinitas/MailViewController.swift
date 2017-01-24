@@ -36,7 +36,7 @@ class MailViewController: UIViewController {
             
         } else {
             
-            self.api.getItslearningMail(completion: { (success, data) in
+            self.api.getItslearningMail(auth_code: nil, completion: { (success, data) in
                 
             })
             
@@ -145,9 +145,7 @@ extension MailViewController: SFSafariViewControllerDelegate {
             
             // Save token & get mail
             
-            self.dhh.saveRefreshToken(withToken: code)
-            
-            self.api.getItslearningMail(completion: { (success, data) in
+            self.api.getItslearningMail(auth_code: code, completion: { (success, data) in
                 
             })
             

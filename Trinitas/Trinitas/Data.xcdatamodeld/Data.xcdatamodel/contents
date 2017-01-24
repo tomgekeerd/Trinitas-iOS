@@ -32,9 +32,11 @@
         <attribute name="sender_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sender_last" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sender_profile_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Lessons" positionX="36" positionY="108" width="128" height="300"/>
-        <element name="Mails" positionX="36" positionY="234" width="128" height="225"/>
+        <element name="Mails" positionX="36" positionY="234" width="128" height="255"/>
     </elements>
 </model>

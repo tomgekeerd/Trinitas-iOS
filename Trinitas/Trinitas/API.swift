@@ -141,13 +141,20 @@ class API: NSObject {
     
     // MARK: - Itslearning RESTAPI
     
-    func getItslearningMail(completion: @escaping (_ success: Bool, _ data: String?) -> Void) {
+    func getItslearningMail(auth_code: String?, completion: @escaping (_ success: Bool, _ data: String?) -> Void) {
         
         // Get refreshToken
         
-        if let refreshToken = self.dhh.retrieveRefreshToken() {
-            
-            self.getItslearningToken(withCode: refreshToken, completion: { (success, access_token) in
+        var code = ""
+        if let auth = auth_code {
+            code = auth
+        } else if let refresh_token = self.dhh.retrieveRefreshToken() {
+            code = refresh_token
+        }
+        
+        if code.characters.count > 0 {
+        
+            self.getItslearningToken(withCode: code, auth_code: auth_code != nil, completion: { (success, access_token) in
                 
                 if success {
                     
@@ -159,6 +166,7 @@ class API: NSObject {
                         
                         Alamofire.request(self.baseILURL + "personal/messages/v1", method: .get, parameters: params).responseData { (response) in
                             
+
                             switch response.result {
                             case .success:
                                 
@@ -192,13 +200,13 @@ class API: NSObject {
         }
         
     }
-    
-    private func getItslearningToken(withCode code: String, completion: @escaping (_ success: Bool, _ token: String?) -> Void) {
+
+    private func getItslearningToken(withCode code: String, auth_code: Bool, completion: @escaping (_ success: Bool, _ token: String?) -> Void) {
         
         let params = [
-            "code": code,
+            auth_code ? "code" : "refresh_token": code,
             "client_id": "10ae9d30-1853-48ff-81cb-47b58a325685",
-            "grant_type": "authorization_code"
+            "grant_type": auth_code ? "authorization_code" : "refresh_token"
         ]
         
         // Request itslearning token
@@ -210,20 +218,18 @@ class API: NSObject {
                 if let data = response.data {
                     let json = JSON(data: data)
 
-                    if json.count > 0 {
-            
-                        if let at = json["access_token"].string, let rt = json["refresh_token"].string {
-                            
-                            // Save refreshToken
-                            
-                            self.dhh.saveRefreshToken(withToken: rt)
-                            
-                            // Completion
-                            
-                            completion(true, at)
-                        }
+                    
+                    if let at = json["access_token"].string, let rt = json["refresh_token"].string {
                         
+                        // Save refreshToken
+                        
+                        self.dhh.saveRefreshToken(withToken: rt)
+
+                        // Completion
+                        
+                        completion(true, at)
                     } else {
+                        
                         completion(false, nil)
                     }
                     

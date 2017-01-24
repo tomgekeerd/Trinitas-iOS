@@ -370,8 +370,7 @@ class DataHelper: NSObject {
     
     // MARK: - Itslearning CoreData
     
-    func saveMails(withData data: [JSON]) {
-        
+    func saveMail(withData mail: JSON) {
         
         // Get AppDelegate
         
@@ -385,67 +384,68 @@ class DataHelper: NSObject {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
             
             if let e = entity {
-
-                for mail in data {
+                
+                // Check if mail already exists...
+                
+                if let message_id = mail["MessageId"].int {
                     
-                    // Check if mail already exists...
+                    fetchRequest.entity = e
+                    let mIdPredicate = NSPredicate(format: "message_id = %i", message_id)
+                    fetchRequest.predicate = mIdPredicate
                     
-                    if let message_id = mail["MessageId"].int {
-                        
-                        fetchRequest.entity = e
-                        let mIdPredicate = NSPredicate(format: "message_id = %i", message_id)
-                        fetchRequest.predicate = mIdPredicate
-                        
-                        var fetchResults = [Mails]()
-                        do {
-                            if let results = try managedContext.fetch(fetchRequest) as? [Mails] {
-                                fetchResults = results
-                            }
-                        } catch {
-                            fatalError("Something went wrong fetching...")
+                    var fetchResults = [Mails]()
+                    do {
+                        if let results = try managedContext.fetch(fetchRequest) as? [Mails] {
+                            fetchResults = results
                         }
+                    } catch {
+                        fatalError("Something went wrong fetching...")
+                    }
+                    
+                    // Had to this weird solution because NSManagedObject does not want to initiate without inserting...
+                    
+                    if fetchResults.count == 0 {
                         
-                        // Had to this weird solution because NSManagedObject does not want to initiate without inserting...
+                        // Insert new one
                         
-                        if fetchResults.count == 0 {
+                        let newMail = Mails(entity: e, insertInto: managedContext)
+                        
+                        if let message_id = mail["MessageId"].int,
+                            let date = mail["DateReceived"].string,
+                            let forwarded = mail["IsForwarded"].bool,
+                            let attachments = mail["HasAttachments"].bool,
+                            let message_url = mail["MessageUrl"].string,
+                            let preview_text = mail["PreviewText"].string,
+                            let read = mail["IsRead"].bool,
+                            let replied = mail["IsReplied"].bool,
+                            let sender_first = mail["From"]["FirstName"].string,
+                            let sender_id = mail["From"]["PersonId"].int,
+                            let sender_last = mail["From"]["LastName"].string,
+                            let sender_profile_url = mail["From"]["ProfileUrl"].string,
+                            let text = mail["Text"].string,
+                            let subject = mail["Subject"].string {
                             
-                            // Insert new one
+                            // Set values :p
                             
-                            let newMail = Mails(entity: e, insertInto: managedContext)
-                            
-                            if let message_id = mail["MessageId"].int,
-                                let date = mail["DateReceived"].string,
-                                let forwarded = mail["IsForwarded"].bool,
-                                let attachments = mail["HasAttachments"].bool,
-                                let message_url = mail["MessageUrl"].string,
-                                let preview_text = mail["PreviewText"].string,
-                                let read = mail["IsRead"].bool,
-                                let replied = mail["IsReplied"].bool,
-                                let sender_first = mail["From"]["FirstName"].string,
-                                let sender_id = mail["From"]["PersonId"].int,
-                                let sender_last = mail["From"]["LastName"].string,
-                                let sender_profile_url = mail["From"]["ProfileUrl"].string {
-                                
-                                // Set values :p
-                                
-                                newMail.setValue(attachments, forKey: "attachments")
-                                newMail.setValue(date, forKey: "date")
-                                newMail.setValue(forwarded, forKey: "forwarded")
-                                newMail.setValue(message_id, forKey: "message_id")
-                                newMail.setValue(message_url, forKey: "message_url")
-                                newMail.setValue(preview_text, forKey: "preview_text")
-                                newMail.setValue(read, forKey: "read")
-                                newMail.setValue(replied, forKey: "replied")
-                                newMail.setValue(sender_first, forKey: "sender_first")
-                                newMail.setValue(sender_id, forKey: "sender_id")
-                                newMail.setValue(sender_last, forKey: "sender_last")
-                                newMail.setValue(sender_profile_url, forKey: "sender_profile_url")
-                                
-                            }
+                            newMail.setValue(attachments, forKey: "attachments")
+                            newMail.setValue(date, forKey: "date")
+                            newMail.setValue(forwarded, forKey: "forwarded")
+                            newMail.setValue(message_id, forKey: "message_id")
+                            newMail.setValue(message_url, forKey: "message_url")
+                            newMail.setValue(preview_text, forKey: "preview_text")
+                            newMail.setValue(read, forKey: "read")
+                            newMail.setValue(replied, forKey: "replied")
+                            newMail.setValue(sender_first, forKey: "sender_first")
+                            newMail.setValue(sender_id, forKey: "sender_id")
+                            newMail.setValue(sender_last, forKey: "sender_last")
+                            newMail.setValue(sender_profile_url, forKey: "sender_profile_url")
+                            newMail.setValue(text, forKey: "text")
+                            newMail.setValue(subject, forKey: "subject")
                             
                         }
                         
                     }
+                    
                 }
                 
                 do {
@@ -455,13 +455,6 @@ class DataHelper: NSObject {
                 }
                 
             }
-            
-        }
-        
-        
-        let mailArray = [Mail]()
-        for mail in data {
-            
             
         }
         
@@ -621,6 +614,7 @@ class DataHelperHelpers {
     
     func saveRefreshToken(withToken token: String) {
         UserDefaults.standard.setSecretObject(token, forKey: "refresh_token")
+        print(UserDefaults.standard.secretObject(forKey: "refresh_token"))
     }
     
     func retrieveRefreshToken() -> String? {
