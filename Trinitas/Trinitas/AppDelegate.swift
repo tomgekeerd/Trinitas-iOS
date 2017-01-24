@@ -87,7 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fetchRequests = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
         do {
             let results = try managedContext.fetch(fetchRequests)
-            print(results.count)
             //            for result in results {
             //                if let r = result as? Lessons {
             //                    print(r.week_no)

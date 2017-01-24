@@ -614,7 +614,6 @@ class DataHelperHelpers {
     
     func saveRefreshToken(withToken token: String) {
         UserDefaults.standard.setSecretObject(token, forKey: "refresh_token")
-        print(UserDefaults.standard.secretObject(forKey: "refresh_token"))
     }
     
     func retrieveRefreshToken() -> String? {

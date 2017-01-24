@@ -173,7 +173,7 @@ class API: NSObject {
                                 if let data = response.data {
                                     
                                     let json = JSON(data: data)
-                                    print(json)
+
                                 }
                                 
                                 break
