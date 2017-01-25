@@ -14,6 +14,8 @@ class MailViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var setupButton: UIButton!
     @IBOutlet var setupLabel: UILabel!
+    @IBOutlet var activityView: UIActivityIndicatorView!
+    var refreshSpinner: UIRefreshControl = UIRefreshControl()
     var mailData = [Mail]()
     let dhh = DataHelperHelpers()
     let api = API()
@@ -26,7 +28,17 @@ class MailViewController: UIViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-
+        self.tableView.isHidden = true
+        self.activityView.startAnimating()
+        
+        // Refresh control setup
+        
+        self.refreshSpinner = UIRefreshControl()
+        self.refreshSpinner.addTarget(self, action: #selector(persistsRefresh), for: .valueChanged)
+        self.tableView.addSubview(self.refreshSpinner)
+        
+        // Setup view
+        
         let setupMail = self.userDidSetupMail()
         self.setView(setup: setupMail)
 
@@ -42,7 +54,6 @@ class MailViewController: UIViewController {
                 if success {
                     if let d = data {
                         self.mailData = d
-                        print(self.mailData)
                         self.tableView.reloadData()
                     }
                 } else {
@@ -66,16 +77,16 @@ class MailViewController: UIViewController {
         
         if setup {
             
-            self.tableView.isHidden = false
             self.setupButton.isHidden = true
             self.setupLabel.isHidden = true
+            self.activityView.isHidden = false
             
         } else {
             
-            self.tableView.isHidden = true
             self.setupButton.isHidden = false
             self.setupLabel.isHidden = false
-            
+            self.activityView.isHidden = true
+
         }
         
     }
@@ -84,6 +95,25 @@ class MailViewController: UIViewController {
     
     func userDidSetupMail() -> Bool {
         return UserDefaults().bool(forKey: "setupMail")
+    }
+    
+    func persistsRefresh() {
+        
+        self.api.getItslearningMail(auth_code: nil, completion: { (success, data) in
+            
+            self.refreshSpinner.endRefreshing()
+            
+            if success {
+                if let d = data {
+                    self.mailData = d
+                    self.tableView.reloadData()
+                }
+            } else {
+                
+            }
+            
+        })
+        
     }
     
     // MARK: - IBActions
@@ -145,16 +175,18 @@ extension MailViewController: UITableViewDataSource {
         // Set read
         
         if mail.read {
-            cell.contentView.alpha = 0.7
+            cell.contentView.alpha = 0.65
         } else {
             cell.contentView.alpha = 1.0
         }
-                
+        
+        
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.tableView.isHidden = self.mailData.count <= 0
         return self.mailData.count
     }
     
