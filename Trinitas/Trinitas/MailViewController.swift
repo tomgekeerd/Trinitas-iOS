@@ -127,6 +127,18 @@ class MailViewController: UIViewController {
         }
 
     }
+    
+    // MARK: - Segue handling
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "mailDetails" {
+            if let dest = segue.destination as? MailDetailViewController, let indexPath = sender as? IndexPath {
+                dest.mail = self.mailData[indexPath.row]
+            }
+        }
+        
+    }
 
 }
 
@@ -150,7 +162,7 @@ extension MailViewController: UITableViewDataSource {
         // Set texts in cell
         
         cell.descriptionOfMsg.text = mail.preview_text
-        cell.sender.text = mail.sender_first + " " + mail.sender_last
+        cell.sender.text = mail.from.first_name + " " + mail.from.last_name
         
         // Set subject
         
@@ -192,6 +204,10 @@ extension MailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "mailDetails", sender: indexPath)
     }
     
 }

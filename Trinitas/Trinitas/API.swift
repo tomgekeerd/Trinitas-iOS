@@ -141,6 +141,67 @@ class API: NSObject {
     
     // MARK: - Itslearning RESTAPI
     
+    func getMail(withMail mail: Mail, completion: @escaping (_ success: Bool, _ data: Mail?) -> Void) {
+        
+        // Get refreshtoken
+        
+        if let refresh_token = self.dhh.retrieveRefreshToken() {
+            
+            self.getItslearningToken(withCode: refresh_token, auth_code: false, completion: { (success, access_token) in
+                
+                if success {
+                    
+                    if let at = access_token {
+                        
+                        let params = [
+                            "access_token": at
+                        ]
+                        
+                        Alamofire.request(self.baseILURL + "personal/messages/\(mail.message_id)/v1", method: .get, parameters: params).responseData { (response) in
+                            
+                            switch response.result {
+                            case .success:
+                                
+                                if let data = response.data {
+                                    
+                                    let json = JSON(data: data)
+                                    if let toArray = json["To"].array, let text = json["Text"].string {
+                                        let personData = self.dh.getPersons(withJsonData: toArray)
+                                        var m = mail
+                                        m.to = personData
+                                        m.text = text
+                                        completion(true, m)
+                                    }
+                                    
+                                }
+                                
+                                break
+                                
+                            case .failure:
+                                
+                                completion(false, nil)
+                                
+                                break
+                                
+                            }
+                            
+                        }
+
+                        
+                    }
+                    
+                } else {
+                    completion(false, nil)
+                }
+                
+            })
+            
+        } else {
+            completion(false, nil)
+        }
+        
+    }
+    
     func getItslearningMail(auth_code: String?, completion: @escaping (_ success: Bool, _ data: [Mail]?) -> Void) {
         
         // Get refreshToken
@@ -173,6 +234,7 @@ class API: NSObject {
                                     
                                     let json = JSON(data: data)
                                     if let jsonData = json["EntityArray"].array {
+                                        print(jsonData)
                                         let mailData = self.dh.getMails(withJsonData: jsonData)
                                         completion(true, mailData)
                                     } else {

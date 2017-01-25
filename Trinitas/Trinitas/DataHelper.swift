@@ -57,19 +57,24 @@ struct Mail {
     
     var preview_text: String
     var message_url: String
-    var sender_first: String
-    var sender_last: String
-    var sender_profile_url: String
     var attachments: Bool
     var date: String
     var forwarded: Bool
     var read: Bool
     var replied: Bool
-    var sender_id: Int
     var message_id: Int
     var text: String?
     var subject: String?
+    var from: ItslearningPerson
+    var to: [ItslearningPerson]?
+    
+}
 
+struct ItslearningPerson {
+    var profile_url: String
+    var person_id: Int
+    var first_name: String
+    var last_name: String
 }
 
 struct User {
@@ -370,7 +375,32 @@ class DataHelper: NSObject {
         
     }
     
-    // MARK: - Itslearning 
+    // MARK: - Itslearning
+    
+    func getPersons(withJsonData jsonData: [JSON]) -> [ItslearningPerson] {
+        
+        var personData = [ItslearningPerson]()
+        for person in jsonData {
+            
+            if let profile_url = person["ProfileUrl"].string,
+                let person_id = person["PersonId"].int,
+                let first_name = person["FirstName"].string,
+                let last_name = person["LastName"].string {
+                
+                let person = ItslearningPerson(profile_url: profile_url,
+                                               person_id: person_id,
+                                               first_name: first_name,
+                                               last_name: last_name)
+                
+                personData.append(person)
+                
+            }
+
+        }
+        
+        return personData
+        
+    }
     
     func getMails(withJsonData jsonData: [JSON]) -> [Mail] {
         
@@ -390,24 +420,26 @@ class DataHelper: NSObject {
                 let sender_last = mail["From"]["LastName"].string,
                 let sender_profile_url = mail["From"]["ProfileUrl"].string,
                 let subject = mail["Subject"].string {
-                
             
                 // Set values :p
                 
+                let from = ItslearningPerson(profile_url: sender_profile_url,
+                                             person_id: sender_id,
+                                             first_name: sender_first,
+                                             last_name: sender_last)
+                
                 let mail = Mail(preview_text: preview_text,
-                                    message_url: message_url,
-                                    sender_first: sender_first,
-                                    sender_last: sender_last,
-                                    sender_profile_url: sender_profile_url,
-                                    attachments: attachments,
-                                    date: date,
-                                    forwarded: forwarded,
-                                    read: read,
-                                    replied: replied,
-                                    sender_id: sender_id,
-                                    message_id: message_id,
-                                    text: nil,
-                                    subject: subject)
+                                message_url: message_url,
+                                attachments: attachments,
+                                date: date,
+                                forwarded: forwarded,
+                                read: read,
+                                replied: replied,
+                                message_id: message_id,
+                                text: nil,
+                                subject: subject,
+                                from: from,
+                                to: nil)
                 
                 mailData.append(mail)
 
