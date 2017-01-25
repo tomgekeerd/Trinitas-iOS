@@ -14,6 +14,7 @@ class MailViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var setupButton: UIButton!
     @IBOutlet var setupLabel: UILabel!
+    var mailData = [Mail]()
     let dhh = DataHelperHelpers()
     let api = API()
     var sfViewController: SFSafariViewController!
@@ -37,6 +38,16 @@ class MailViewController: UIViewController {
         } else {
             
             self.api.getItslearningMail(auth_code: nil, completion: { (success, data) in
+                
+                if success {
+                    if let d = data {
+                        self.mailData = d
+                        print(self.mailData)
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    
+                }
                 
             })
             
@@ -104,12 +115,47 @@ extension MailViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MailCell
         
+        let mail = self.mailData[indexPath.row]
+        
+        // Set texts in cell
+        
+        cell.descriptionOfMsg.text = mail.preview_text
+        cell.sender.text = mail.sender_first + " " + mail.sender_last
+        
+        // Set subject
+        
+        if let sub = mail.subject {
+            if sub.characters.count > 0 {
+                cell.subject.text = sub
+            } else {
+                cell.subject.text = "Geen onderwerp"
+            }
+        }
+        
+        // Set date
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        if let date = dateFormatter.date(from: mail.date) {
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            let formattedDate = dateFormatter.string(from: date)
+            cell.dateOfMsg.text = formattedDate
+        }
+        
+        // Set read
+        
+        if mail.read {
+            cell.contentView.alpha = 0.7
+        } else {
+            cell.contentView.alpha = 1.0
+        }
+                
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.mailData.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -123,6 +169,7 @@ extension MailViewController: UITableViewDataSource {
 class MailCell: UITableViewCell {
     @IBOutlet var sender: UILabel!
     @IBOutlet var descriptionOfMsg: UILabel!
+    @IBOutlet var subject: UILabel!
     @IBOutlet var dateOfMsg: UILabel!
 }
 

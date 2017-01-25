@@ -584,15 +584,15 @@
                                     <action selector="showSetupMail" destination="DaX-fI-b22" eventType="touchUpInside" id="MZx-6E-PGR"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rnN-S9-D51">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="106" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rnN-S9-D51">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="84" id="I3o-zk-i0i" customClass="MailCell" customModule="Trinitas" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="84"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="103" id="I3o-zk-i0i" customClass="MailCell" customModule="Trinitas" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I3o-zk-i0i" id="ELs-gn-Abg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="O. Putten van der" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agE-9F-Yjm">
@@ -601,7 +601,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="ocA-xf-gMJ"/>
                                                         <constraint firstAttribute="width" constant="180" id="trr-qZ-1xs"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -615,31 +615,47 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngb-jg-cJc">
-                                                    <rect key="frame" x="16" y="32" width="343" height="43"/>
+                                                    <rect key="frame" x="16" y="54" width="343" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="2ix-jn-pFc"/>
+                                                    </constraints>
                                                     <string key="text">asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mO2-qB-c4k">
+                                                    <rect key="frame" x="16" y="32" width="343" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Opt-Kf-bPS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="agE-9F-Yjm" firstAttribute="top" secondItem="ELs-gn-Abg" secondAttribute="topMargin" id="4mZ-Eg-A3L"/>
                                                 <constraint firstItem="ngb-jg-cJc" firstAttribute="bottom" secondItem="ELs-gn-Abg" secondAttribute="bottomMargin" id="7dM-Dm-oBW"/>
-                                                <constraint firstItem="ngb-jg-cJc" firstAttribute="top" secondItem="agE-9F-Yjm" secondAttribute="bottom" constant="3" id="CKt-Xd-CZS"/>
                                                 <constraint firstItem="CM6-Nf-jbo" firstAttribute="top" secondItem="ELs-gn-Abg" secondAttribute="topMargin" id="Gco-zC-du6"/>
+                                                <constraint firstItem="mO2-qB-c4k" firstAttribute="top" secondItem="CM6-Nf-jbo" secondAttribute="bottom" constant="3" id="J07-8p-l7L"/>
+                                                <constraint firstItem="mO2-qB-c4k" firstAttribute="centerX" secondItem="ELs-gn-Abg" secondAttribute="centerX" id="KKP-ZR-Am6"/>
                                                 <constraint firstItem="agE-9F-Yjm" firstAttribute="leading" secondItem="ELs-gn-Abg" secondAttribute="leadingMargin" constant="8" id="LeQ-4a-Lba"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ngb-jg-cJc" secondAttribute="trailing" constant="8" id="MEn-Ve-41T"/>
                                                 <constraint firstItem="CM6-Nf-jbo" firstAttribute="leading" secondItem="agE-9F-Yjm" secondAttribute="trailing" constant="8" id="TWQ-2W-Mcp"/>
+                                                <constraint firstItem="mO2-qB-c4k" firstAttribute="top" secondItem="agE-9F-Yjm" secondAttribute="bottom" constant="3" id="Uj2-Ee-fST"/>
                                                 <constraint firstItem="ngb-jg-cJc" firstAttribute="centerX" secondItem="ELs-gn-Abg" secondAttribute="centerX" id="esN-CP-KMP"/>
                                                 <constraint firstItem="CM6-Nf-jbo" firstAttribute="trailing" secondItem="ELs-gn-Abg" secondAttribute="trailingMargin" id="fnP-8s-CVz"/>
-                                                <constraint firstItem="ngb-jg-cJc" firstAttribute="top" secondItem="CM6-Nf-jbo" secondAttribute="bottom" constant="3" id="jb1-ce-4lP"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="mO2-qB-c4k" secondAttribute="trailing" constant="8" id="hEH-yb-tye"/>
                                                 <constraint firstItem="ngb-jg-cJc" firstAttribute="leading" secondItem="ELs-gn-Abg" secondAttribute="leadingMargin" constant="8" id="mqn-BV-6LR"/>
+                                                <constraint firstItem="mO2-qB-c4k" firstAttribute="leading" secondItem="ELs-gn-Abg" secondAttribute="leadingMargin" constant="8" id="yfM-5X-hgD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateOfMsg" destination="CM6-Nf-jbo" id="5iH-me-Czl"/>
                                             <outlet property="descriptionOfMsg" destination="ngb-jg-cJc" id="rPq-5D-3V9"/>
                                             <outlet property="sender" destination="agE-9F-Yjm" id="RTA-Jf-SZd"/>
+                                            <outlet property="subject" destination="mO2-qB-c4k" id="aUp-hf-6T1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

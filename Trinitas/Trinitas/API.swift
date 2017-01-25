@@ -141,7 +141,7 @@ class API: NSObject {
     
     // MARK: - Itslearning RESTAPI
     
-    func getItslearningMail(auth_code: String?, completion: @escaping (_ success: Bool, _ data: String?) -> Void) {
+    func getItslearningMail(auth_code: String?, completion: @escaping (_ success: Bool, _ data: [Mail]?) -> Void) {
         
         // Get refreshToken
         
@@ -166,13 +166,18 @@ class API: NSObject {
                         
                         Alamofire.request(self.baseILURL + "personal/messages/v1", method: .get, parameters: params).responseData { (response) in
                             
-
                             switch response.result {
                             case .success:
                                 
                                 if let data = response.data {
                                     
                                     let json = JSON(data: data)
+                                    if let jsonData = json["EntityArray"].array {
+                                        let mailData = self.dh.getMails(withJsonData: jsonData)
+                                        completion(true, mailData)
+                                    } else {
+                                        completion(false, nil)
+                                    }
 
                                 }
                                 
@@ -217,7 +222,6 @@ class API: NSObject {
             case .success:
                 if let data = response.data {
                     let json = JSON(data: data)
-
                     
                     if let at = json["access_token"].string, let rt = json["refresh_token"].string {
                         
