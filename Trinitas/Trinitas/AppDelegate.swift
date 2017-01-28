@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewController: Any!
-        
+
         // Set Encryption
         
         let saltStringMD5 = "3f04f40b3c8f2bcb366574817be3ed92"

@@ -191,9 +191,9 @@ extension MailViewController: UITableViewDataSource {
         // Set read
         
         if mail.read {
-            cell.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1.0)
+            cell.contentView.alpha = 0.5
         } else {
-            cell.backgroundColor = UIColor.white
+            cell.contentView.alpha = 1.0
         }
         
         

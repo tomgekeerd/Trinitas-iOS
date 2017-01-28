@@ -504,7 +504,7 @@ class DataHelper: NSObject {
 
                         let section = Section(name: sectionId,
                                               grades: gradeArray,
-                                              average: String(avg))
+                                              average: total == 0 ? "-": String(avg))
                         sectionArray.append(section)
                     }
                     
@@ -667,6 +667,18 @@ class DataHelperHelpers {
     
 }
 
+extension UILabel {
+    func setColor(forGrade grade: Double) {
+        if grade < 5.5 {
+            self.textColor = UIColor(red: 255/255, green: 89/255, blue: 110/255, alpha: 1.0)
+        } else if grade >= 5.5 && grade < 7.5 {
+            self.textColor = UIColor.orange
+        } else {
+            self.textColor = UIColor(red: 101/255, green: 211/255, blue: 110/255, alpha: 1.0)
+        }
+    }
+}
+
 extension Date {
     var components: DateComponents {
         let cal = NSCalendar.current
@@ -688,4 +700,6 @@ extension UIViewController {
         alertController.addAction(ok)
         self.present(alertController, animated: true, completion: nil)
     }
+    
 }
+

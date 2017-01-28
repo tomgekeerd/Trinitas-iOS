@@ -24,6 +24,8 @@ class MailDetailViewController: UIViewController {
         self.tableView.tableFooterView = UIView()
         self.activityView.startAnimating()
         
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+
         if let mail = self.mail {
             
             self.api.getMail(withMail: mail, completion: { (success, m) in
@@ -127,7 +129,7 @@ extension MailDetailViewController: UITableViewDelegate, UITableViewDataSource {
                         self.cellHeight = newFrame.size.height + 8
                     } else {
                         self.cellHeight = 500
-                        self.present(alertWithTitle: "Er is geen text gevonden", msg: "")
+                        self.present(alertWithTitle: "Er is geen tekst gevonden", msg: "")
                     }
                     let _ = self.tableView(self.tableView, heightForRowAt: indexPath)
                 }

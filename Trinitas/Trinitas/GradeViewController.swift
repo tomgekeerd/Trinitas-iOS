@@ -11,14 +11,32 @@ import UIKit
 class GradeViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var segmentedControl: UISegmentedControl!
+    var refreshSpinner: UIRefreshControl = UIRefreshControl()
     var gradePeriods = [GradePeriod]()
     let api = API()
+    
+    var period: GradePeriod? {
+        if let p = self.gradePeriods.first(where: { $0.period == self.segmentedControl.selectedSegmentIndex }) {
+            return p
+        } else {
+            return nil
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
+
+        // Refresh control setup
+        
+        self.refreshSpinner = UIRefreshControl()
+        self.refreshSpinner.addTarget(self, action: #selector(persistsRefresh), for: .valueChanged)
+        self.tableView.addSubview(self.refreshSpinner)
 
         self.api.getGrades { (success, periods) in
             
@@ -26,7 +44,6 @@ class GradeViewController: UIViewController {
                 if let p = periods {
                     if p.count > 0 {
                         self.gradePeriods = p
-                        print(self.gradePeriods)
                         self.tableView.reloadData()
                     } else {
                         self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
@@ -45,16 +62,46 @@ class GradeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func segmentedIndexChanged() {
+        self.tableView.reloadData()
     }
-    */
+    
+    func persistsRefresh() {
+        
+        self.api.getGrades { (success, periods) in
+            
+            self.refreshSpinner.endRefreshing()
+            
+            if success {
+                if let p = periods {
+                    if p.count > 0 {
+                        self.gradePeriods = p
+                        self.tableView.reloadData()
+                    } else {
+                        self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
+                    }
+                }
+            } else {
+                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Segue handling
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = sender as? IndexPath {
+            if segue.identifier == "gradeInfo" {
+                if let dest = segue.destination as? GradeDetailsViewController {
+                    if let period = self.period {
+                        dest.section = period.sections[indexPath.row]
+                    }
+                }
+            }
+        }
+    }
 
 }
 
@@ -64,21 +111,26 @@ extension GradeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableView.isHidden = gradePeriods.count == 0
-        if let period = self.gradePeriods.first(where: { $0.period == section }) {
+        if let period = self.period {
             return period.sections.count
         }
         return 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GradeCell", for: indexPath) as! GradeCell
-
-        if let period = self.gradePeriods.first(where: { $0.period == indexPath.section }) {
+        let cell = SectionCell(style: .value1, reuseIdentifier: "SectionCell")
+        cell.selectionStyle = .none
+        
+        if let period = self.period {
+            
+            if period.sections[indexPath.row].grades.count == 0 {
+                cell.enable(on: false)
+            }
             
             // Set section name & average
             
@@ -91,24 +143,34 @@ extension GradeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "Periode 1"
-        case 1:
-            return "Periode 2"
-        case 2:
-            return "Periode 3"
-        default:
-            ()
+        if self.segmentedControl.selectedSegmentIndex <= 2 {
+            return "Cijfers periode \(self.segmentedControl.selectedSegmentIndex + 1)"
+        } else {
+            return "Examendossier"
         }
-        return ""
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let p = self.period {
+            if p.sections[indexPath.row].grades.count > 0 {
+                self.performSegue(withIdentifier: "gradeInfo", sender: indexPath)
+            }
+        }
+    }
     
 }
 
-class GradeCell: UITableViewCell {
+class SectionCell: UITableViewCell {
     @IBOutlet var sectionLabel: UILabel!
     @IBOutlet var averageGrade: UILabel!
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
 }
 
