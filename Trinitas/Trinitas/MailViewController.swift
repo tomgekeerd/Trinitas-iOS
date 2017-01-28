@@ -119,7 +119,7 @@ class MailViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func showSetupMail() {
-        
+
         if let url = URL(string: "https://trinitas.itslearning.com/oauth2/authorize.aspx?client_id=10ae9d30-1853-48ff-81cb-47b58a325685&state=state&response_type=code&redirect_uri=itsl-itslearning://login&scope=SCOPE") {
             self.sfViewController = SFSafariViewController(url: url)
             self.sfViewController.delegate = self
@@ -156,6 +156,7 @@ extension MailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MailCell
+        cell.selectionStyle = .none
         
         let mail = self.mailData[indexPath.row]
         
@@ -187,9 +188,9 @@ extension MailViewController: UITableViewDataSource {
         // Set read
         
         if mail.read {
-            cell.contentView.alpha = 0.65
+            cell.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1.0)
         } else {
-            cell.contentView.alpha = 1.0
+            cell.backgroundColor = UIColor.white
         }
         
         

@@ -170,6 +170,7 @@ class API: NSObject {
                                         var m = mail
                                         m.to = personData
                                         m.text = text
+                                        
                                         completion(true, m)
                                     }
                                     
@@ -234,7 +235,6 @@ class API: NSObject {
                                     
                                     let json = JSON(data: data)
                                     if let jsonData = json["EntityArray"].array {
-                                        print(jsonData)
                                         let mailData = self.dh.getMails(withJsonData: jsonData)
                                         completion(true, mailData)
                                     } else {
