@@ -13,28 +13,23 @@ import CoreData
 import SwiftKeychainWrapper
 import SecureNSUserDefaults
 
+// Lesson
+
 enum LessonType {
-    
     case Vrij
     case EersteUurVrij
     case Tussenuur
     case Les
     case Pauze
-    
 }
 
 struct Lesson {
-    
-    // Required
-    
     var day: String!
     var type: LessonType!
     var date: String!
     
     var hour: Int!
     var lastUpdate: Int!
-
-    // Optional
     
     var lessonFormat: String? = nil
     var lessonGroup: String? = nil
@@ -50,11 +45,11 @@ struct Lesson {
     
     var homework: Bool? = nil
     var test: Bool? = nil
-    
 }
 
+// Mail
+
 struct Mail {
-    
     var preview_text: String
     var message_url: String
     var attachments: Bool
@@ -67,7 +62,6 @@ struct Mail {
     var subject: String?
     var from: ItslearningPerson
     var to: [ItslearningPerson]?
-    
 }
 
 struct ItslearningPerson {
@@ -77,11 +71,32 @@ struct ItslearningPerson {
     var last_name: String
 }
 
+// Grades
+
+struct Grade {
+    var period: Int
+    var mark: String
+    var description: String
+    var count: String
+    var section: String
+}
+
+struct GradePeriod {
+    var period: Int
+    var sections: [Section]
+}
+
+struct Section {
+    var name: String
+    var grades: [Grade]
+    var average: String
+}
+
+// Personal
+
 struct User {
-    
     var username: String!
     var password: String!
-    
 }
 
 class DataHelper: NSObject {
@@ -451,6 +466,64 @@ class DataHelper: NSObject {
         
     }
     
+    // MARK: - Grades
+    
+    func getGradesData(withJsonData json: JSON) -> [GradePeriod] {
+        
+        var gradePeriods = [GradePeriod]()
+        if let periodArray = json.dictionary {
+            
+            for (periodId, sections) in periodArray {
+                
+                if let sectionsDict = sections.dictionary {
+                    
+                    var sectionArray = [Section]()
+                    for (sectionId, grades) in sectionsDict {
+                        
+                        var gradeArray = [Grade]()
+                        if let grades = grades.array {
+                            
+                            for grade in grades {
+                                
+                                let g = Grade(period: Int(periodId)!,
+                                              mark: grade["mark"].stringValue,
+                                              description: grade["description"].stringValue,
+                                              count: grade["count"].stringValue,
+                                              section: grade["section"].stringValue)
+                                gradeArray.append(g)
+                                
+                            }
+                            
+                        }
+                        
+                        var total = 0.0
+                        for grade in gradeArray {
+                            total = total + Double(grade.mark)! * Double(grade.count)!
+                        }
+                        let avg = total / Double(gradeArray.count).roundTo(places: 1)
+
+                        let section = Section(name: sectionId,
+                                              grades: gradeArray,
+                                              average: String(avg))
+                        sectionArray.append(section)
+                    }
+                    
+                    sectionArray = sectionArray.sorted(by: { $0.name < $1.name })                    
+                    let period = GradePeriod(period: Int(periodId)!,
+                                             sections: sectionArray)
+                    gradePeriods.append(period)
+                    
+                }
+                
+            }
+            
+        }
+        
+        return gradePeriods
+
+    }
+    
+    
 }
 
 class DataHelperHelpers {
@@ -567,29 +640,6 @@ class DataHelperHelpers {
         
     }
     
-//    func getAllLessons() {
-//       let appDelegate =
-//            UIApplication.shared.delegate as! AppDelegate
-//
-//        let managedContext = appDelegate.managedObjectContext
-//
-//        //2
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Lessons")
-//
-//        //3
-//        do {
-//            let results = try managedContext.fetch(fetchRequest)
-//            for result in results {
-//                if let r = result as? Lessons {
-//                    print(r.day)
-//                }
-//            }
-//        } catch let error as NSError {
-//                print("Could not fetch \(error), \(error.userInfo)")
-//        }
-//
-//    }
-    
     private static func getWeekFirstDay(from sourceDate: Date) -> Date? {
         let Calendar = NSCalendar(calendarIdentifier: .gregorian)!
         var sourceComp = sourceDate.components
@@ -621,5 +671,21 @@ extension Date {
     var components: DateComponents {
         let cal = NSCalendar.current
         return cal.dateComponents(Set([.year, .month, .day, .hour, .minute, .second, .weekday, .weekOfYear, .yearForWeekOfYear]), from: self)
+    }
+}
+
+extension Double {
+    func roundTo(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+
+extension UIViewController {
+    func present(alertWithTitle title: String, msg: String) {
+        let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(ok)
+        self.present(alertController, animated: true, completion: nil)
     }
 }

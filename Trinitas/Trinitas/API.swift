@@ -139,6 +139,53 @@ class API: NSObject {
             
     }
     
+    // MARK: - Grades
+    
+    func getGrades(completion: @escaping (_ success: Bool, _ data: [GradePeriod]?) -> Void) {
+        
+        // Get user
+        
+        if let user = dh.user() {
+
+            // Initialize params
+            
+            let parameters: Parameters = [
+                "lln": user.username,
+                "pass": user.password
+            ]
+            
+            // Request login
+            
+            Alamofire.request(baseURL + "numbers", method: .post, parameters: parameters).responseData { (response) in
+                
+                switch response.result {
+                case .success:
+                    
+                    if let data = response.data {
+                        let json = JSON(data: data)
+                        let gradeData = self.dh.getGradesData(withJsonData: json)
+                        completion(true, gradeData)
+                    }
+                    
+                    break
+                    
+                case .failure(let error):
+                    
+                    completion(false, nil)
+                    print(error)
+                    
+                    break
+                    
+                }
+                
+            }
+            
+        } else {
+            completion(false, nil)
+        }
+
+    }
+    
     // MARK: - Itslearning RESTAPI
     
     func getMail(withMail mail: Mail, completion: @escaping (_ success: Bool, _ data: Mail?) -> Void) {

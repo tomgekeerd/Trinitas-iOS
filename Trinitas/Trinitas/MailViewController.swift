@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import Alamofire
 
 class MailViewController: UIViewController {
 
@@ -57,7 +58,7 @@ class MailViewController: UIViewController {
                         self.tableView.reloadData()
                     }
                 } else {
-                    
+                    self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later opnieuw")
                 }
                 
             })
@@ -109,7 +110,7 @@ class MailViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             } else {
-                
+                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later opnieuw")
             }
             
         })
@@ -121,9 +122,11 @@ class MailViewController: UIViewController {
     @IBAction func showSetupMail() {
 
         if let url = URL(string: "https://trinitas.itslearning.com/oauth2/authorize.aspx?client_id=10ae9d30-1853-48ff-81cb-47b58a325685&state=state&response_type=code&redirect_uri=itsl-itslearning://login&scope=SCOPE") {
+            
             self.sfViewController = SFSafariViewController(url: url)
             self.sfViewController.delegate = self
             self.present(self.sfViewController, animated: true, completion: nil)
+
         }
 
     }
@@ -226,6 +229,18 @@ class MailCell: UITableViewCell {
 
 extension MailViewController: SFSafariViewControllerDelegate {
     
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true) { 
+            if let url = URL(string: "https://trinitas.itslearning.com") {
+                
+                self.sfViewController = SFSafariViewController(url: url)
+                self.sfViewController.delegate = self
+                self.present(self.sfViewController, animated: true, completion: nil)
+                
+            }
+        }
+    }
+    
     // MARK: - Get finish
     
     func grantedViewControllerFinished(notification: NSNotification) {
@@ -242,7 +257,14 @@ extension MailViewController: SFSafariViewControllerDelegate {
             // Save token & get mail
             
             self.api.getItslearningMail(auth_code: code, completion: { (success, data) in
-                
+                if success {
+                    if let d = data {
+                        self.mailData = d
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later opnieuw")
+                }
             })
             
             // Dismiss the OAuth controller

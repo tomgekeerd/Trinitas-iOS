@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		575D5387E1510375E964AED8 /* Pods_Trinitas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60961B20B77098D469E8819 /* Pods_Trinitas.framework */; };
+		935587631E3CE5AB00B1A72E /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 935587621E3CE5AB00B1A72E /* email.png */; };
+		935587651E3CE61400B1A72E /* grades.png in Resources */ = {isa = PBXBuildFile; fileRef = 935587641E3CE61400B1A72E /* grades.png */; };
+		935587671E3CE68500B1A72E /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 935587661E3CE68500B1A72E /* calendar.png */; };
+		935587691E3CE6AF00B1A72E /* library.png in Resources */ = {isa = PBXBuildFile; fileRef = 935587681E3CE6AF00B1A72E /* library.png */; };
+		9355876E1E3CFFE400B1A72E /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9355876D1E3CFFE400B1A72E /* GradeViewController.swift */; };
 		93CFD9A01E33B1B60039D7E3 /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */; };
 		93CFD9A21E393E240039D7E3 /* MailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CFD9A11E393E240039D7E3 /* MailDetailViewController.swift */; };
 		E21209311DE2080E00BA390E /* SLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E21209301DE2080E00BA390E /* SLButton.m */; };
@@ -40,6 +45,11 @@
 
 /* Begin PBXFileReference section */
 		4CDB53B9A4238BFA8F9DAE34 /* Pods-Trinitas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.debug.xcconfig"; sourceTree = "<group>"; };
+		935587621E3CE5AB00B1A72E /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
+		935587641E3CE61400B1A72E /* grades.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grades.png; sourceTree = "<group>"; };
+		935587661E3CE68500B1A72E /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		935587681E3CE6AF00B1A72E /* library.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library.png; sourceTree = "<group>"; };
+		9355876D1E3CFFE400B1A72E /* GradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
 		93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
 		93CFD9A11E393E240039D7E3 /* MailDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailDetailViewController.swift; sourceTree = "<group>"; };
 		DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.release.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +115,32 @@
 				DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9355876A1E3CFF9B00B1A72E /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */,
+				E2A79B871E01F42800FC37E8 /* LessonDetailViewController.swift */,
+			);
+			name = Schedule;
+			sourceTree = "<group>";
+		};
+		9355876B1E3CFFA100B1A72E /* Mail */ = {
+			isa = PBXGroup;
+			children = (
+				93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */,
+				93CFD9A11E393E240039D7E3 /* MailDetailViewController.swift */,
+			);
+			name = Mail;
+			sourceTree = "<group>";
+		};
+		9355876C1E3CFFB300B1A72E /* Grades */ = {
+			isa = PBXGroup;
+			children = (
+				9355876D1E3CFFE400B1A72E /* GradeViewController.swift */,
+			);
+			name = Grades;
 			sourceTree = "<group>";
 		};
 		B7E67F2DAC9C744D76BE1B1A /* Frameworks */ = {
@@ -174,10 +210,6 @@
 				E25B1B441DD4EE450034B740 /* Custom */,
 				E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */,
 				E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */,
-				E28C527D1DE5F66200C1C585 /* RoosterTableViewController.swift */,
-				E2A79B871E01F42800FC37E8 /* LessonDetailViewController.swift */,
-				93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */,
-				93CFD9A11E393E240039D7E3 /* MailDetailViewController.swift */,
 				E25B1B331DD3D3C40034B740 /* Main.storyboard */,
 				E25B1B361DD3D3C40034B740 /* Assets.xcassets */,
 				E25B1B381DD3D3C40034B740 /* LaunchScreen.storyboard */,
@@ -195,6 +227,9 @@
 				E23E7BDF1DE6378A00FD1738 /* Textfield */,
 				E23E7BDE1DE6378500FD1738 /* SLButton */,
 				E25B1B601DD515130034B740 /* Images */,
+				9355876A1E3CFF9B00B1A72E /* Schedule */,
+				9355876B1E3CFFA100B1A72E /* Mail */,
+				9355876C1E3CFFB300B1A72E /* Grades */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -202,6 +237,10 @@
 		E25B1B601DD515130034B740 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				935587621E3CE5AB00B1A72E /* email.png */,
+				935587641E3CE61400B1A72E /* grades.png */,
+				935587661E3CE68500B1A72E /* calendar.png */,
+				935587681E3CE6AF00B1A72E /* library.png */,
 				E2EBF2851DE1E0CF00140310 /* trinitas.jpg */,
 				E28CC7921DE1E94100EEF231 /* trinitasLogo.png */,
 				E23E7BE61DE63F2E00FD1738 /* homework.png */,
@@ -325,7 +364,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E25B1B3A1DD3D3C40034B740 /* LaunchScreen.storyboard in Resources */,
+				935587631E3CE5AB00B1A72E /* email.png in Resources */,
 				E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */,
+				935587671E3CE68500B1A72E /* calendar.png in Resources */,
+				935587691E3CE6AF00B1A72E /* library.png in Resources */,
+				935587651E3CE61400B1A72E /* grades.png in Resources */,
 				E25B1B371DD3D3C40034B740 /* Assets.xcassets in Resources */,
 				E25B1B351DD3D3C40034B740 /* Main.storyboard in Resources */,
 				E28CC7931DE1E94100EEF231 /* trinitasLogo.png in Resources */,
@@ -389,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E28C527E1DE5F66200C1C585 /* RoosterTableViewController.swift in Sources */,
+				9355876E1E3CFFE400B1A72E /* GradeViewController.swift in Sources */,
 				93CFD9A01E33B1B60039D7E3 /* MailViewController.swift in Sources */,
 				E2D0278E1DFDD87800280887 /* UIColor+CL.m in Sources */,
 				E270920B1DE72276000F7B18 /* Data.xcdatamodeld in Sources */,

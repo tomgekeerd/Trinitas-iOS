@@ -21,6 +21,7 @@ class MailDetailViewController: UIViewController {
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.tableFooterView = UIView()
         self.activityView.startAnimating()
         
         if let mail = self.mail {
@@ -123,9 +124,12 @@ extension MailDetailViewController: UITableViewDelegate, UITableViewDataSource {
                         newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
                         cell.mailContents.frame = newFrame
                         
-                        self.cellHeight = newFrame.size.height
-                        self.tableView(self.tableView, heightForRowAt: indexPath)
+                        self.cellHeight = newFrame.size.height + 8
+                    } else {
+                        self.cellHeight = 500
+                        self.present(alertWithTitle: "Er is geen text gevonden", msg: "")
                     }
+                    let _ = self.tableView(self.tableView, heightForRowAt: indexPath)
                 }
                 
                 return cell
