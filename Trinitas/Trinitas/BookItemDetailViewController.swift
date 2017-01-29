@@ -13,6 +13,7 @@ class BookItemDetailViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var activityView: UIActivityIndicatorView!
+    var cellHeight: CGFloat = 0.0
     var bookItem: BookItem!
     var book: Book!
     let api = API()
@@ -58,7 +59,8 @@ extension BookItemDetailViewController: UITableViewDelegate, UITableViewDataSour
             case 0:
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BookInfoFeatureCell", for: indexPath) as! BookInfoFeatureCell
-                
+                cell.isUserInteractionEnabled = false
+
                 Alamofire.request(book.cover, method: .get).response(completionHandler: { (response) in
                     if let data = response.data {
                         
@@ -85,6 +87,7 @@ extension BookItemDetailViewController: UITableViewDelegate, UITableViewDataSour
             case 1:
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BookInfoTitleCell", for: indexPath) as! BookInfoTitleCell
+                cell.isUserInteractionEnabled = false
                 cell.titleOfBook.text = book.title
                 cell.byLabel.text = "Door: \(book.author)"
                 return cell
@@ -92,6 +95,7 @@ extension BookItemDetailViewController: UITableViewDelegate, UITableViewDataSour
             case 2:
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BookInfoRatingCell", for: indexPath) as! BookInfoRatingCell
+                cell.isUserInteractionEnabled = false
                 cell.numberOfRatingsLabel.text = book.num_ratings == 0 ? "Geen beoordelingen" : "\(String(book.num_ratings)) beoordeling(en)"
                 cell.starRatingView.isUserInteractionEnabled = false
                 
@@ -100,6 +104,35 @@ extension BookItemDetailViewController: UITableViewDelegate, UITableViewDataSour
                 } else {
                     cell.starRatingView.value = 0
                 }
+                
+                return cell
+                
+            case 3:
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BookInfoSummaryCell", for: indexPath) as! BookInfoSummaryCell
+                
+                // Calculate height
+                
+                if book.summary.characters.count > 0 {
+                    
+                    cell.summaryView.isScrollEnabled = false
+                    cell.summaryView.text = book.summary
+                    
+                    let fixedWidth = cell.summaryView.frame.size.width
+                    cell.summaryView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+                    let newSize = cell.summaryView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+                    var newFrame = cell.summaryView.frame
+                    newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+                    cell.summaryView.frame = newFrame
+                    
+                    self.cellHeight = newFrame.size.height + 17
+                    
+                } else {
+                    self.cellHeight = 50
+                    cell.summaryView.text = "Geen beschrijving"
+                }
+                
+                let _ = self.tableView(self.tableView, heightForRowAt: indexPath)
                 
                 return cell
                 
@@ -115,7 +148,7 @@ extension BookItemDetailViewController: UITableViewDelegate, UITableViewDataSour
     
     func numberOfSections(in tableView: UITableView) -> Int {
         self.tableView.isHidden = self.book == nil
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -130,6 +163,12 @@ extension BookItemDetailViewController: UITableViewDelegate, UITableViewDataSour
             return 65.0
         case 2:
             return 35.0
+        case 3:
+            if self.cellHeight != 0.0 {
+                return self.cellHeight
+            } else {
+                return 0.0
+            }
         default:
             ()
         }
@@ -152,4 +191,8 @@ class BookInfoTitleCell: UITableViewCell {
 class BookInfoRatingCell: UITableViewCell {
     @IBOutlet var numberOfRatingsLabel: UILabel!
     @IBOutlet var starRatingView: SwiftyStarRatingView!
+}
+
+class BookInfoSummaryCell: UITableViewCell {
+    @IBOutlet var summaryView: UITextView!
 }
