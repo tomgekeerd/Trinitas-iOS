@@ -84,7 +84,18 @@ class LibraryViewController: UIViewController {
     func persistsRefresh() {
         self.getData()
     }
+    
+    // MARK: - Segue handling
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let indexPath = sender as? IndexPath, let dest = segue.destination as? BookItemDetailViewController {
+            if segue.identifier == "bookInfo" {
+                dest.bookItem = self.books[indexPath.row]
+            }
+        }
+        
+    }
 }
 
 extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -183,6 +194,7 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         return CGSize(width: 0, height: 0)
     }
+    
     func updateSectionHeader(withHeader header: HeaderView, forIndexPath indexPath: IndexPath) {
         switch indexPath.section {
         case 1:
@@ -192,6 +204,10 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         default:
             ()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "bookInfo", sender: indexPath)
     }
     
 }
@@ -223,6 +239,8 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+
 
 class LibraryInfoCell: UICollectionViewCell {
     @IBOutlet var nameLabel: UILabel!

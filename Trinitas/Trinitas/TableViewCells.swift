@@ -17,7 +17,7 @@ class LessonCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var homeworkIcon: UIImageView!
-    
+    @IBOutlet var breakLine: UIView!
     // Lesson data
     
     var lessonData: Lesson!
@@ -50,6 +50,8 @@ class LessonCell: UITableViewCell {
     
     func setCellType(type: LessonType) {
         
+        self.breakLine.isHidden = true
+
         if let data = self.lessonData {
             
             // Hide homework
@@ -169,6 +171,13 @@ class LessonCell: UITableViewCell {
                 break
                 
             case .Pauze:
+                
+                self.classLabel.isHidden = true
+                self.timeLabel.isHidden = true
+                self.timeLabel.isHidden = true
+                self.homeworkIcon.isHidden = true
+                self.breakLine.layer.cornerRadius = 9
+                self.breakLine.isHidden = false
                 
                 break
             default:

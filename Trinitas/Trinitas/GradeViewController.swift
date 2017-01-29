@@ -134,6 +134,8 @@ extension GradeViewController: UITableViewDelegate, UITableViewDataSource {
             
             if period.sections[indexPath.row].grades.count == 0 {
                 cell.enable(on: false)
+            } else {
+                cell.accessoryType = .disclosureIndicator
             }
             
             // Set section name & average

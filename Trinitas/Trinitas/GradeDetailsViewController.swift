@@ -56,6 +56,7 @@ extension GradeDetailsViewController: UITableViewDelegate, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "GradeInfoCell", for: indexPath) as! GradeInfoCell
             cell.selectionStyle = .none
             cell.averageGrade.text = self.section.average
+            cell.averageGrade.setColor(forGrade: Double(self.section.average)!)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "GradeCell", for: indexPath) as! GradeCell

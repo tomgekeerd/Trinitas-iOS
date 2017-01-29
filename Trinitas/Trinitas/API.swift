@@ -445,48 +445,41 @@ class API: NSObject {
     
     func getBook(withItemId itemid: String, completion: @escaping (_ success: Bool, _ book: Book?) -> Void) {
         
-        // Get user
+        // Initialize params
         
-        if let user = dh.user() {
+        let parameters: Parameters = [
+            "itemid": itemid
+        ]
+        
+        // Request login
+        
+        Alamofire.request(baseALURL + "getItem.ashx", method: .get, parameters: parameters).responseData { (response) in
             
-            // Initialize params
-            
-            let parameters: Parameters = [
-                "itemid": itemid
-            ]
-            
-            // Request login
-            
-            Alamofire.request(baseALURL + "getItem.ashx", method: .get, parameters: parameters).responseData { (response) in
+            switch response.result {
+            case .success:
                 
-                switch response.result {
-                case .success:
-                    
-                    if let data = response.data {
-                        let json = JSON(data: data)
-                        if let books = self.dh.getBookData(fromJsonData: json) {
-                            completion(true, book)
-                        } else {
-                            completion(false, nil)
-                        }
+                if let data = response.data {
+                    let json = JSON(data: data)
+                    print(json)
+                    if let book = self.dh.getBookData(fromJsonData: json) {
+                        completion(true, book)
                     } else {
                         completion(false, nil)
                     }
-                    
-                    break
-                case .failure(let error):
-                    
+                } else {
                     completion(false, nil)
-                    print(error)
-                    
-                    break
-                    
                 }
                 
-            }
+                break
+            case .failure(let error):
                 
-        } else {
-            completion(false, nil)
+                completion(false, nil)
+                print(error)
+                
+                break
+                
+            }
+            
         }
 
     }

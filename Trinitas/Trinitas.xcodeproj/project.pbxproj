@@ -14,6 +14,7 @@
 		93CFD9A21E393E240039D7E3 /* MailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CFD9A11E393E240039D7E3 /* MailDetailViewController.swift */; };
 		93D13F301E3D68D70016C1BC /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D13F2F1E3D68D70016C1BC /* LibraryViewController.swift */; };
 		93D13F321E3DFF340016C1BC /* BookItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D13F311E3DFF340016C1BC /* BookItemDetailViewController.swift */; };
+		93F9FB951E3E49E700240C8C /* SwiftyStarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9FB941E3E49E700240C8C /* SwiftyStarRatingView.swift */; };
 		E21209311DE2080E00BA390E /* SLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E21209301DE2080E00BA390E /* SLButton.m */; };
 		E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BE61DE63F2E00FD1738 /* homework.png */; };
 		E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 		93CFD9A11E393E240039D7E3 /* MailDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailDetailViewController.swift; sourceTree = "<group>"; };
 		93D13F2F1E3D68D70016C1BC /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		93D13F311E3DFF340016C1BC /* BookItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookItemDetailViewController.swift; sourceTree = "<group>"; };
+		93F9FB941E3E49E700240C8C /* SwiftyStarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyStarRatingView.swift; sourceTree = "<group>"; };
 		DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.release.xcconfig"; sourceTree = "<group>"; };
 		E212092F1DE2080E00BA390E /* SLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLButton.h; sourceTree = "<group>"; };
 		E21209301DE2080E00BA390E /* SLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLButton.m; sourceTree = "<group>"; };
@@ -151,6 +153,14 @@
 			name = Library;
 			sourceTree = "<group>";
 		};
+		93F9FB961E3E49EE00240C8C /* Star rating view */ = {
+			isa = PBXGroup;
+			children = (
+				93F9FB941E3E49E700240C8C /* SwiftyStarRatingView.swift */,
+			);
+			name = "Star rating view";
+			sourceTree = "<group>";
+		};
 		B7E67F2DAC9C744D76BE1B1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +245,7 @@
 		E25B1B441DD4EE450034B740 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				93F9FB961E3E49EE00240C8C /* Star rating view */,
 				E23E7BD31DE6377B00FD1738 /* Date picker */,
 				E23E7BDF1DE6378A00FD1738 /* Textfield */,
 				E23E7BDE1DE6378500FD1738 /* SLButton */,
@@ -455,6 +466,7 @@
 				E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */,
 				93D13F321E3DFF340016C1BC /* BookItemDetailViewController.swift in Sources */,
 				93CFD9A21E393E240039D7E3 /* MailDetailViewController.swift in Sources */,
+				93F9FB951E3E49E700240C8C /* SwiftyStarRatingView.swift in Sources */,
 				E2B2BF631DE229E900E0E5C7 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

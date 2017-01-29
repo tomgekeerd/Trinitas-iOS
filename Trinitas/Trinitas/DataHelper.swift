@@ -620,7 +620,7 @@ class DataHelper: NSObject {
             let title = json["title"].string,
             let author = json["author"].string,
             let category = json["category"].string,
-            let siso = json["siso"].string,
+            let siso = json["sisocode"].string,
             let material = json["material"].string,
             let level = json["level"].string,
             let genre = json["genre"].string,
