@@ -542,7 +542,9 @@ class DataHelper: NSObject {
                         
                         var total = 0.0
                         for grade in gradeArray {
-                            total = total + Double(grade.mark)! * Double(grade.count)!
+                            if let mark = Double(grade.mark), let count = Double(grade.count) {
+                                total = total + mark * count
+                            }
                         }
                         let avg = total / Double(gradeArray.count).roundTo(places: 1)
 

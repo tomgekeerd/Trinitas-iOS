@@ -46,7 +46,9 @@ class GradeViewController: UIViewController {
             if success {
                 if let p = periods {
                     if p.count > 0 {
-                        self.gradePeriods = p
+                        for period in p {
+                            self.gradePeriods.append(period)
+                        }
                         self.tableView.reloadData()
                     } else {
                         self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
@@ -58,6 +60,25 @@ class GradeViewController: UIViewController {
             
         }
         
+        self.api.getExamGrades { (success, periods) in
+            
+            if success {
+                if let p = periods {
+                    if p.count > 0 {
+                        for period in p {
+                            self.gradePeriods.append(period)
+                        }
+                        self.tableView.reloadData()
+                    } else {
+                        self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
+                    }
+                }
+            } else {
+                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
+            }
+            
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,6 +93,8 @@ class GradeViewController: UIViewController {
     
     func persistsRefresh() {
         
+        self.gradePeriods.removeAll()
+        
         self.api.getGrades { (success, periods) in
             
             self.refreshSpinner.endRefreshing()
@@ -79,7 +102,30 @@ class GradeViewController: UIViewController {
             if success {
                 if let p = periods {
                     if p.count > 0 {
-                        self.gradePeriods = p
+                        for period in p {
+                            self.gradePeriods.append(period)
+                        }
+                        self.tableView.reloadData()
+                    } else {
+                        self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
+                    }
+                }
+            } else {
+                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
+            }
+            
+        }
+        
+        self.api.getExamGrades { (success, periods) in
+            
+            self.refreshSpinner.endRefreshing()
+            
+            if success {
+                if let p = periods {
+                    if p.count > 0 {
+                        for period in p {
+                            self.gradePeriods.append(period)
+                        }
                         self.tableView.reloadData()
                     } else {
                         self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")

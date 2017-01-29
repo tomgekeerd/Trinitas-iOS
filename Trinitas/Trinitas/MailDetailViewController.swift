@@ -31,6 +31,7 @@ class MailDetailViewController: UIViewController {
             self.api.getMail(withMail: mail, completion: { (success, m) in
                 self.mail = m
                 self.tableView.reloadData()
+                                
             })
             
         }

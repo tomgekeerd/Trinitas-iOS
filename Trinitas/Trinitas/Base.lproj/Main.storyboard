@@ -473,6 +473,7 @@
                                             <segment title="P1"/>
                                             <segment title="P2"/>
                                             <segment title="P3"/>
+                                            <segment title="Examen"/>
                                         </segments>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>

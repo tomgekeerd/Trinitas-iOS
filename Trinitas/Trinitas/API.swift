@@ -192,6 +192,55 @@ class API: NSObject {
 
     }
     
+    func getExamGrades(completion: @escaping (_ success: Bool, _ grades: [GradePeriod]?) -> Void) {
+        
+        // Get user
+        
+        if let user = dh.user() {
+            
+            // Initialize params
+            
+            let parameters: Parameters = [
+                "lln": user.username,
+                "pass": user.password
+            ]
+            
+            // Request login
+            
+            Alamofire.request(baseURL + "exam_numbers", method: .post, parameters: parameters).responseData { (response) in
+                
+                switch response.result {
+                case .success:
+                    
+                    if let data = response.data {
+                        let json = JSON(data: data)
+                        if json["success"].boolValue == true {
+                            let gradeData = self.dh.getGradesData(withJsonData: json)
+                            completion(true, gradeData)
+                        } else {
+                            completion(false, nil)
+                        }
+                    }
+                    
+                    break
+                    
+                case .failure(let error):
+                    
+                    completion(false, nil)
+                    print(error)
+                    
+                    break
+                    
+                }
+                
+            }
+            
+        } else {
+            completion(false, nil)
+        }
+        
+    }
+    
     // MARK: - Library
     
     func getLibraryId(completion: @escaping (_ success: Bool, _ id: String?) -> Void) {
@@ -460,7 +509,6 @@ class API: NSObject {
                 
                 if let data = response.data {
                     let json = JSON(data: data)
-                    print(json)
                     if let book = self.dh.getBookData(fromJsonData: json) {
                         completion(true, book)
                     } else {
@@ -498,11 +546,12 @@ class API: NSObject {
                     
                     if let at = access_token {
                         
-                        let params = [
-                            "access_token": at
+                        let params: [String: Any] = [
+                            "MessageId": mail.message_id,
+                            "IsRead": true
                         ]
                         
-                        Alamofire.request(self.baseILURL + "personal/messages/\(mail.message_id)/v1", method: .get, parameters: params).responseData { (response) in
+                        Alamofire.request(self.baseILURL + "personal/messages/\(mail.message_id)/v1?access_token=\(at)", method: .put, parameters: params, encoding: JSONEncoding.default).responseData { (response) in
                             
                             switch response.result {
                             case .success:
