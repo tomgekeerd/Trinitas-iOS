@@ -15,6 +15,7 @@ class API: NSObject {
     var sheduleLoop = DispatchGroup()
     var baseURL = "https://tomderuiter.com/trinitas/v1/"
     var baseILURL = "https://trinitas.itslearning.com/restapi/"
+    var baseALURL = "http://trinitascollege.auralibrary.nl/"
     let dh = DataHelper()
     let dhh = DataHelperHelpers()
     
@@ -163,8 +164,12 @@ class API: NSObject {
                     
                     if let data = response.data {
                         let json = JSON(data: data)
-                        let gradeData = self.dh.getGradesData(withJsonData: json)
-                        completion(true, gradeData)
+                        if json["success"].boolValue == true {
+                            let gradeData = self.dh.getGradesData(withJsonData: json)
+                            completion(true, gradeData)
+                        } else {
+                            completion(false, nil)
+                        }
                     }
                     
                     break
@@ -177,6 +182,122 @@ class API: NSObject {
                     break
                     
                 }
+                
+            }
+            
+        } else {
+            completion(false, nil)
+        }
+
+    }
+    
+    // MARK: - Library
+    
+    func getLibraryId(completion: @escaping (_ success: Bool, _ id: String?) -> Void) {
+        
+        // Get user
+        
+        if let user = dh.user() {
+            
+            // Initialize params
+            
+            let parameters: Parameters = [
+                "lln": user.username,
+                "pass": user.password
+            ]
+            
+            // Request login
+            
+            Alamofire.request(baseURL + "m_id", method: .post, parameters: parameters).responseData { (response) in
+                
+                switch response.result {
+                case .success:
+                    
+                    if let data = response.data {
+                        let json = JSON(data: data)
+                        if json["success"].boolValue == true {
+                            if let id = json["id"].string {
+                                completion(true, id)
+                            }
+                        } else {
+                            completion(false, nil)
+                        }
+                    }
+                    
+                    break
+                    
+                case .failure(let error):
+                    
+                    completion(false, nil)
+                    print(error)
+                    
+                    break
+                    
+                }
+                
+            }
+            
+        } else {
+            completion(false, nil)
+        }
+
+    }
+    
+    func getBorrowedBooks(completion: @escaping (_ success: Bool, _ bookData: [BookItem]?) -> Void) {
+        
+        // Get user
+        
+        if let user = dh.user() {
+            
+            if let libraryId = self.dhh.retrieveLibraryId() {
+                
+                // Initialize params
+                
+                let parameters: Parameters = [
+                    "id": user.username,
+                    "auth": libraryId
+                ]
+                
+                // Request login
+                
+                Alamofire.request(baseALURL + "getBorrowed.ashx", method: .get, parameters: parameters).responseData { (response) in
+                    
+                    switch response.result {
+                    case .success:
+                        
+                        if let data = response.data, let json = JSON(data: data).array {
+                            let books = self.dh.getBooksData(fromJsonData: json)
+                            completion(true, books)
+                        } else {
+                            completion(false, nil)
+                        }
+                        
+                        break
+                    case .failure(let error):
+                        
+                        completion(false, nil)
+                        print(error)
+                        
+                        break
+                        
+                    }
+                    
+                }
+
+            } else {
+                
+                self.getLibraryId(completion: { (success, id) in
+                    if success {
+                        if let id = id {
+                            self.dhh.saveLibraryId(withId: id)
+                            self.getBorrowedBooks(completion: completion)
+                        } else {
+                            completion(false, nil)
+                        }
+                    } else {
+                        completion(false, nil)
+                    }
+                })
                 
             }
             

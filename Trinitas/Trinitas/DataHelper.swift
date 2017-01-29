@@ -92,6 +92,17 @@ struct Section {
     var average: String
 }
 
+// Library
+
+struct BookItem {
+    var itemId: String
+    var title: String
+    var author: String
+    var duedate: String
+    var cover: String
+    var overdue: Bool
+}
+
 // Personal
 
 struct User {
@@ -523,6 +534,43 @@ class DataHelper: NSObject {
 
     }
     
+    // MARK: - Library
+    
+    func getBooksData(fromJsonData json: [JSON]) -> [BookItem] {
+        
+        var books = [BookItem]()
+        for item in json {
+            
+            if let itemid = item["itemid"].string,
+                let title = item["title"].string,
+                let author = item["author"].string,
+                let duedate = item["duedate"].string,
+                let cover = item["cover"].string {
+                
+                var overdue = false
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                if let date = dateFormatter.date(from: duedate) {
+                    if date.timeIntervalSince1970 > Date().timeIntervalSince1970 {
+                        overdue = true
+                    }
+                }
+                
+                let book = BookItem(itemId: itemid,
+                                    title: title,
+                                    author: author,
+                                    duedate: duedate,
+                                    cover: cover,
+                                    overdue: overdue)
+                books.append(book)
+                
+            }
+            
+        }
+        
+        return books
+        
+    }
     
 }
 
@@ -660,6 +708,20 @@ class DataHelperHelpers {
     func retrieveRefreshToken() -> String? {
         if let refreshToken = UserDefaults.standard.secretObject(forKey: "refresh_token") as? String {
             return refreshToken
+        } else {
+            return nil
+        }
+    }
+    
+    // MARK: - Aura library
+    
+    func saveLibraryId(withId id: String) {
+        UserDefaults.standard.setSecretObject(id, forKey: "library_id")
+    }
+    
+    func retrieveLibraryId() -> String? {
+        if let id = UserDefaults.standard.secretObject(forKey: "library_id") as? String {
+            return id
         } else {
             return nil
         }

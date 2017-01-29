@@ -12,6 +12,7 @@ class GradeViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet var activityView: UIActivityIndicatorView!
     var refreshSpinner: UIRefreshControl = UIRefreshControl()
     var gradePeriods = [GradePeriod]()
     let api = API()
@@ -29,6 +30,8 @@ class GradeViewController: UIViewController {
         
         // Setup
         
+        self.title = "Periode \(self.segmentedControl.selectedSegmentIndex + 1)"
+        self.activityView.startAnimating()
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
@@ -63,6 +66,7 @@ class GradeViewController: UIViewController {
     }
     
     @IBAction func segmentedIndexChanged() {
+        self.title = "Periode \(self.segmentedControl.selectedSegmentIndex + 1)"
         self.tableView.reloadData()
     }
     
@@ -135,7 +139,12 @@ extension GradeViewController: UITableViewDelegate, UITableViewDataSource {
             // Set section name & average
             
             cell.textLabel?.text = period.sections[indexPath.row].name
-            cell.detailTextLabel?.text = period.sections[indexPath.row].average
+            
+            let grade = period.sections[indexPath.row].average
+            cell.detailTextLabel?.text = grade
+            if grade != "-" {
+                cell.detailTextLabel?.setColor(forGrade: Double(grade)!)
+            }
             
         }
         

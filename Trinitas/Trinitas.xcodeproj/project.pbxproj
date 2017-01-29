@@ -12,6 +12,7 @@
 		93CDD7761E3D20760035C3F7 /* GradeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CDD7751E3D20760035C3F7 /* GradeDetailsViewController.swift */; };
 		93CFD9A01E33B1B60039D7E3 /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */; };
 		93CFD9A21E393E240039D7E3 /* MailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CFD9A11E393E240039D7E3 /* MailDetailViewController.swift */; };
+		93D13F301E3D68D70016C1BC /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D13F2F1E3D68D70016C1BC /* LibraryViewController.swift */; };
 		E21209311DE2080E00BA390E /* SLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E21209301DE2080E00BA390E /* SLButton.m */; };
 		E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BE61DE63F2E00FD1738 /* homework.png */; };
 		E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 		93CDD7751E3D20760035C3F7 /* GradeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeDetailsViewController.swift; sourceTree = "<group>"; };
 		93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
 		93CFD9A11E393E240039D7E3 /* MailDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailDetailViewController.swift; sourceTree = "<group>"; };
+		93D13F2F1E3D68D70016C1BC /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.release.xcconfig"; sourceTree = "<group>"; };
 		E212092F1DE2080E00BA390E /* SLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLButton.h; sourceTree = "<group>"; };
 		E21209301DE2080E00BA390E /* SLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLButton.m; sourceTree = "<group>"; };
@@ -138,6 +140,14 @@
 			name = Grades;
 			sourceTree = "<group>";
 		};
+		93D13F2E1E3D68C80016C1BC /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				93D13F2F1E3D68D70016C1BC /* LibraryViewController.swift */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
 		B7E67F2DAC9C744D76BE1B1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +216,7 @@
 				9355876A1E3CFF9B00B1A72E /* Schedule */,
 				9355876B1E3CFFA100B1A72E /* Mail */,
 				9355876C1E3CFFB300B1A72E /* Grades */,
+				93D13F2E1E3D68C80016C1BC /* Library */,
 				E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */,
 				E2EBF2871DE1E0FF00140310 /* LoginTableViewController.swift */,
 				E25B1B331DD3D3C40034B740 /* Main.storyboard */,
@@ -418,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D13F301E3D68D70016C1BC /* LibraryViewController.swift in Sources */,
 				E28C527E1DE5F66200C1C585 /* RoosterTableViewController.swift in Sources */,
 				9355876E1E3CFFE400B1A72E /* GradeViewController.swift in Sources */,
 				93CDD7761E3D20760035C3F7 /* GradeDetailsViewController.swift in Sources */,

@@ -66,12 +66,12 @@ class RoosterTableViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     // MARK: - Segue handler
@@ -228,7 +228,7 @@ extension RoosterTableViewController: CLWeeklyCalendarViewDelegate {
 
         return [
             CLCalendarWeekStartDay: 1,
-            CLCalendarBackgroundImageColor: UIColor(red: 224/255, green: 54/255, blue: 56/255, alpha: 1.0),
+            CLCalendarBackgroundImageColor: UIColor(red: 244/255, green: 30/255, blue: 35/255, alpha: 1.0),
         ]
         
     }
