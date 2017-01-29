@@ -91,7 +91,13 @@ class LibraryViewController: UIViewController {
         
         if let indexPath = sender as? IndexPath, let dest = segue.destination as? BookItemDetailViewController {
             if segue.identifier == "bookInfo" {
-                dest.bookItem = self.books[indexPath.row]
+                let overdue = self.books.filter({ $0.overdue == true })
+                let notoverdue = self.books.filter({ $0.overdue == false })
+                if indexPath.section == 0 {
+                    dest.bookItem = notoverdue[indexPath.row]
+                } else if indexPath.section == 1 {
+                    dest.bookItem = overdue[indexPath.row]
+                }
             }
         }
         
@@ -105,21 +111,10 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         var filteredArray: [BookItem]!
         switch indexPath.section {
         case 0:
-            let infoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "LibraryInfoCell", for: indexPath) as! LibraryInfoCell
-            if let fee = self.fee, let libraryuser = self.libraryUser {
-                if fee.totalFee > 0.00 {
-                    infoCell.feeLabel.textColor = UIColor.red
-                }
-                infoCell.feeLabel.text = "\(fee.totalFee)"
-                infoCell.nameLabel.text = libraryuser.name
-                infoCell.numberOfItems.text = "\(self.books.count) boeken"
-            }
-            return infoCell
-        case 1:
             filteredArray = self.books.filter({ $0.overdue == false })
             cell.dueLabel.textColor = UIColor.black
             break
-        case 2:
+        case 1:
             filteredArray = self.books.filter({ $0.overdue == true })
             cell.dueLabel.textColor = UIColor.red
             break
@@ -152,7 +147,7 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -162,12 +157,10 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         switch section {
         case 0:
-            return 1
-        case 1:
             return self.books.filter({
                 $0.overdue == false
             }).count
-        case 2:
+        case 1:
             return self.books.filter({
                 $0.overdue == true
             }).count
@@ -185,9 +178,7 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         switch section {
-        case 0:
-            return CGSize(width: 0, height: 0)
-        case 1,2:
+        case 0,1:
             return CGSize(width: self.collectionView.frame.size.width, height: 32)
         default:
             ()
@@ -197,9 +188,9 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func updateSectionHeader(withHeader header: HeaderView, forIndexPath indexPath: IndexPath) {
         switch indexPath.section {
-        case 1:
+        case 0:
             header.titleLabel.text = "Uitgeleend"
-        case 2:
+        case 1:
             header.titleLabel.text = "Te laat"
         default:
             ()
@@ -216,9 +207,7 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
-        case 0:
-            return CGSize(width: self.collectionView.frame.size.width, height: 100)
-        case 1,2:
+        case 0,1:
             return CGSize(width: 155, height: 215)
         default:
             ()
@@ -228,9 +217,7 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch section {
-        case 0:
-            return UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
-        case 1,2:
+        case 0,1:
             return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         default:
             ()

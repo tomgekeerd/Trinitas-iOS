@@ -136,6 +136,20 @@ extension BookItemDetailViewController: UITableViewDelegate, UITableViewDataSour
                 
                 return cell
                 
+            case 4:
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BookInfoCodesCell", for: indexPath) as! BookInfoCodesCell
+                cell.selectionStyle = .none
+                
+                cell.categoryLabel.text = book.category.characters.count > 0 ? book.category : "-"
+                cell.isbnLabel.text = book.isbn.characters.count > 0 ? book.isbn : "-"
+                cell.genreLabel.text = book.genre.characters.count > 0 ? book.genre : "-"
+                cell.locationLabel.text = (book.residence.characters.count > 0 ? book.residence : "-") + ", " + (book.location.characters.count > 0 ? book.location : "-")
+                cell.publisherLabel.text = book.publisher.characters.count > 0 ? book.publisher : "-"
+                cell.levelLabel.text = book.level.characters.count > 0 ? book.level : "-"
+
+                return cell
+                
             default:
                 ()
             }
@@ -148,7 +162,7 @@ extension BookItemDetailViewController: UITableViewDelegate, UITableViewDataSour
     
     func numberOfSections(in tableView: UITableView) -> Int {
         self.tableView.isHidden = self.book == nil
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -169,6 +183,8 @@ extension BookItemDetailViewController: UITableViewDelegate, UITableViewDataSour
             } else {
                 return 0.0
             }
+        case 4:
+            return 154.0
         default:
             ()
         }
@@ -195,4 +211,13 @@ class BookInfoRatingCell: UITableViewCell {
 
 class BookInfoSummaryCell: UITableViewCell {
     @IBOutlet var summaryView: UITextView!
+}
+
+class BookInfoCodesCell: UITableViewCell {
+    @IBOutlet var isbnLabel: UILabel!
+    @IBOutlet var genreLabel: UILabel!
+    @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var publisherLabel: UILabel!
+    @IBOutlet var categoryLabel: UILabel!
+    @IBOutlet var levelLabel: UILabel!
 }

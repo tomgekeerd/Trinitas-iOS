@@ -130,6 +130,7 @@ struct Book {
     var location: String
     var residence: String
     var cover: String
+    var publisher: String
     var summary: String
     var stars: Int
     var num_ratings: Int
@@ -629,6 +630,7 @@ class DataHelper: NSObject {
             let residence = json["residence"].string,
             let cover = json["cover_url"].string,
             let summary = json["summary"].string,
+            let publisher = json["publisher"].string,
             let stars = json["stars"].int,
             let num_ratings = json["num_ratings"].int {
             
@@ -649,6 +651,7 @@ class DataHelper: NSObject {
                         location: location,
                         residence: residence,
                         cover: cover,
+                        publisher: publisher,
                         summary: summary,
                         stars: stars,
                         num_ratings: num_ratings)
