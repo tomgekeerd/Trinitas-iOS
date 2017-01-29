@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Money
 
 class API: NSObject {
     
@@ -243,6 +244,141 @@ class API: NSObject {
 
     }
     
+    func getPersonalLibraryDetails(completion: @escaping (_ success: Bool, _ libraryUser: LibraryUser?) -> Void) {
+        
+        // Get user
+        
+        if let user = dh.user() {
+            
+            
+            // Initialize params
+            
+            let parameters: Parameters = [
+                "id": user.username,
+                "password": user.password
+            ]
+            
+            // Request login
+            
+            Alamofire.request(baseALURL + "amLogin.ashx", method: .get, parameters: parameters).responseData { (response) in
+                
+                switch response.result {
+                case .success:
+                    
+                    if let data = response.data {
+                        let json = JSON(data: data)
+                        if let name = json["name"].string,
+                            let email = json["email"].string,
+                            let accountid = json["accountid"].string {
+                            
+                            let libraryUser = LibraryUser(name: name,
+                                                          accountId: accountid,
+                                                          email: email)
+                            completion(true, libraryUser)
+                            
+                        }
+                    } else {
+                        completion(false, nil)
+                    }
+                    
+                    break
+                case .failure(let error):
+                    
+                    completion(false, nil)
+                    print(error)
+                    
+                    break
+                    
+                }
+                
+            }
+        
+        } else {
+            completion(false, nil)
+        }
+
+    }
+    
+    func getFee(completion: @escaping (_ success: Bool, _ fee: Fee?) -> Void) {
+        
+        // Get user
+        
+        if let user = dh.user() {
+            
+            if let libraryId = self.dhh.retrieveLibraryId() {
+                
+                // Initialize params
+                
+                let parameters: Parameters = [
+                    "id": user.username,
+                    "auth": libraryId
+                ]
+                
+                // Request login
+                
+                Alamofire.request(baseALURL + "getFee.ashx", method: .get, parameters: parameters).responseData { (response) in
+                    
+                    switch response.result {
+                    case .success:
+                        
+                        if let data = response.data {
+                            let json = JSON(data: data)
+                            if let overdueFee = json["overduefee"].string,
+                                let remainingFee = json["remainingfee"].string {
+                                
+                                var overdueFee = overdueFee.replacingOccurrences(of: ",", with: ".")
+                                overdueFee = overdueFee.replacingOccurrences(of: "EUR ", with: "")
+                                
+                                var remainingFee = remainingFee.replacingOccurrences(of: ",", with: ".")
+                                remainingFee = remainingFee.replacingOccurrences(of: "EUR ", with: "")
+                                
+                                let total: EUR = EUR(overdueFee.doubleValue + remainingFee.doubleValue)
+                                
+                                let fee = Fee(overdueFee: overdueFee,
+                                              remainingFee: remainingFee,
+                                              totalFee: total)
+                                completion(true, fee)
+                                
+                            }
+                        } else {
+                            completion(false, nil)
+                        }
+                        
+                        break
+                    case .failure(let error):
+                        
+                        completion(false, nil)
+                        print(error)
+                        
+                        break
+                        
+                    }
+                    
+                }
+                
+            } else {
+                
+                self.getLibraryId(completion: { (success, id) in
+                    if success {
+                        if let id = id {
+                            self.dhh.saveLibraryId(withId: id)
+                            self.getFee(completion: completion)
+                        } else {
+                            completion(false, nil)
+                        }
+                    } else {
+                        completion(false, nil)
+                    }
+                })
+                
+            }
+            
+        } else {
+            completion(false, nil)
+        }
+        
+    }
+    
     func getBorrowedBooks(completion: @escaping (_ success: Bool, _ bookData: [BookItem]?) -> Void) {
         
         // Get user
@@ -301,6 +437,54 @@ class API: NSObject {
                 
             }
             
+        } else {
+            completion(false, nil)
+        }
+
+    }
+    
+    func getBook(withItemId itemid: String, completion: @escaping (_ success: Bool, _ book: Book?) -> Void) {
+        
+        // Get user
+        
+        if let user = dh.user() {
+            
+            // Initialize params
+            
+            let parameters: Parameters = [
+                "itemid": itemid
+            ]
+            
+            // Request login
+            
+            Alamofire.request(baseALURL + "getItem.ashx", method: .get, parameters: parameters).responseData { (response) in
+                
+                switch response.result {
+                case .success:
+                    
+                    if let data = response.data {
+                        let json = JSON(data: data)
+                        if let books = self.dh.getBookData(fromJsonData: json) {
+                            completion(true, book)
+                        } else {
+                            completion(false, nil)
+                        }
+                    } else {
+                        completion(false, nil)
+                    }
+                    
+                    break
+                case .failure(let error):
+                    
+                    completion(false, nil)
+                    print(error)
+                    
+                    break
+                    
+                }
+                
+            }
+                
         } else {
             completion(false, nil)
         }

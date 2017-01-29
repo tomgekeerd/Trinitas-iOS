@@ -30,7 +30,7 @@ class GradeViewController: UIViewController {
         
         // Setup
         
-        self.title = "Periode \(self.segmentedControl.selectedSegmentIndex + 1)"
+        self.navigationItem.title = "Periode \(self.segmentedControl.selectedSegmentIndex + 1)"
         self.activityView.startAnimating()
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -66,7 +66,7 @@ class GradeViewController: UIViewController {
     }
     
     @IBAction func segmentedIndexChanged() {
-        self.title = "Periode \(self.segmentedControl.selectedSegmentIndex + 1)"
+        self.navigationItem.title = "Periode \(self.segmentedControl.selectedSegmentIndex + 1)"
         self.tableView.reloadData()
     }
     

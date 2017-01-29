@@ -12,6 +12,7 @@ import SwiftyJSON
 import CoreData
 import SwiftKeychainWrapper
 import SecureNSUserDefaults
+import Money
 
 // Lesson
 
@@ -101,6 +102,37 @@ struct BookItem {
     var duedate: String
     var cover: String
     var overdue: Bool
+}
+
+struct Fee {
+    var overdueFee: String
+    var remainingFee: String
+    var totalFee: EUR
+}
+
+struct LibraryUser {
+    var name: String
+    var accountId: String
+    var email: String
+}
+
+struct Book {
+    var itemid: String
+    var bookid: String
+    var title: String
+    var author: String
+    var category: String
+    var siso: String
+    var material: String
+    var level: String
+    var genre: String
+    var isbn: String
+    var location: String
+    var residence: String
+    var cover: String
+    var summary: String
+    var stars: Int
+    var num_ratings: Int
 }
 
 // Personal
@@ -545,7 +577,13 @@ class DataHelper: NSObject {
                 let title = item["title"].string,
                 let author = item["author"].string,
                 let duedate = item["duedate"].string,
-                let cover = item["cover"].string {
+                let cover = item["cover_url"].string {
+                
+                // Change cover
+                
+                let cover = cover.replacingOccurrences(of: ".ashx", with: "")
+                
+                // Set overdue
                 
                 var overdue = false
                 let dateFormatter = DateFormatter()
@@ -555,6 +593,8 @@ class DataHelper: NSObject {
                         overdue = true
                     }
                 }
+                
+                // Create book type
                 
                 let book = BookItem(itemId: itemid,
                                     title: title,
@@ -569,6 +609,55 @@ class DataHelper: NSObject {
         }
         
         return books
+        
+    }
+    
+    func getBookData(fromJsonData json: JSON) -> Book? {
+        
+        var book: Book!
+        if let itemid = json["itemid"].string,
+            let bookid = json["bookid"].string,
+            let title = json["title"].string,
+            let author = json["author"].string,
+            let category = json["category"].string,
+            let siso = json["siso"].string,
+            let material = json["material"].string,
+            let level = json["level"].string,
+            let genre = json["genre"].string,
+            let isbn = json["isbn"].string,
+            let location = json["location"].string,
+            let residence = json["residence"].string,
+            let cover = json["cover_url"].string,
+            let summary = json["summary"].string,
+            let stars = json["stars"].int,
+            let num_ratings = json["num_ratings"].int {
+            
+            // Change cover
+            
+            let cover = cover.replacingOccurrences(of: ".ashx", with: "")
+            
+            book = Book(itemid: itemid,
+                        bookid: bookid,
+                        title: title,
+                        author: author,
+                        category: category,
+                        siso: siso,
+                        material: material,
+                        level: level,
+                        genre: genre,
+                        isbn: isbn,
+                        location: location,
+                        residence: residence,
+                        cover: cover,
+                        summary: summary,
+                        stars: stars,
+                        num_ratings: num_ratings)
+            
+            return book
+
+        }
+        
+        return nil
         
     }
     
@@ -763,5 +852,25 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+}
+
+extension String {
+    var digits: String {
+        return components(separatedBy: CharacterSet.decimalDigits.inverted)
+            .joined(separator: "")
+    }
+    static let numberFormatter = NumberFormatter()
+    var doubleValue: Double {
+        String.numberFormatter.decimalSeparator = "."
+        if let result =  String.numberFormatter.number(from: self) {
+            return result.doubleValue
+        } else {
+            String.numberFormatter.decimalSeparator = ","
+            if let result = String.numberFormatter.number(from: self) {
+                return result.doubleValue
+            }
+        }
+        return 0
+    }
 }
 

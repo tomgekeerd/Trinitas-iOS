@@ -12,15 +12,39 @@ import Alamofire
 class LibraryViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var activityView: UIActivityIndicatorView!
+    var refreshSpinner: UIRefreshControl = UIRefreshControl()
     var books = [BookItem]()
+    var fee: Fee!
+    var libraryUser: LibraryUser!
     let api = API()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Setup
+        
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.alwaysBounceVertical = true
+        self.activityView.startAnimating()
+        
+        // Refresh control setup
+        
+        self.refreshSpinner = UIRefreshControl()
+        self.refreshSpinner.addTarget(self, action: #selector(persistsRefresh), for: .valueChanged)
+        self.collectionView.addSubview(self.refreshSpinner)
+
+        self.getData()
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func getData() {
         
         self.api.getBorrowedBooks { (success, books) in
             if success {
@@ -33,11 +57,32 @@ class LibraryViewController: UIViewController {
             }
         }
         
+        self.api.getFee { (success, fee) in
+            if success {
+                if let fee = fee {
+                    self.fee = fee
+                    self.collectionView.reloadData()
+                }
+            } else {
+                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later opnieuw")
+            }
+        }
+        
+        self.api.getPersonalLibraryDetails { (success, libraryuser) in
+            if success {
+                if let libraryuser = libraryuser {
+                    self.libraryUser = libraryuser
+                    self.collectionView.reloadData()
+                }
+            } else {
+                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later opnieuw")
+            }
+        }
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func persistsRefresh() {
+        self.getData()
     }
 
 }
@@ -49,16 +94,34 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         var filteredArray: [BookItem]!
         switch indexPath.section {
         case 0:
-            filteredArray = self.books.filter({ $0.overdue == false })
-            break
+            let infoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "LibraryInfoCell", for: indexPath) as! LibraryInfoCell
+            if let fee = self.fee, let libraryuser = self.libraryUser {
+                if fee.totalFee > 0.00 {
+                    infoCell.feeLabel.textColor = UIColor.red
+                }
+                infoCell.feeLabel.text = "\(fee.totalFee)"
+                infoCell.nameLabel.text = libraryuser.name
+                infoCell.numberOfItems.text = "\(self.books.count) boeken"
+            }
+            return infoCell
         case 1:
+            filteredArray = self.books.filter({ $0.overdue == false })
+            cell.dueLabel.textColor = UIColor.black
+            break
+        case 2:
             filteredArray = self.books.filter({ $0.overdue == true })
+            cell.dueLabel.textColor = UIColor.red
             break
         default:
             ()
         }
         
         cell.title.text = filteredArray[indexPath.row].title
+        cell.coverImage.layer.shadowColor = UIColor.black.cgColor
+        cell.coverImage.layer.shadowOpacity = 0.65
+        cell.coverImage.layer.shadowRadius = 3.0
+        cell.coverImage.layer.shadowOffset = CGSize(width: 4, height: 4)
+        
         Alamofire.request(filteredArray[indexPath.row].cover, method: .get).response(completionHandler: { (response) in
             if let data = response.data {
                 cell.coverImage.image = UIImage(data: data, scale: 1)
@@ -67,21 +130,33 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
         })
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatter.date(from: filteredArray[indexPath.row].duedate) {
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            cell.dueLabel.text = dateFormatter.string(from: date)
+        }
+        
         return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.collectionView.isHidden = self.books.count == 0
+        self.collectionView.isHidden = self.books.count == 0 || self.fee == nil || self.libraryUser == nil
+        if !self.collectionView.isHidden {
+            self.refreshSpinner.endRefreshing()
+        }
         switch section {
         case 0:
+            return 1
+        case 1:
             return self.books.filter({
                 $0.overdue == false
             }).count
-        case 1:
+        case 2:
             return self.books.filter({
                 $0.overdue == true
             }).count
@@ -97,11 +172,22 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         return view
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        switch section {
+        case 0:
+            return CGSize(width: 0, height: 0)
+        case 1,2:
+            return CGSize(width: self.collectionView.frame.size.width, height: 32)
+        default:
+            ()
+        }
+        return CGSize(width: 0, height: 0)
+    }
     func updateSectionHeader(withHeader header: HeaderView, forIndexPath indexPath: IndexPath) {
         switch indexPath.section {
-        case 0:
-            header.titleLabel.text = "Uitgeleend"
         case 1:
+            header.titleLabel.text = "Uitgeleend"
+        case 2:
             header.titleLabel.text = "Te laat"
         default:
             ()
@@ -110,9 +196,44 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
 }
 
+extension LibraryViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: self.collectionView.frame.size.width, height: 100)
+        case 1,2:
+            return CGSize(width: 155, height: 215)
+        default:
+            ()
+        }
+        return CGSize(width: 0, height: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch section {
+        case 0:
+            return UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+        case 1,2:
+            return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        default:
+            ()
+        }
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+}
+
+class LibraryInfoCell: UICollectionViewCell {
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var feeLabel: UILabel!
+    @IBOutlet var numberOfItems: UILabel!
+}
+
 class BookItemCell: UICollectionViewCell {
     @IBOutlet var coverImage: UIImageView!
     @IBOutlet var title: UILabel!
+    @IBOutlet var dueLabel: UILabel!
 }
 
 class HeaderView: UICollectionReusableView {

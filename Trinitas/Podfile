@@ -11,6 +11,7 @@ target 'Trinitas' do
   pod 'SwiftyJSON'
   pod 'SVProgressHUD'
   pod 'SecureNSUserDefaults', '~> 1.0.1'
+  pod 'Money'
 
   # Swift 3
   pod 'SwiftKeychainWrapper', :git=> 'https://github.com/jrendel/SwiftKeychainWrapper.git', :branch=>'master'
