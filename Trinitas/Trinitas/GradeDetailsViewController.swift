@@ -42,7 +42,7 @@ extension GradeDetailsViewController: UITableViewDelegate, UITableViewDataSource
         case 0:
             return 1
         case 1:
-            return self.section.grades.count
+            return self.section.grades.filter({ $0.type == 0 }).count
         default:
             ()
         }
@@ -55,18 +55,28 @@ extension GradeDetailsViewController: UITableViewDelegate, UITableViewDataSource
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "GradeInfoCell", for: indexPath) as! GradeInfoCell
             cell.selectionStyle = .none
-            cell.averageGrade.text = self.section.average
-            cell.averageGrade.setColor(forGrade: Double(self.section.average)!)
+            
+            if let averageGrade = self.section.grades.first(where: { $0.type == 1 }) {
+                cell.averageGrade.text = averageGrade.mark
+                cell.averageGrade.setColor(forGrade: self.section.average)
+            } else {
+                cell.averageGrade.text = "-"
+            }
+            
             return cell
+            
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "GradeCell", for: indexPath) as! GradeCell
             cell.selectionStyle = .none
-            let grade = self.section.grades[indexPath.row].mark
-            cell.gradeLabel.setColor(forGrade: Double(grade)!)
-            cell.gradeLabel.text = self.section.grades[indexPath.row].mark
-            cell.descriptionLabel.text = self.section.grades[indexPath.row].description
+            
+            let grade = self.section.grades.filter({ $0.type == 0 })[indexPath.row]
+            cell.gradeLabel.setColor(forGrade: grade.mark)
+            cell.gradeLabel.text = grade.mark
+            cell.descriptionLabel.text = grade.description
             cell.countLabel.text = "Telt \(self.section.grades[indexPath.row].count) keer mee"
+            
             return cell
+            
         default:
             ()
         }

@@ -80,6 +80,7 @@ struct Grade {
     var description: String
     var count: String
     var section: String
+    var type: Int
 }
 
 struct GradePeriod {
@@ -533,25 +534,26 @@ class DataHelper: NSObject {
                                               mark: grade["mark"].stringValue,
                                               description: grade["description"].stringValue,
                                               count: grade["count"].stringValue,
-                                              section: grade["section"].stringValue)
+                                              section: grade["section"].stringValue,
+                                              type: grade["type"].intValue)
                                 gradeArray.append(g)
                                 
                             }
                             
                         }
                         
-                        var total = 0.0
-                        for grade in gradeArray {
-                            if let mark = Double(grade.mark), let count = Double(grade.count) {
-                                total = total + mark * count
-                            }
+                        var avg = ""
+                        if let average = gradeArray.first(where: { $0.type == 1 }) {
+                            avg = average.mark
+                        } else {
+                            avg = "-"
                         }
-                        let avg = total / Double(gradeArray.count).roundTo(places: 1)
-
+                        
                         let section = Section(name: sectionId,
                                               grades: gradeArray,
-                                              average: total == 0 ? "-": String(avg))
+                                              average: avg)
                         sectionArray.append(section)
+    
                     }
                     
                     sectionArray = sectionArray.sorted(by: { $0.name < $1.name })                    
@@ -824,13 +826,29 @@ class DataHelperHelpers {
 }
 
 extension UILabel {
-    func setColor(forGrade grade: Double) {
-        if grade < 5.5 {
-            self.textColor = UIColor(red: 255/255, green: 89/255, blue: 110/255, alpha: 1.0)
-        } else if grade >= 5.5 && grade < 7.5 {
-            self.textColor = UIColor.orange
+    func setColor(forGrade grade: String) {
+        if grade.doubleValue != 0.0 {
+            if grade.doubleValue < 5.5 {
+                self.textColor = UIColor(red: 255/255, green: 89/255, blue: 110/255, alpha: 1.0)
+            } else if grade.doubleValue >= 5.5 && grade.doubleValue < 7.5 {
+                self.textColor = UIColor.orange
+            } else {
+                self.textColor = UIColor(red: 101/255, green: 211/255, blue: 110/255, alpha: 1.0)
+            }
         } else {
-            self.textColor = UIColor(red: 101/255, green: 211/255, blue: 110/255, alpha: 1.0)
+            switch grade {
+            case "O":
+                self.textColor = UIColor(red: 255/255, green: 89/255, blue: 110/255, alpha: 1.0)
+                break
+            case "V":
+                self.textColor = UIColor.orange
+                break
+            case "G":
+                self.textColor = UIColor(red: 101/255, green: 211/255, blue: 110/255, alpha: 1.0)
+                break
+            default:
+                ()
+            }
         }
     }
 }

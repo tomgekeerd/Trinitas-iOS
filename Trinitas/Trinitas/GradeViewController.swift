@@ -15,13 +15,22 @@ class GradeViewController: UIViewController {
     @IBOutlet var activityView: UIActivityIndicatorView!
     var refreshSpinner: UIRefreshControl = UIRefreshControl()
     var gradePeriods = [GradePeriod]()
+    var examPeriod: GradePeriod!
     let api = API()
     
     var period: GradePeriod? {
-        if let p = self.gradePeriods.first(where: { $0.period == self.segmentedControl.selectedSegmentIndex }) {
-            return p
+        if self.segmentedControl.selectedSegmentIndex <= 2 {
+            if let p = self.gradePeriods.first(where: { $0.period == self.segmentedControl.selectedSegmentIndex }) {
+                return p
+            } else {
+                return nil
+            }
         } else {
-            return nil
+            if let ep = self.examPeriod {
+                return ep
+            } else {
+                return nil
+            }
         }
     }
     
@@ -41,44 +50,8 @@ class GradeViewController: UIViewController {
         self.refreshSpinner.addTarget(self, action: #selector(persistsRefresh), for: .valueChanged)
         self.tableView.addSubview(self.refreshSpinner)
 
-        self.api.getGrades { (success, periods) in
-            
-            if success {
-                if let p = periods {
-                    if p.count > 0 {
-                        for period in p {
-                            self.gradePeriods.append(period)
-                        }
-                        self.tableView.reloadData()
-                    } else {
-                        self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
-                    }
-                }
-            } else {
-                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
-            }
-            
-        }
+        self.persistsRefresh()
         
-        self.api.getExamGrades { (success, periods) in
-            
-            if success {
-                if let p = periods {
-                    if p.count > 0 {
-                        for period in p {
-                            self.gradePeriods.append(period)
-                        }
-                        self.tableView.reloadData()
-                    } else {
-                        self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
-                    }
-                }
-            } else {
-                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
-            }
-            
-        }
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,24 +60,22 @@ class GradeViewController: UIViewController {
     }
     
     @IBAction func segmentedIndexChanged() {
-        self.navigationItem.title = "Periode \(self.segmentedControl.selectedSegmentIndex + 1)"
+        if self.segmentedControl.selectedSegmentIndex <= 2 {
+            self.navigationItem.title = "Periode \(self.segmentedControl.selectedSegmentIndex + 1)"
+        } else {
+             self.navigationItem.title = "Examendossier"
+        }
         self.tableView.reloadData()
     }
     
     func persistsRefresh() {
         
-        self.gradePeriods.removeAll()
-        
         self.api.getGrades { (success, periods) in
-            
-            self.refreshSpinner.endRefreshing()
             
             if success {
                 if let p = periods {
                     if p.count > 0 {
-                        for period in p {
-                            self.gradePeriods.append(period)
-                        }
+                        self.gradePeriods = p
                         self.tableView.reloadData()
                     } else {
                         self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
@@ -118,14 +89,10 @@ class GradeViewController: UIViewController {
         
         self.api.getExamGrades { (success, periods) in
             
-            self.refreshSpinner.endRefreshing()
-            
             if success {
                 if let p = periods {
                     if p.count > 0 {
-                        for period in p {
-                            self.gradePeriods.append(period)
-                        }
+                        self.examPeriod = p[0]
                         self.tableView.reloadData()
                     } else {
                         self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later nog eens")
@@ -160,10 +127,12 @@ class GradeViewController: UIViewController {
 extension GradeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView.isHidden = gradePeriods.count == 0
+        tableView.isHidden = gradePeriods.count == 0 || examPeriod == nil
+        
         if let period = self.period {
             return period.sections.count
         }
+        
         return 0
     }
     
@@ -176,9 +145,9 @@ extension GradeViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = SectionCell(style: .value1, reuseIdentifier: "SectionCell")
         cell.selectionStyle = .none
         
-        if let period = self.period {
+        if let p = self.period {
             
-            if period.sections[indexPath.row].grades.count == 0 {
+            if p.sections[indexPath.row].grades.count == 0 {
                 cell.enable(on: false)
             } else {
                 cell.accessoryType = .disclosureIndicator
@@ -186,12 +155,12 @@ extension GradeViewController: UITableViewDelegate, UITableViewDataSource {
             
             // Set section name & average
             
-            cell.textLabel?.text = period.sections[indexPath.row].name
+            cell.textLabel?.text = p.sections[indexPath.row].name
             
-            let grade = period.sections[indexPath.row].average
+            let grade = p.sections[indexPath.row].average
             cell.detailTextLabel?.text = grade
             if grade != "-" {
-                cell.detailTextLabel?.setColor(forGrade: Double(grade)!)
+                cell.detailTextLabel?.setColor(forGrade: grade)
             }
             
         }
