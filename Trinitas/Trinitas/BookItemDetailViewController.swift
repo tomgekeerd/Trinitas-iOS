@@ -24,7 +24,9 @@ class BookItemDetailViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView()
+
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Verleng", style: .plain, target: self, action: #selector(extend))
         self.activityView.startAnimating()
         
         if let bitem = self.bookItem {
@@ -45,6 +47,13 @@ class BookItemDetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - User actions
+    
+    func extend() {
+        
+        
     }
     
 }

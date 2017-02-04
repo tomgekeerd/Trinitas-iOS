@@ -293,12 +293,76 @@ class API: NSObject {
 
     }
     
-    func getPersonalLibraryDetails(completion: @escaping (_ success: Bool, _ libraryUser: LibraryUser?) -> Void) {
+    func extendBook(withBookId id: String, completion: @escaping (_ success: Bool) -> Void) {
         
         // Get user
         
         if let user = dh.user() {
             
+            if let libraryId = self.dhh.retrieveLibraryId() {
+                
+                // Initialize params
+                
+                let parameters: Parameters = [
+                    "id": user.username,
+                    "auth": libraryId,
+                    "itemid": id
+                ]
+                
+                // Request login
+                
+                Alamofire.request(baseALURL + "extend.ashx", method: .get, parameters: parameters).responseData { (response) in
+                    
+                    switch response.result {
+                    case .success:
+                        
+                        if let data = response.data {
+                            let json = JSON(data: data)
+                            
+                        } else {
+                            completion(false)
+                        }
+                        
+                        break
+                    case .failure(let error):
+                        
+                        completion(false)
+                        print(error)
+                        
+                        break
+                        
+                    }
+                    
+                }
+                
+            } else {
+                
+                self.getLibraryId(completion: { (success, id) in
+                    if success {
+                        if let id = id {
+                            self.dhh.saveLibraryId(withId: id)
+                            self.extendBook(withBookId: id, completion: completion)
+                        } else {
+                            completion(false)
+                        }
+                    } else {
+                        completion(false)
+                    }
+                })
+                
+            }
+            
+        } else {
+            completion(false)
+        }
+
+    }
+    
+    func getPersonalLibraryDetails(completion: @escaping (_ success: Bool, _ libraryUser: LibraryUser?) -> Void) {
+        
+        // Get user
+        
+        if let user = dh.user() {
             
             // Initialize params
             
@@ -320,10 +384,22 @@ class API: NSObject {
                             let email = json["email"].string,
                             let accountid = json["accountid"].string {
                             
-                            let libraryUser = LibraryUser(name: name,
-                                                          accountId: accountid,
-                                                          email: email)
-                            completion(true, libraryUser)
+                            self.getLibraryProfilePicture(completion: { (success, image) in
+                                if success {
+                                    if let img = image {
+                                        let libraryUser = LibraryUser(name: name,
+                                                                      accountId: accountid,
+                                                                      email: email,
+                                                                      profile: img)
+                                        completion(true, libraryUser)
+                                    } else {
+                                        completion(false, nil)
+                                    }
+
+                                } else {
+                                    completion(false, nil)
+                                }
+                            })
                             
                         }
                     } else {
@@ -530,6 +606,70 @@ class API: NSObject {
             
         }
 
+    }
+    
+    func getLibraryProfilePicture(completion: @escaping (_ success: Bool, _ profile: UIImage?) -> Void) {
+        
+        // Get user
+        
+        if let user = dh.user() {
+            
+            if let libraryId = self.dhh.retrieveLibraryId() {
+                
+                // Initialize params
+                
+                let parameters: Parameters = [
+                    "id": user.username,
+                    "auth": libraryId
+                ]
+                
+                // Request login
+                
+                Alamofire.request(baseALURL + "getPhoto.ashx", method: .get, parameters: parameters).responseData { (response) in
+                    
+                    switch response.result {
+                    case .success:
+                        
+                        if let data = response.data {
+                            let image = UIImage(data: data, scale: 1.0)
+                            completion(true, image)
+                        } else {
+                            completion(false, nil)
+                        }
+                        
+                        break
+                    case .failure(let error):
+                        
+                        completion(false, nil)
+                        print(error)
+                        
+                        break
+                        
+                    }
+                    
+                }
+                
+            } else {
+                
+                self.getLibraryId(completion: { (success, id) in
+                    if success {
+                        if let id = id {
+                            self.dhh.saveLibraryId(withId: id)
+                            self.getLibraryProfilePicture(completion: completion)
+                        } else {
+                            completion(false, nil)
+                        }
+                    } else {
+                        completion(false, nil)
+                    }
+                })
+                
+            }
+            
+        } else {
+            completion(false, nil)
+        }
+        
     }
     
     // MARK: - Itslearning RESTAPI

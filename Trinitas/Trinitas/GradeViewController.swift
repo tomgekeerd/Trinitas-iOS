@@ -142,10 +142,16 @@ extension GradeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // Look for cell
+        
         let cell = SectionCell(style: .value1, reuseIdentifier: "SectionCell")
         cell.selectionStyle = .none
         
+        // Check if period exists
+        
         if let p = self.period {
+            
+            // Check if period does have sections with grades
             
             if p.sections[indexPath.row].grades.count == 0 {
                 cell.enable(on: false)

@@ -15,8 +15,6 @@ class LibraryViewController: UIViewController {
     @IBOutlet var activityView: UIActivityIndicatorView!
     var refreshSpinner: UIRefreshControl = UIRefreshControl()
     var books = [BookItem]()
-    var fee: Fee!
-    var libraryUser: LibraryUser!
     let api = API()
     
     override func viewDidLoad() {
@@ -50,28 +48,6 @@ class LibraryViewController: UIViewController {
             if success {
                 if let books = books {
                     self.books = books
-                    self.collectionView.reloadData()
-                }
-            } else {
-                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later opnieuw")
-            }
-        }
-        
-        self.api.getFee { (success, fee) in
-            if success {
-                if let fee = fee {
-                    self.fee = fee
-                    self.collectionView.reloadData()
-                }
-            } else {
-                self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later opnieuw")
-            }
-        }
-        
-        self.api.getPersonalLibraryDetails { (success, libraryuser) in
-            if success {
-                if let libraryuser = libraryuser {
-                    self.libraryUser = libraryuser
                     self.collectionView.reloadData()
                 }
             } else {
@@ -124,9 +100,9 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.title.text = filteredArray[indexPath.row].title
         cell.coverImage.layer.shadowColor = UIColor.black.cgColor
-        cell.coverImage.layer.shadowOpacity = 0.65
-        cell.coverImage.layer.shadowRadius = 3.0
-        cell.coverImage.layer.shadowOffset = CGSize(width: 4, height: 4)
+        cell.coverImage.layer.shadowOpacity = 0.4
+        cell.coverImage.layer.shadowRadius = 5.0
+        cell.coverImage.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         Alamofire.request(filteredArray[indexPath.row].cover, method: .get).response(completionHandler: { (response) in
             if let data = response.data {
@@ -151,7 +127,7 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.collectionView.isHidden = self.books.count == 0 || self.fee == nil || self.libraryUser == nil
+        self.collectionView.isHidden = self.books.count == 0
         if !self.collectionView.isHidden {
             self.refreshSpinner.endRefreshing()
         }
@@ -189,9 +165,13 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func updateSectionHeader(withHeader header: HeaderView, forIndexPath indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            header.titleLabel.text = "Uitgeleend"
+            header.titleLabel.text = self.books.filter({
+                $0.overdue == false
+            }).count > 0 ? "Geleend" : "Geleend (-)"
         case 1:
-            header.titleLabel.text = "Te laat"
+            header.titleLabel.text = self.books.filter({
+                $0.overdue == true
+            }).count > 0 ? "Te laat" : "Te laat (-)"
         default:
             ()
         }

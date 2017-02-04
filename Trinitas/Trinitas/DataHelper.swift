@@ -115,6 +115,7 @@ struct LibraryUser {
     var name: String
     var accountId: String
     var email: String
+    var profile: UIImage
 }
 
 struct Book {
@@ -238,7 +239,7 @@ class DataHelper: NSObject {
                 } catch {
                     fatalError("Something went wrong gathering results...")
                 }
-                
+
             }
             
         }
@@ -515,15 +516,21 @@ class DataHelper: NSObject {
     
     func getGradesData(withJsonData json: JSON) -> [GradePeriod] {
         
+        // Setup array with period's & loop through
+        
         var gradePeriods = [GradePeriod]()
         if let periodArray = json.dictionary {
             
             for (periodId, sections) in periodArray {
                 
+                // Check all the sections in this period & loop through
+                
                 if let sectionsDict = sections.dictionary {
                     
                     var sectionArray = [Section]()
                     for (sectionId, grades) in sectionsDict {
+                        
+                        // Check all grade in this section & loop through
                         
                         var gradeArray = [Grade]()
                         if let grades = grades.array {
@@ -542,6 +549,8 @@ class DataHelper: NSObject {
                             
                         }
                         
+                        // Set average
+                        
                         var avg = ""
                         if let average = gradeArray.first(where: { $0.type == 1 }) {
                             avg = average.mark
@@ -555,6 +564,8 @@ class DataHelper: NSObject {
                         sectionArray.append(section)
     
                     }
+                    
+                    // Sort the array on alphabet
                     
                     sectionArray = sectionArray.sorted(by: { $0.name < $1.name })                    
                     let period = GradePeriod(period: Int(periodId)!,
