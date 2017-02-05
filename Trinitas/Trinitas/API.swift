@@ -293,7 +293,7 @@ class API: NSObject {
 
     }
     
-    func extendBook(withBookId id: String, completion: @escaping (_ success: Bool) -> Void) {
+    func extendBook(withItemId id: String, completion: @escaping (_ success: Bool, _ msg: String?) -> Void) {
         
         // Get user
         
@@ -318,15 +318,15 @@ class API: NSObject {
                         
                         if let data = response.data {
                             let json = JSON(data: data)
-                            
+                            completion(json["success"].boolValue, json["msg"].stringValue)
                         } else {
-                            completion(false)
+                            completion(false, nil)
                         }
                         
                         break
                     case .failure(let error):
                         
-                        completion(false)
+                        completion(false, nil)
                         print(error)
                         
                         break
@@ -341,19 +341,19 @@ class API: NSObject {
                     if success {
                         if let id = id {
                             self.dhh.saveLibraryId(withId: id)
-                            self.extendBook(withBookId: id, completion: completion)
+                            self.extendBook(withItemId: id, completion: completion)
                         } else {
-                            completion(false)
+                            completion(false, nil)
                         }
                     } else {
-                        completion(false)
+                        completion(false, nil)
                     }
                 })
                 
             }
             
         } else {
-            completion(false)
+            completion(false, nil)
         }
 
     }

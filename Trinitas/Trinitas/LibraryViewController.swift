@@ -165,13 +165,9 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func updateSectionHeader(withHeader header: HeaderView, forIndexPath indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            header.titleLabel.text = self.books.filter({
-                $0.overdue == false
-            }).count > 0 ? "Geleend" : "Geleend (-)"
+            "Geleend (\(self.books.filter({ $0.overdue == false }).count))"
         case 1:
-            header.titleLabel.text = self.books.filter({
-                $0.overdue == true
-            }).count > 0 ? "Te laat" : "Te laat (-)"
+            "Te laat (\(self.books.filter({ $0.overdue == true }).count))"
         default:
             ()
         }

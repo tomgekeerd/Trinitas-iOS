@@ -53,7 +53,36 @@ class BookItemDetailViewController: UIViewController {
     
     func extend() {
         
+        if let b = self.book {
+            
+            self.api.extendBook(withItemId: b.itemid, completion: { (success, msg) in
+                if let msg = msg {
+                    self.present(alertWithTitle: "Verlengen", msg: msg)
+                    self.refresh()
+                }
+            })
+
+        }
         
+    }
+    
+    func refresh() {
+        
+        if let b = self.book {
+            
+            self.api.getBook(withItemId: b.itemid, completion: { (success, book) in
+                if success {
+                    if let book = book {
+                        self.book = book
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    self.present(alertWithTitle: "Er is iets misgegaan...", msg: "Probeer het later opnieuw")
+                }
+            })
+            
+        }
+
     }
     
 }
