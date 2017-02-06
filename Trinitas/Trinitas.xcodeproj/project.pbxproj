@@ -16,6 +16,8 @@
 		93D13F301E3D68D70016C1BC /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D13F2F1E3D68D70016C1BC /* LibraryViewController.swift */; };
 		93D13F321E3DFF340016C1BC /* BookItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D13F311E3DFF340016C1BC /* BookItemDetailViewController.swift */; };
 		93F9FB951E3E49E700240C8C /* SwiftyStarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9FB941E3E49E700240C8C /* SwiftyStarRatingView.swift */; };
+		93FEEEB51E492614000D179D /* ComposeMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FEEEB41E492614000D179D /* ComposeMailViewController.swift */; };
+		93FEEEB71E49263C000D179D /* MailReceiverDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FEEEB61E49263C000D179D /* MailReceiverDetailsViewController.swift */; };
 		E21209311DE2080E00BA390E /* SLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E21209301DE2080E00BA390E /* SLButton.m */; };
 		E23E7BE71DE63F2E00FD1738 /* homework.png in Resources */ = {isa = PBXBuildFile; fileRef = E23E7BE61DE63F2E00FD1738 /* homework.png */; };
 		E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25B1B2F1DD3D3C40034B740 /* AppDelegate.swift */; };
@@ -54,6 +56,8 @@
 		93D13F2F1E3D68D70016C1BC /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		93D13F311E3DFF340016C1BC /* BookItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookItemDetailViewController.swift; sourceTree = "<group>"; };
 		93F9FB941E3E49E700240C8C /* SwiftyStarRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyStarRatingView.swift; sourceTree = "<group>"; };
+		93FEEEB41E492614000D179D /* ComposeMailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeMailViewController.swift; sourceTree = "<group>"; };
+		93FEEEB61E49263C000D179D /* MailReceiverDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailReceiverDetailsViewController.swift; sourceTree = "<group>"; };
 		DD4125CEEC900B3BE507E46A /* Pods-Trinitas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trinitas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Trinitas/Pods-Trinitas.release.xcconfig"; sourceTree = "<group>"; };
 		E212092F1DE2080E00BA390E /* SLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLButton.h; sourceTree = "<group>"; };
 		E21209301DE2080E00BA390E /* SLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLButton.m; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				93CFD99F1E33B1B60039D7E3 /* MailViewController.swift */,
+				93FEEEB61E49263C000D179D /* MailReceiverDetailsViewController.swift */,
+				93FEEEB41E492614000D179D /* ComposeMailViewController.swift */,
 				93CFD9A11E393E240039D7E3 /* MailDetailViewController.swift */,
 			);
 			name = Mail;
@@ -462,6 +468,7 @@
 				93CFD9A01E33B1B60039D7E3 /* MailViewController.swift in Sources */,
 				E2D0278E1DFDD87800280887 /* UIColor+CL.m in Sources */,
 				E270920B1DE72276000F7B18 /* Data.xcdatamodeld in Sources */,
+				93FEEEB51E492614000D179D /* ComposeMailViewController.swift in Sources */,
 				E21209311DE2080E00BA390E /* SLButton.m in Sources */,
 				E2D0278B1DFDD87800280887 /* DayTitleLabel.m in Sources */,
 				E28CC79B1DE1F98E00EEF231 /* ACFloatingTextField.swift in Sources */,
@@ -476,6 +483,7 @@
 				E2EBF2881DE1E0FF00140310 /* LoginTableViewController.swift in Sources */,
 				E270920D1DE73242000F7B18 /* DataHelper.swift in Sources */,
 				E25B1B301DD3D3C40034B740 /* AppDelegate.swift in Sources */,
+				93FEEEB71E49263C000D179D /* MailReceiverDetailsViewController.swift in Sources */,
 				93D13F321E3DFF340016C1BC /* BookItemDetailViewController.swift in Sources */,
 				93CFD9A21E393E240039D7E3 /* MailDetailViewController.swift in Sources */,
 				93F9FB951E3E49E700240C8C /* SwiftyStarRatingView.swift in Sources */,

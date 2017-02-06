@@ -16,7 +16,7 @@ class API: NSObject {
     var sheduleLoop = DispatchGroup()
     var baseURL = "https://tomderuiter.com/trinitas/v1/"
     var baseILURL = "https://trinitas.itslearning.com/restapi/"
-    var baseALURL = "http://trinitascollege.auralibrary.nl/"
+    var baseALURL = "https://trinitascollege.auralibrary.nl/"
     let dh = DataHelper()
     let dhh = DataHelperHelpers()
     

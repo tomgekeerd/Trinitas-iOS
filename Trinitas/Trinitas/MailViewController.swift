@@ -38,6 +38,10 @@ class MailViewController: UIViewController {
         self.refreshSpinner.addTarget(self, action: #selector(persistsRefresh), for: .valueChanged)
         self.tableView.addSubview(self.refreshSpinner)
         
+        // Navigationbar button setup
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(composeEmail))
+        
         // Setup view
         
         let setupMail = self.userDidSetupMail()
@@ -129,6 +133,12 @@ class MailViewController: UIViewController {
 
         }
 
+    }
+    
+    // MARK: - User actions
+    
+    func composeEmail() {
+        
     }
     
     // MARK: - Segue handling
