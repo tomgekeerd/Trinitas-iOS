@@ -76,6 +76,8 @@ extension LessonDetailViewController: UITableViewDataSource, UITableViewDelegate
             
             if let c = cell as? HomeworkTableViewCell {
                 
+                c.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0);
+
                 if let data = self.lessonData {
 
                     // Set test

@@ -83,7 +83,9 @@ class LibraryViewController: UIViewController {
 extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookItemCell", for: indexPath) as! BookItemCell
+        
         var filteredArray: [BookItem]!
         switch indexPath.section {
         case 0:
@@ -165,9 +167,9 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func updateSectionHeader(withHeader header: HeaderView, forIndexPath indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            "Geleend (\(self.books.filter({ $0.overdue == false }).count))"
+            header.titleLabel.text = "Geleend (\(self.books.filter({ $0.overdue == false }).count))"
         case 1:
-            "Te laat (\(self.books.filter({ $0.overdue == true }).count))"
+            header.titleLabel.text = "Te laat (\(self.books.filter({ $0.overdue == true }).count))"
         default:
             ()
         }

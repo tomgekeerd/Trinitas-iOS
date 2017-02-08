@@ -605,7 +605,7 @@ class DataHelper: NSObject {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 if let date = dateFormatter.date(from: duedate) {
-                    if date.timeIntervalSince1970 > Date().timeIntervalSince1970 {
+                    if Date().timeIntervalSince1970 > date.timeIntervalSince1970 {
                         overdue = true
                     }
                 }
