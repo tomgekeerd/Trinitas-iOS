@@ -162,7 +162,7 @@ class API: NSObject {
                 
                 switch response.result {
                 case .success:
-                    
+                    print(String(data: response.data!, encoding: .utf8))
                     if let data = response.data {
                         let json = JSON(data: data)
                         if json["success"].boolValue == true {
